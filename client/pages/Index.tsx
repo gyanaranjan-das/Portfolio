@@ -173,6 +173,7 @@ export default function Index() {
                 { id: "about", label: "About", isHash: true },
                 { id: "skills", label: "Skills", isHash: true },
                 { id: "projects", label: "Projects", isHash: true },
+                { id: "resume", label: "Resume", isHash: true },
                 { id: "contact", label: "Contact", isHash: true }
               ].map(({ id, label, isHash }) => (
                 <a
