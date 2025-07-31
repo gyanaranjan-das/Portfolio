@@ -104,7 +104,11 @@
   }
 
   html {
-    @apply dark;
+    @apply antialiased;
+  }
+
+  html.dark {
+    color-scheme: dark;
   }
 
   body {
