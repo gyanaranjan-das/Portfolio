@@ -323,45 +323,39 @@ export default function Resume() {
         </div>
 
         {/* Contact Information */}
-        <div className="mt-12 text-center">
-          <div className="tech-card max-w-2xl mx-auto">
-            <h3 className="text-xl font-bold text-foreground mb-6">Connect With Me</h3>
-            <div className="grid sm:grid-cols-3 gap-6">
-              <a 
+        <div className="mt-12">
+          <div className="tech-card max-w-4xl mx-auto">
+            <h3 className="text-xl font-bold text-foreground mb-6 text-center">Connect With Me</h3>
+            <div className="grid sm:grid-cols-3 gap-4">
+              <a
                 href="mailto:dasgyanaranjan835@gmail.com"
-                className="flex items-center justify-center gap-3 p-4 border border-quantum-primary rounded-lg hover:bg-quantum-primary hover:text-background transition-all duration-300"
+                className="flex flex-col items-center text-center p-6 border border-quantum-primary rounded-lg hover:bg-quantum-primary hover:text-background transition-all duration-300 group"
               >
-                <Mail className="w-5 h-5" />
-                <div className="text-left">
-                  <div className="font-medium">Email</div>
-                  <div className="text-sm opacity-80">dasgyanaranjan835@gmail.com</div>
-                </div>
+                <Mail className="w-8 h-8 mb-3 group-hover:scale-110 transition-transform" />
+                <div className="font-medium mb-1">Email</div>
+                <div className="text-sm opacity-80 break-all">dasgyanaranjan835@gmail.com</div>
               </a>
-              
-              <a 
+
+              <a
                 href="https://github.com/gyanaranjan-das"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 p-4 border border-quantum-primary rounded-lg hover:bg-quantum-primary hover:text-background transition-all duration-300"
+                className="flex flex-col items-center text-center p-6 border border-quantum-primary rounded-lg hover:bg-quantum-primary hover:text-background transition-all duration-300 group"
               >
-                <Github className="w-5 h-5" />
-                <div className="text-left">
-                  <div className="font-medium">GitHub</div>
-                  <div className="text-sm opacity-80">gyanaranjan-das</div>
-                </div>
+                <Github className="w-8 h-8 mb-3 group-hover:scale-110 transition-transform" />
+                <div className="font-medium mb-1">GitHub</div>
+                <div className="text-sm opacity-80">gyanaranjan-das</div>
               </a>
-              
-              <a 
+
+              <a
                 href="https://www.linkedin.com/in/gyanaranjan-das"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 p-4 border border-quantum-primary rounded-lg hover:bg-quantum-primary hover:text-background transition-all duration-300"
+                className="flex flex-col items-center text-center p-6 border border-quantum-primary rounded-lg hover:bg-quantum-primary hover:text-background transition-all duration-300 group"
               >
-                <Linkedin className="w-5 h-5" />
-                <div className="text-left">
-                  <div className="font-medium">LinkedIn</div>
-                  <div className="text-sm opacity-80">gyanaranjan-das</div>
-                </div>
+                <Linkedin className="w-8 h-8 mb-3 group-hover:scale-110 transition-transform" />
+                <div className="font-medium mb-1">LinkedIn</div>
+                <div className="text-sm opacity-80">gyanaranjan-das</div>
               </a>
             </div>
           </div>
