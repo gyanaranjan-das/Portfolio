@@ -52,7 +52,7 @@ const devopsTools = [
 ];
 
 const cloudServices = [
-  { name: "AWS", icon: "☁️", description: "Cloud Infrastructure" },
+  { name: "AWS", icon: "���️", description: "Cloud Infrastructure" },
   { name: "Firebase", icon: "🔥", description: "Backend Services" },
   { name: "MongoDB", icon: "🍃", description: "NoSQL Database" },
   { name: "PostgreSQL", icon: "🐘", description: "Relational Database" },
@@ -169,24 +169,30 @@ export default function Index() {
             <div className="text-2xl font-bold text-quantum-primary">Gyan</div>
             <div className="hidden md:flex space-x-8">
               {[
-                { id: "hero", label: "Home" },
-                { id: "about", label: "About" },
-                { id: "skills", label: "Skills" },
-                { id: "projects", label: "Projects" },
-                { id: "contact", label: "Contact" }
-              ].map(({ id, label }) => (
+                { id: "hero", label: "Home", isHash: true },
+                { id: "about", label: "About", isHash: true },
+                { id: "skills", label: "Skills", isHash: true },
+                { id: "projects", label: "Projects", isHash: true },
+                { id: "contact", label: "Contact", isHash: true }
+              ].map(({ id, label, isHash }) => (
                 <a
                   key={id}
-                  href={`#${id}`}
+                  href={isHash ? `#${id}` : `/${id}`}
                   className={`transition-colors duration-300 ${
-                    activeSection === id 
-                      ? "text-quantum-primary" 
+                    activeSection === id
+                      ? "text-quantum-primary"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   {label}
                 </a>
               ))}
+              <a
+                href="/blog"
+                className="text-muted-foreground hover:text-foreground transition-colors duration-300"
+              >
+                Blog
+              </a>
             </div>
           </div>
         </div>
