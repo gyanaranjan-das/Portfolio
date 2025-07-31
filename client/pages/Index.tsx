@@ -173,7 +173,6 @@ export default function Index() {
                 { id: "about", label: "About", isHash: true },
                 { id: "skills", label: "Skills", isHash: true },
                 { id: "projects", label: "Projects", isHash: true },
-                { id: "resume", label: "Resume", isHash: true },
                 { id: "contact", label: "Contact", isHash: true }
               ].map(({ id, label, isHash }) => (
                 <a
@@ -188,6 +187,12 @@ export default function Index() {
                   {label}
                 </a>
               ))}
+              <a
+                href="/resume"
+                className="text-muted-foreground hover:text-foreground transition-colors duration-300"
+              >
+                Resume
+              </a>
               <a
                 href="/blog"
                 className="text-muted-foreground hover:text-foreground transition-colors duration-300"
