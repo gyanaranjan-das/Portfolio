@@ -487,34 +487,17 @@ export default function Index() {
               Ready to build the future together? Let's discuss how we can leverage cutting-edge technology to solve complex problems.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <a
-                href="mailto:dasgyanaranjan835@gmail.com"
-                className="flex items-center justify-center gap-3 px-8 py-4 bg-quantum-primary text-background font-semibold rounded-lg hover:bg-quantum-secondary transition-all duration-300 hover:scale-105"
-              >
-                <Mail className="w-5 h-5" />
-                Send Email
-              </a>
-              <a
-                href="https://www.linkedin.com/in/gyanaranjan-das"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 px-8 py-4 border border-quantum-primary text-quantum-primary font-semibold rounded-lg hover:bg-quantum-primary hover:text-background transition-all duration-300"
-              >
-                <Linkedin className="w-5 h-5" />
-                LinkedIn
-              </a>
-            </div>
-
             <div className="flex justify-center space-x-8 pt-8">
               {[
-                { icon: Github, href: "https://github.com/gyanaranjan-das", label: "GitHub" },
-                { icon: Linkedin, href: "https://www.linkedin.com/in/gyanaranjan-das", label: "LinkedIn" },
-                { icon: Mail, href: "mailto:dasgyanaranjan835@gmail.com", label: "Email" }
-              ].map(({ icon: Icon, href, label }) => (
+                { icon: Github, href: "https://github.com/gyanaranjan-das", label: "GitHub", external: true },
+                { icon: Linkedin, href: "https://www.linkedin.com/in/gyanaranjan-das", label: "LinkedIn", external: true },
+                { icon: Mail, href: "mailto:dasgyanaranjan835@gmail.com", label: "Email", external: false }
+              ].map(({ icon: Icon, href, label, external }) => (
                 <a
                   key={label}
                   href={href}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noopener noreferrer" : undefined}
                   className="flex flex-col items-center gap-2 text-muted-foreground hover:text-quantum-primary transition-all duration-300 hover:scale-110 group"
                 >
                   <Icon className="w-8 h-8" />
