@@ -123,7 +123,7 @@ export default function Index() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "about", "skills", "projects", "contact"];
+      const sections = ["hero", "about", "skills", "projects", "resume", "contact"];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
