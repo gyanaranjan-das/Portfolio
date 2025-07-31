@@ -481,15 +481,17 @@ export default function Index() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <a 
-                href="mailto:gyan@example.com"
+              <a
+                href="mailto:dasgyanaranjan835@gmail.com"
                 className="flex items-center justify-center gap-3 px-8 py-4 bg-quantum-primary text-background font-semibold rounded-lg hover:bg-quantum-secondary transition-all duration-300 hover:scale-105"
               >
                 <Mail className="w-5 h-5" />
                 Send Email
               </a>
-              <a 
-                href="#"
+              <a
+                href="https://www.linkedin.com/in/gyanaranjan-das"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center justify-center gap-3 px-8 py-4 border border-quantum-primary text-quantum-primary font-semibold rounded-lg hover:bg-quantum-primary hover:text-background transition-all duration-300"
               >
                 <Linkedin className="w-5 h-5" />
