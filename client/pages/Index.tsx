@@ -513,7 +513,7 @@ export default function Index() {
       <footer className="py-8 border-t border-border/50 bg-card/30">
         <div className="container mx-auto px-6 text-center">
           <p className="text-muted-foreground">
-            © 2024 Gyanaranjan Das. Crafted with quantum precision and classical elegance.
+            © 2025 Gyanaranjan Das. Crafted with quantum precision and classical elegance.
           </p>
         </div>
       </footer>
