@@ -263,13 +263,15 @@ export default function Index() {
 
             <div className="flex justify-center space-x-6 pt-8">
               {[
-                { icon: Github, href: "https://github.com/gyanaranjan-das" },
-                { icon: Linkedin, href: "https://www.linkedin.com/in/gyanaranjan-das" },
-                { icon: Mail, href: "mailto:dasgyanaranjan835@gmail.com" }
-              ].map(({ icon: Icon, href }, index) => (
+                { icon: Github, href: "https://github.com/gyanaranjan-das", external: true },
+                { icon: Linkedin, href: "https://www.linkedin.com/in/gyanaranjan-das", external: true },
+                { icon: Mail, href: "mailto:dasgyanaranjan835@gmail.com", external: false }
+              ].map(({ icon: Icon, href, external }, index) => (
                 <a
                   key={index}
                   href={href}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noopener noreferrer" : undefined}
                   className="text-muted-foreground hover:text-quantum-primary transition-all duration-300 hover:scale-110"
                 >
                   <Icon className="w-6 h-6" />
