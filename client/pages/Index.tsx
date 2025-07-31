@@ -258,9 +258,9 @@ export default function Index() {
 
             <div className="flex justify-center space-x-6 pt-8">
               {[
-                { icon: Github, href: "#" },
-                { icon: Linkedin, href: "#" },
-                { icon: Mail, href: "mailto:gyan@example.com" }
+                { icon: Github, href: "https://github.com/gyanaranjan-das" },
+                { icon: Linkedin, href: "https://www.linkedin.com/in/gyanaranjan-das" },
+                { icon: Mail, href: "mailto:dasgyanaranjan835@gmail.com" }
               ].map(({ icon: Icon, href }, index) => (
                 <a
                   key={index}
