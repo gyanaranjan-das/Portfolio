@@ -11,14 +11,24 @@ export default function Blog() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedTag, setSelectedTag] = useState("");
   const [sortBy, setSortBy] = useState<"newest" | "popular" | "most-viewed">("newest");
+  const [lastUpdate, setLastUpdate] = useState(Date.now());
 
   const categories = ["All", ...blogManager.getAllCategories()];
   const tags = blogManager.getAllTags();
 
   useEffect(() => {
-    const allPosts = blogManager.getAllPosts();
-    setPosts(allPosts);
-    setFilteredPosts(allPosts);
+    const loadPosts = () => {
+      const allPosts = blogManager.getAllPosts();
+      setPosts(allPosts);
+      setFilteredPosts(allPosts);
+      setLastUpdate(Date.now());
+    };
+
+    loadPosts();
+
+    // Subscribe to real-time updates
+    const unsubscribe = blogManager.subscribeToUpdates(loadPosts);
+    return unsubscribe;
   }, []);
 
   useEffect(() => {
