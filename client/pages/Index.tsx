@@ -1,22 +1,29 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Github, Linkedin, Mail, Download, ExternalLink, ChevronDown } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Download,
+  ExternalLink,
+  ChevronDown,
+} from "lucide-react";
 import Preloader from "../components/Preloader";
 import ContactForm from "../components/ContactForm";
 
 const techIcons = {
-  "Python": "🐍",
-  "JavaScript": "💛",
-  "Java": "☕",
+  Python: "🐍",
+  JavaScript: "💛",
+  Java: "☕",
   "C++": "⚡",
-  "React": "⚛️",
+  React: "⚛️",
   "Node.js": "🟢",
-  "TensorFlow": "🧠",
-  "PyTorch": "🔥",
-  "Docker": "🐳",
-  "Kubernetes": "⭐",
-  "AWS": "☁️",
-  "MongoDB": "🍃"
+  TensorFlow: "🧠",
+  PyTorch: "🔥",
+  Docker: "🐳",
+  Kubernetes: "⭐",
+  AWS: "☁️",
+  MongoDB: "🍃",
 };
 
 const programmingLanguages = [
@@ -25,23 +32,35 @@ const programmingLanguages = [
   { name: "Java", level: 85, icon: "☕" },
   { name: "C++", level: 80, icon: "⚡" },
   { name: "TypeScript", level: 88, icon: "📘" },
-  { name: "Go", level: 75, icon: "🔵" }
+  { name: "Go", level: 75, icon: "🔵" },
 ];
 
 const aimlFrameworks = [
-  { name: "TensorFlow", icon: "🧠", description: "Deep Learning & Neural Networks" },
+  {
+    name: "TensorFlow",
+    icon: "🧠",
+    description: "Deep Learning & Neural Networks",
+  },
   { name: "PyTorch", icon: "🔥", description: "Research & Computer Vision" },
-  { name: "OpenCV", icon: "👁️", description: "Computer Vision & Image Processing" },
-  { name: "Scikit-learn", icon: "📊", description: "Machine Learning & Data Analysis" },
+  {
+    name: "OpenCV",
+    icon: "👁️",
+    description: "Computer Vision & Image Processing",
+  },
+  {
+    name: "Scikit-learn",
+    icon: "📊",
+    description: "Machine Learning & Data Analysis",
+  },
   { name: "Pandas", icon: "🐼", description: "Data Manipulation & Analysis" },
-  { name: "NumPy", icon: "🔢", description: "Numerical Computing" }
+  { name: "NumPy", icon: "🔢", description: "Numerical Computing" },
 ];
 
 const quantumTools = [
   { name: "Qiskit", icon: "⚛️", description: "IBM Quantum Development" },
   { name: "Cirq", icon: "🔄", description: "Google Quantum AI" },
   { name: "PennyLane", icon: "🪙", description: "Quantum Machine Learning" },
-  { name: "Quantum Inspire", icon: "💡", description: "QuTech Platform" }
+  { name: "Quantum Inspire", icon: "💡", description: "QuTech Platform" },
 ];
 
 const devopsTools = [
@@ -50,7 +69,7 @@ const devopsTools = [
   { name: "GitHub Actions", icon: "⚙️", description: "CI/CD Automation" },
   { name: "Jenkins", icon: "🔧", description: "Build Automation" },
   { name: "Terraform", icon: "🏗️", description: "Infrastructure as Code" },
-  { name: "Ansible", icon: "📋", description: "Configuration Management" }
+  { name: "Ansible", icon: "📋", description: "Configuration Management" },
 ];
 
 const cloudServices = [
@@ -59,64 +78,81 @@ const cloudServices = [
   { name: "MongoDB", icon: "🍃", description: "NoSQL Database" },
   { name: "PostgreSQL", icon: "🐘", description: "Relational Database" },
   { name: "Redis", icon: "🔴", description: "In-Memory Cache" },
-  { name: "GraphQL", icon: "🌐", description: "API Query Language" }
+  { name: "GraphQL", icon: "🌐", description: "API Query Language" },
 ];
 
 const systemDesignConcepts = [
-  { 
-    title: "Distributed Systems", 
-    topics: ["Microservices", "Event-Driven Architecture", "CQRS", "Saga Pattern"],
-    icon: "🔗"
+  {
+    title: "Distributed Systems",
+    topics: [
+      "Microservices",
+      "Event-Driven Architecture",
+      "CQRS",
+      "Saga Pattern",
+    ],
+    icon: "🔗",
   },
-  { 
-    title: "Scalability", 
-    topics: ["Load Balancing", "Horizontal Scaling", "Caching Strategies", "CDN"],
-    icon: "📈"
+  {
+    title: "Scalability",
+    topics: [
+      "Load Balancing",
+      "Horizontal Scaling",
+      "Caching Strategies",
+      "CDN",
+    ],
+    icon: "📈",
   },
-  { 
-    title: "Data Engineering", 
+  {
+    title: "Data Engineering",
     topics: ["Apache Kafka", "Apache Spark", "ETL Pipelines", "Data Lakes"],
-    icon: "🏗️"
+    icon: "🏗️",
   },
-  { 
-    title: "Security", 
+  {
+    title: "Security",
     topics: ["OAuth 2.0", "JWT", "API Security", "Zero Trust"],
-    icon: "🔒"
-  }
+    icon: "🔒",
+  },
 ];
 
 const projects = [
   {
     title: "Quantum ML Optimizer",
-    description: "Hybrid classical-quantum machine learning framework for optimization problems",
+    description:
+      "Hybrid classical-quantum machine learning framework for optimization problems",
     tech: ["Python", "Qiskit", "TensorFlow", "Docker"],
     liveUrl: "#",
     githubUrl: "#",
-    featured: true
+    featured: true,
   },
   {
     title: "Distributed AI Pipeline",
-    description: "Scalable microservices architecture for real-time AI model inference",
+    description:
+      "Scalable microservices architecture for real-time AI model inference",
     tech: ["Kubernetes", "Python", "FastAPI", "Redis"],
     liveUrl: "#",
     githubUrl: "#",
-    featured: true
+    featured: true,
   },
   {
     title: "DevOps Automation Suite",
-    description: "Complete CI/CD pipeline with infrastructure as code and monitoring",
+    description:
+      "Complete CI/CD pipeline with infrastructure as code and monitoring",
     tech: ["Terraform", "GitHub Actions", "AWS", "Prometheus"],
     liveUrl: "#",
     githubUrl: "#",
-    featured: false
-  }
+    featured: false,
+  },
 ];
 
 const certificates = [
-  { name: "AWS Certified Solutions Architect", issuer: "Amazon Web Services", year: "2024" },
+  {
+    name: "AWS Certified Solutions Architect",
+    issuer: "Amazon Web Services",
+    year: "2024",
+  },
   { name: "TensorFlow Developer Certificate", issuer: "Google", year: "2024" },
   { name: "Certified Kubernetes Administrator", issuer: "CNCF", year: "2023" },
-  { name: "IBM Quantum Developer", issuer: "IBM", year: "2024" }
+  { name: "IBM Quantum Developer", issuer: "IBM", year: "2024" },
 ];
 
 export default function Index() {
@@ -133,8 +169,11 @@ export default function Index() {
         if (element) {
           const offsetTop = element.offsetTop;
           const offsetHeight = element.offsetHeight;
-          
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
             setActiveSection(section);
             break;
           }
@@ -150,7 +189,15 @@ export default function Index() {
     return <Preloader onComplete={() => setShowPreloader(false)} />;
   }
 
-  const TechCard = ({ name, icon, description }: { name: string; icon: string; description?: string }) => (
+  const TechCard = ({
+    name,
+    icon,
+    description,
+  }: {
+    name: string;
+    icon: string;
+    description?: string;
+  }) => (
     <div className="tech-card group cursor-pointer">
       <div className="text-center">
         <div className="text-3xl mb-2 group-hover:animate-bounce">{icon}</div>
@@ -175,7 +222,7 @@ export default function Index() {
                 { id: "about", label: "About", isHash: true },
                 { id: "skills", label: "Skills", isHash: true },
                 { id: "projects", label: "Projects", isHash: true },
-                { id: "contact", label: "Contact", isHash: true }
+                { id: "contact", label: "Contact", isHash: true },
               ].map(({ id, label, isHash }) => (
                 <a
                   key={id}
@@ -213,10 +260,13 @@ export default function Index() {
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      <section
+        id="hero"
+        className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      >
         {/* Background Effects */}
         <div className="absolute inset-0 bg-quantum-grid opacity-10" />
-        
+
         {/* Floating Tech Icons */}
         <div className="absolute inset-0 overflow-hidden">
           {Object.entries(techIcons).map(([tech, icon], index) => (
@@ -224,10 +274,10 @@ export default function Index() {
               key={tech}
               className="absolute text-2xl opacity-20 animate-float"
               style={{
-                left: `${10 + (index * 13) % 80}%`,
-                top: `${20 + (index * 17) % 60}%`,
+                left: `${10 + ((index * 13) % 80)}%`,
+                top: `${20 + ((index * 17) % 60)}%`,
                 animationDelay: `${index * 0.5}s`,
-                animationDuration: `${3 + (index % 3)}s`
+                animationDuration: `${3 + (index % 3)}s`,
               }}
             >
               {icon}
@@ -274,9 +324,21 @@ export default function Index() {
 
             <div className="flex justify-center space-x-6 pt-8">
               {[
-                { icon: Github, href: "https://github.com/gyanaranjan-das", external: true },
-                { icon: Linkedin, href: "https://www.linkedin.com/in/gyanaranjan-das", external: true },
-                { icon: Mail, href: "mailto:dasgyanaranjan835@gmail.com", external: false }
+                {
+                  icon: Github,
+                  href: "https://github.com/gyanaranjan-das",
+                  external: true,
+                },
+                {
+                  icon: Linkedin,
+                  href: "https://www.linkedin.com/in/gyanaranjan-das",
+                  external: true,
+                },
+                {
+                  icon: Mail,
+                  href: "mailto:dasgyanaranjan835@gmail.com",
+                  external: false,
+                },
               ].map(({ icon: Icon, href, external }, index) => (
                 <a
                   key={index}
@@ -301,26 +363,42 @@ export default function Index() {
       <section id="about" className="py-20 bg-card/30">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">About Me</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+              About Me
+            </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-quantum-primary to-quantum-secondary mx-auto"></div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-slide-in-left">
               <p className="text-lg text-muted-foreground leading-relaxed">
-                I'm a passionate B.Tech Computer Science Engineering student with a deep fascination for cutting-edge technologies that shape our future. My journey spans across artificial intelligence, quantum computing, and scalable system architecture.
+                I'm a passionate B.Tech Computer Science Engineering student
+                with a deep fascination for cutting-edge technologies that shape
+                our future. My journey spans across artificial intelligence,
+                quantum computing, and scalable system architecture.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                With expertise in machine learning frameworks, quantum algorithms, and cloud-native architectures, I bridge the gap between theoretical computer science and practical engineering solutions.
+                With expertise in machine learning frameworks, quantum
+                algorithms, and cloud-native architectures, I bridge the gap
+                between theoretical computer science and practical engineering
+                solutions.
               </p>
               <div className="grid grid-cols-2 gap-4 pt-4">
                 <div className="text-center p-4 bg-quantum-primary/10 rounded-lg">
-                  <div className="text-2xl font-bold text-quantum-primary">8+</div>
-                  <div className="text-sm text-muted-foreground">Projects Completed</div>
+                  <div className="text-2xl font-bold text-quantum-primary">
+                    8+
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    Projects Completed
+                  </div>
                 </div>
                 <div className="text-center p-4 bg-quantum-secondary/10 rounded-lg">
-                  <div className="text-2xl font-bold text-quantum-secondary">2+</div>
-                  <div className="text-sm text-muted-foreground">Years Learning</div>
+                  <div className="text-2xl font-bold text-quantum-secondary">
+                    2+
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    Years Learning
+                  </div>
                 </div>
               </div>
             </div>
@@ -340,26 +418,36 @@ export default function Index() {
       <section id="skills" className="py-20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">Technical Arsenal</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+              Technical Arsenal
+            </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-quantum-primary to-quantum-secondary mx-auto"></div>
           </div>
 
           {/* Programming Languages */}
           <div className="mb-16">
-            <h3 className="text-2xl font-bold mb-8 text-center text-foreground">Programming Languages</h3>
+            <h3 className="text-2xl font-bold mb-8 text-center text-foreground">
+              Programming Languages
+            </h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
               {programmingLanguages.map((lang, index) => (
-                <div key={lang.name} className="tech-card" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div
+                  key={lang.name}
+                  className="tech-card"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
                   <div className="text-center">
                     <div className="text-3xl mb-2">{lang.icon}</div>
                     <h4 className="font-semibold">{lang.name}</h4>
                     <div className="w-full bg-muted rounded-full h-2 mt-2">
-                      <div 
+                      <div
                         className="bg-quantum-primary h-2 rounded-full transition-all duration-1000"
                         style={{ width: `${lang.level}%` }}
                       />
                     </div>
-                    <span className="text-xs text-muted-foreground">{lang.level}%</span>
+                    <span className="text-xs text-muted-foreground">
+                      {lang.level}%
+                    </span>
                   </div>
                 </div>
               ))}
@@ -368,7 +456,9 @@ export default function Index() {
 
           {/* AI/ML Frameworks */}
           <div className="mb-16">
-            <h3 className="text-2xl font-bold mb-8 text-center text-foreground">AI/ML Frameworks</h3>
+            <h3 className="text-2xl font-bold mb-8 text-center text-foreground">
+              AI/ML Frameworks
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {aimlFrameworks.map((framework, index) => (
                 <TechCard key={framework.name} {...framework} />
@@ -378,7 +468,9 @@ export default function Index() {
 
           {/* Quantum Computing */}
           <div className="mb-16">
-            <h3 className="text-2xl font-bold mb-8 text-center text-foreground">Quantum Computing</h3>
+            <h3 className="text-2xl font-bold mb-8 text-center text-foreground">
+              Quantum Computing
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {quantumTools.map((tool, index) => (
                 <div key={tool.name} className="tech-card quantum-glow">
@@ -390,7 +482,9 @@ export default function Index() {
 
           {/* DevOps & Tools */}
           <div className="mb-16">
-            <h3 className="text-2xl font-bold mb-8 text-center text-foreground">DevOps & Tools</h3>
+            <h3 className="text-2xl font-bold mb-8 text-center text-foreground">
+              DevOps & Tools
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {devopsTools.map((tool, index) => (
                 <TechCard key={tool.name} {...tool} />
@@ -400,7 +494,9 @@ export default function Index() {
 
           {/* Cloud & Databases */}
           <div className="mb-16">
-            <h3 className="text-2xl font-bold mb-8 text-center text-foreground">Cloud & Databases</h3>
+            <h3 className="text-2xl font-bold mb-8 text-center text-foreground">
+              Cloud & Databases
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {cloudServices.map((service, index) => (
                 <TechCard key={service.name} {...service} />
@@ -410,7 +506,9 @@ export default function Index() {
 
           {/* System Design & Architecture */}
           <div>
-            <h3 className="text-2xl font-bold mb-8 text-center text-foreground">System Design & Architecture</h3>
+            <h3 className="text-2xl font-bold mb-8 text-center text-foreground">
+              System Design & Architecture
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {systemDesignConcepts.map((concept, index) => (
                 <div key={concept.title} className="tech-card">
@@ -419,7 +517,10 @@ export default function Index() {
                     <h4 className="font-bold mb-3">{concept.title}</h4>
                     <div className="space-y-1">
                       {concept.topics.map((topic) => (
-                        <span key={topic} className="inline-block text-xs bg-quantum-primary/20 text-quantum-primary px-2 py-1 rounded-full mr-1 mb-1">
+                        <span
+                          key={topic}
+                          className="inline-block text-xs bg-quantum-primary/20 text-quantum-primary px-2 py-1 rounded-full mr-1 mb-1"
+                        >
                           {topic}
                         </span>
                       ))}
@@ -436,41 +537,58 @@ export default function Index() {
       <section id="projects" className="py-20 bg-card/30">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">Featured Projects</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+              Featured Projects
+            </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-quantum-primary to-quantum-secondary mx-auto"></div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {projects.filter(p => p.featured).map((project, index) => (
-              <div key={project.title} className="tech-card h-full">
-                <div className="space-y-4">
-                  <h3 className="text-xl font-bold">{project.title}</h3>
-                  <p className="text-muted-foreground">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech) => (
-                      <span key={tech} className="text-xs bg-quantum-primary/20 text-quantum-primary px-2 py-1 rounded-full">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex gap-4 pt-4">
-                    <a href={project.liveUrl} className="flex items-center gap-2 text-quantum-primary hover:text-quantum-secondary transition-colors">
-                      <ExternalLink className="w-4 h-4" />
-                      Live Demo
-                    </a>
-                    <a href={project.githubUrl} className="flex items-center gap-2 text-quantum-primary hover:text-quantum-secondary transition-colors">
-                      <Github className="w-4 h-4" />
-                      Source Code
-                    </a>
+            {projects
+              .filter((p) => p.featured)
+              .map((project, index) => (
+                <div key={project.title} className="tech-card h-full">
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-bold">{project.title}</h3>
+                    <p className="text-muted-foreground">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((tech) => (
+                        <span
+                          key={tech}
+                          className="text-xs bg-quantum-primary/20 text-quantum-primary px-2 py-1 rounded-full"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="flex gap-4 pt-4">
+                      <a
+                        href={project.liveUrl}
+                        className="flex items-center gap-2 text-quantum-primary hover:text-quantum-secondary transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        Live Demo
+                      </a>
+                      <a
+                        href={project.githubUrl}
+                        className="flex items-center gap-2 text-quantum-primary hover:text-quantum-secondary transition-colors"
+                      >
+                        <Github className="w-4 h-4" />
+                        Source Code
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
 
           {/* Certificates */}
           <div className="mt-20">
-            <h3 className="text-2xl font-bold mb-8 text-center text-foreground">Certifications</h3>
+            <h3 className="text-2xl font-bold mb-8 text-center text-foreground">
+              Certifications
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {certificates.map((cert, index) => (
                 <div key={cert.name} className="tech-card text-center">
@@ -489,10 +607,13 @@ export default function Index() {
       <section id="contact" className="py-20 bg-card/30">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">Let's Connect</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+              Let's Connect
+            </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-quantum-primary to-quantum-secondary mx-auto"></div>
             <p className="text-xl text-muted-foreground mt-6 max-w-3xl mx-auto">
-              Ready to build the future together? Let's discuss how we can leverage cutting-edge technology to solve complex problems.
+              Ready to build the future together? Let's discuss how we can
+              leverage cutting-edge technology to solve complex problems.
             </p>
           </div>
 
@@ -515,12 +636,20 @@ export default function Index() {
                     </a>
                   </div>
                   <div>
-                    <h4 className="font-medium text-foreground mb-2">Response Time</h4>
-                    <p className="text-muted-foreground">Usually within 24 hours</p>
+                    <h4 className="font-medium text-foreground mb-2">
+                      Response Time
+                    </h4>
+                    <p className="text-muted-foreground">
+                      Usually within 24 hours
+                    </p>
                   </div>
                   <div>
-                    <h4 className="font-medium text-foreground mb-2">Best Time to Reach</h4>
-                    <p className="text-muted-foreground">Monday - Friday, 9 AM - 6 PM IST</p>
+                    <h4 className="font-medium text-foreground mb-2">
+                      Best Time to Reach
+                    </h4>
+                    <p className="text-muted-foreground">
+                      Monday - Friday, 9 AM - 6 PM IST
+                    </p>
                   </div>
                 </div>
               </div>
@@ -529,9 +658,24 @@ export default function Index() {
                 <h3 className="text-xl font-bold mb-6">Follow My Journey</h3>
                 <div className="grid grid-cols-3 gap-4">
                   {[
-                    { icon: Github, href: "https://github.com/gyanaranjan-das", label: "GitHub", external: true },
-                    { icon: Linkedin, href: "https://www.linkedin.com/in/gyanaranjan-das", label: "LinkedIn", external: true },
-                    { icon: Mail, href: "mailto:dasgyanaranjan835@gmail.com", label: "Email", external: false }
+                    {
+                      icon: Github,
+                      href: "https://github.com/gyanaranjan-das",
+                      label: "GitHub",
+                      external: true,
+                    },
+                    {
+                      icon: Linkedin,
+                      href: "https://www.linkedin.com/in/gyanaranjan-das",
+                      label: "LinkedIn",
+                      external: true,
+                    },
+                    {
+                      icon: Mail,
+                      href: "mailto:dasgyanaranjan835@gmail.com",
+                      label: "Email",
+                      external: false,
+                    },
                   ].map(({ icon: Icon, href, label, external }) => (
                     <a
                       key={label}
@@ -550,11 +694,14 @@ export default function Index() {
               <div className="tech-card bg-quantum-primary/5 border-quantum-primary/20">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                  <h3 className="text-lg font-bold">Available for Opportunities</h3>
+                  <h3 className="text-lg font-bold">
+                    Available for Opportunities
+                  </h3>
                 </div>
                 <p className="text-muted-foreground text-sm">
-                  I'm currently open to internship opportunities in AI/ML, Quantum Computing,
-                  and Backend Development. Let's build something amazing together!
+                  I'm currently open to internship opportunities in AI/ML,
+                  Quantum Computing, and Backend Development. Let's build
+                  something amazing together!
                 </p>
               </div>
             </div>
@@ -566,7 +713,8 @@ export default function Index() {
       <footer className="py-8 border-t border-border/50 bg-card/30">
         <div className="container mx-auto px-6 text-center">
           <p className="text-muted-foreground">
-            © 2025 Gyanaranjan Das. Crafted with quantum precision and classical elegance.
+            © 2025 Gyanaranjan Das. Crafted with quantum precision and
+            classical elegance.
           </p>
         </div>
       </footer>

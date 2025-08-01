@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { BarChart3, TrendingUp, Code2, Brain, Atom } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { BarChart3, TrendingUp, Code2, Brain, Atom } from "lucide-react";
 
 interface Skill {
   name: string;
@@ -11,27 +11,107 @@ interface Skill {
 }
 
 const skillsData: Skill[] = [
-  { name: 'Python', level: 95, category: 'Programming', icon: '🐍', experience: '2+ years', projects: 8 },
-  { name: 'JavaScript', level: 90, category: 'Programming', icon: '💛', experience: '2 years', projects: 6 },
-  { name: 'Java', level: 85, category: 'Programming', icon: '☕', experience: '1.5 years', projects: 4 },
-  { name: 'React', level: 88, category: 'Frontend', icon: '⚛️', experience: '1.5 years', projects: 5 },
-  { name: 'TensorFlow', level: 80, category: 'AI/ML', icon: '🧠', experience: '1 year', projects: 3 },
-  { name: 'PyTorch', level: 75, category: 'AI/ML', icon: '🔥', experience: '1 year', projects: 2 },
-  { name: 'Qiskit', level: 70, category: 'Quantum', icon: '⚛️', experience: '8 months', projects: 2 },
-  { name: 'Docker', level: 82, category: 'DevOps', icon: '🐳', experience: '1 year', projects: 4 },
-  { name: 'AWS', level: 78, category: 'Cloud', icon: '☁️', experience: '10 months', projects: 3 },
-  { name: 'MongoDB', level: 85, category: 'Database', icon: '🍃', experience: '1.5 years', projects: 5 }
+  {
+    name: "Python",
+    level: 95,
+    category: "Programming",
+    icon: "🐍",
+    experience: "2+ years",
+    projects: 8,
+  },
+  {
+    name: "JavaScript",
+    level: 90,
+    category: "Programming",
+    icon: "💛",
+    experience: "2 years",
+    projects: 6,
+  },
+  {
+    name: "Java",
+    level: 85,
+    category: "Programming",
+    icon: "☕",
+    experience: "1.5 years",
+    projects: 4,
+  },
+  {
+    name: "React",
+    level: 88,
+    category: "Frontend",
+    icon: "⚛️",
+    experience: "1.5 years",
+    projects: 5,
+  },
+  {
+    name: "TensorFlow",
+    level: 80,
+    category: "AI/ML",
+    icon: "🧠",
+    experience: "1 year",
+    projects: 3,
+  },
+  {
+    name: "PyTorch",
+    level: 75,
+    category: "AI/ML",
+    icon: "🔥",
+    experience: "1 year",
+    projects: 2,
+  },
+  {
+    name: "Qiskit",
+    level: 70,
+    category: "Quantum",
+    icon: "⚛️",
+    experience: "8 months",
+    projects: 2,
+  },
+  {
+    name: "Docker",
+    level: 82,
+    category: "DevOps",
+    icon: "🐳",
+    experience: "1 year",
+    projects: 4,
+  },
+  {
+    name: "AWS",
+    level: 78,
+    category: "Cloud",
+    icon: "☁️",
+    experience: "10 months",
+    projects: 3,
+  },
+  {
+    name: "MongoDB",
+    level: 85,
+    category: "Database",
+    icon: "🍃",
+    experience: "1.5 years",
+    projects: 5,
+  },
 ];
 
-const categories = ['All', 'Programming', 'Frontend', 'AI/ML', 'Quantum', 'DevOps', 'Cloud', 'Database'];
+const categories = [
+  "All",
+  "Programming",
+  "Frontend",
+  "AI/ML",
+  "Quantum",
+  "DevOps",
+  "Cloud",
+  "Database",
+];
 
 export default function SkillsChart() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [animationProgress, setAnimationProgress] = useState(0);
 
-  const filteredSkills = selectedCategory === 'All' 
-    ? skillsData 
-    : skillsData.filter(skill => skill.category === selectedCategory);
+  const filteredSkills =
+    selectedCategory === "All"
+      ? skillsData
+      : skillsData.filter((skill) => skill.category === selectedCategory);
 
   useEffect(() => {
     // Animate skill bars on mount or category change
@@ -42,18 +122,22 @@ export default function SkillsChart() {
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case 'Programming': return <Code2 className="w-4 h-4" />;
-      case 'AI/ML': return <Brain className="w-4 h-4" />;
-      case 'Quantum': return <Atom className="w-4 h-4" />;
-      default: return <BarChart3 className="w-4 h-4" />;
+      case "Programming":
+        return <Code2 className="w-4 h-4" />;
+      case "AI/ML":
+        return <Brain className="w-4 h-4" />;
+      case "Quantum":
+        return <Atom className="w-4 h-4" />;
+      default:
+        return <BarChart3 className="w-4 h-4" />;
     }
   };
 
   const getSkillColor = (level: number) => {
-    if (level >= 90) return 'from-green-500 to-green-400';
-    if (level >= 80) return 'from-blue-500 to-blue-400';
-    if (level >= 70) return 'from-yellow-500 to-yellow-400';
-    return 'from-red-500 to-red-400';
+    if (level >= 90) return "from-green-500 to-green-400";
+    if (level >= 80) return "from-blue-500 to-blue-400";
+    if (level >= 70) return "from-yellow-500 to-yellow-400";
+    return "from-red-500 to-red-400";
   };
 
   return (
@@ -65,14 +149,14 @@ export default function SkillsChart() {
 
       {/* Category Filter */}
       <div className="flex flex-wrap gap-2 mb-6">
-        {categories.map(category => (
+        {categories.map((category) => (
           <button
             key={category}
             onClick={() => setSelectedCategory(category)}
             className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
               selectedCategory === category
-                ? 'bg-quantum-primary text-background'
-                : 'bg-muted/50 text-muted-foreground hover:bg-muted'
+                ? "bg-quantum-primary text-background"
+                : "bg-muted/50 text-muted-foreground hover:bg-muted"
             }`}
           >
             {getCategoryIcon(category)}
@@ -84,8 +168,8 @@ export default function SkillsChart() {
       {/* Skills List */}
       <div className="space-y-4">
         {filteredSkills.map((skill, index) => (
-          <div 
-            key={skill.name} 
+          <div
+            key={skill.name}
             className="group"
             style={{ animationDelay: `${index * 0.1}s` }}
           >
@@ -93,7 +177,9 @@ export default function SkillsChart() {
               <div className="flex items-center gap-3">
                 <span className="text-lg">{skill.icon}</span>
                 <div>
-                  <span className="font-medium text-foreground">{skill.name}</span>
+                  <span className="font-medium text-foreground">
+                    {skill.name}
+                  </span>
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <span>{skill.experience}</span>
                     <span>•</span>
@@ -102,28 +188,35 @@ export default function SkillsChart() {
                 </div>
               </div>
               <div className="text-right">
-                <span className="text-sm font-medium text-foreground">{skill.level}%</span>
-                <div className="text-xs text-muted-foreground">{skill.category}</div>
+                <span className="text-sm font-medium text-foreground">
+                  {skill.level}%
+                </span>
+                <div className="text-xs text-muted-foreground">
+                  {skill.category}
+                </div>
               </div>
             </div>
-            
+
             <div className="relative">
               <div className="w-full bg-muted rounded-full h-3 overflow-hidden">
-                <div 
+                <div
                   className={`h-full bg-gradient-to-r ${getSkillColor(skill.level)} transition-all duration-1000 ease-out rounded-full relative`}
-                  style={{ 
+                  style={{
                     width: `${(animationProgress / 100) * skill.level}%`,
-                    transition: 'width 1s ease-out'
+                    transition: "width 1s ease-out",
                   }}
                 >
                   <div className="absolute inset-0 bg-white/20 animate-pulse" />
                 </div>
               </div>
-              
+
               {/* Skill level indicator */}
-              <div 
+              <div
                 className="absolute top-0 h-3 w-1 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                style={{ left: `${skill.level}%`, transform: 'translateX(-50%)' }}
+                style={{
+                  left: `${skill.level}%`,
+                  transform: "translateX(-50%)",
+                }}
               />
             </div>
           </div>
@@ -135,9 +228,15 @@ export default function SkillsChart() {
         <div className="grid grid-cols-3 gap-4 text-center">
           <div>
             <div className="text-2xl font-bold text-quantum-primary">
-              {Math.round(filteredSkills.reduce((acc, skill) => acc + skill.level, 0) / filteredSkills.length)}%
+              {Math.round(
+                filteredSkills.reduce((acc, skill) => acc + skill.level, 0) /
+                  filteredSkills.length,
+              )}
+              %
             </div>
-            <div className="text-xs text-muted-foreground">Avg. Proficiency</div>
+            <div className="text-xs text-muted-foreground">
+              Avg. Proficiency
+            </div>
           </div>
           <div>
             <div className="text-2xl font-bold text-quantum-secondary">

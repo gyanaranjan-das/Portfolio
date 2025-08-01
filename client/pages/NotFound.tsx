@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
-import { Home, ArrowLeft, Search, Zap } from 'lucide-react';
-import ThemeToggle from '../components/ThemeToggle';
-import MobileNav from '../components/MobileNav';
+import { Link } from "react-router-dom";
+import { Home, ArrowLeft, Search, Zap } from "lucide-react";
+import ThemeToggle from "../components/ThemeToggle";
+import MobileNav from "../components/MobileNav";
 
 export default function NotFound() {
   return (
@@ -15,16 +15,28 @@ export default function NotFound() {
             </Link>
             <div className="flex items-center gap-4">
               <div className="hidden md:flex space-x-8">
-                <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Home
                 </Link>
-                <Link to="/work" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/work"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Work
                 </Link>
-                <Link to="/resume" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/resume"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Resume
                 </Link>
-                <Link to="/blog" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/blog"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Blog
                 </Link>
               </div>
@@ -55,10 +67,10 @@ export default function NotFound() {
                   key={i}
                   className="absolute w-2 h-2 bg-quantum-primary rounded-full animate-pulse opacity-60"
                   style={{
-                    left: `${20 + (i * 15)}%`,
+                    left: `${20 + i * 15}%`,
                     top: `${30 + (i % 3) * 20}%`,
                     animationDelay: `${i * 0.5}s`,
-                    animationDuration: `${2 + (i % 3)}s`
+                    animationDuration: `${2 + (i % 3)}s`,
                   }}
                 />
               ))}
@@ -81,8 +93,20 @@ export default function NotFound() {
                   fill="none"
                   className="text-quantum-secondary"
                 />
-                <circle cx="100" cy="100" r="4" fill="currentColor" className="text-quantum-accent" />
-                <circle cx="300" cy="100" r="4" fill="currentColor" className="text-quantum-primary" />
+                <circle
+                  cx="100"
+                  cy="100"
+                  r="4"
+                  fill="currentColor"
+                  className="text-quantum-accent"
+                />
+                <circle
+                  cx="300"
+                  cy="100"
+                  r="4"
+                  fill="currentColor"
+                  className="text-quantum-primary"
+                />
               </svg>
             </div>
           </div>
@@ -120,7 +144,7 @@ export default function NotFound() {
               { to: "/", label: "Home", icon: Home },
               { to: "/work", label: "My Work", icon: Zap },
               { to: "/resume", label: "Resume", icon: Search },
-              { to: "/blog", label: "Blog", icon: Search }
+              { to: "/blog", label: "Blog", icon: Search },
             ].map(({ to, label, icon: Icon }) => (
               <Link
                 key={to}
@@ -136,8 +160,9 @@ export default function NotFound() {
           {/* Fun message */}
           <div className="mt-12 p-6 bg-card/30 rounded-xl max-w-md mx-auto">
             <p className="text-sm text-muted-foreground">
-              💡 <strong>Fun Fact:</strong> In quantum computing, superposition means a qubit can be in multiple states simultaneously.
-              This page, however, is definitely in just one state: missing! 😄
+              💡 <strong>Fun Fact:</strong> In quantum computing, superposition
+              means a qubit can be in multiple states simultaneously. This page,
+              however, is definitely in just one state: missing! 😄
             </p>
           </div>
         </div>

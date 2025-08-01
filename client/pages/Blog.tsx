@@ -1,6 +1,16 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Search, Filter, Clock, Eye, Heart, MessageCircle, Calendar, User, Tag } from "lucide-react";
+import {
+  Search,
+  Filter,
+  Clock,
+  Eye,
+  Heart,
+  MessageCircle,
+  Calendar,
+  User,
+  Tag,
+} from "lucide-react";
 import { blogManager, BlogPost } from "../lib/blogData";
 import { cn } from "../lib/utils";
 
@@ -10,7 +20,9 @@ export default function Blog() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedTag, setSelectedTag] = useState("");
-  const [sortBy, setSortBy] = useState<"newest" | "popular" | "most-viewed">("newest");
+  const [sortBy, setSortBy] = useState<"newest" | "popular" | "most-viewed">(
+    "newest",
+  );
   const [lastUpdate, setLastUpdate] = useState(Date.now());
 
   const categories = ["All", ...blogManager.getAllCategories()];
@@ -36,21 +48,24 @@ export default function Blog() {
 
     // Filter by search term
     if (searchTerm) {
-      filtered = filtered.filter(post =>
-        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+      filtered = filtered.filter(
+        (post) =>
+          post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          post.tags.some((tag) =>
+            tag.toLowerCase().includes(searchTerm.toLowerCase()),
+          ),
       );
     }
 
     // Filter by category
     if (selectedCategory !== "All") {
-      filtered = filtered.filter(post => post.category === selectedCategory);
+      filtered = filtered.filter((post) => post.category === selectedCategory);
     }
 
     // Filter by tag
     if (selectedTag) {
-      filtered = filtered.filter(post => post.tags.includes(selectedTag));
+      filtered = filtered.filter((post) => post.tags.includes(selectedTag));
     }
 
     // Sort posts
@@ -63,7 +78,9 @@ export default function Blog() {
         break;
       case "newest":
       default:
-        filtered.sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
+        filtered.sort(
+          (a, b) => b.publishedAt.getTime() - a.publishedAt.getTime(),
+        );
         break;
     }
 
@@ -71,22 +88,32 @@ export default function Blog() {
   }, [posts, searchTerm, selectedCategory, selectedTag, sortBy]);
 
   const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     }).format(date);
   };
 
-  const BlogCard = ({ post, featured = false }: { post: BlogPost; featured?: boolean }) => (
-    <article className={cn(
-      "group bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-quantum-primary/20 hover:-translate-y-1",
-      featured && "lg:col-span-2 lg:row-span-2"
-    )}>
+  const BlogCard = ({
+    post,
+    featured = false,
+  }: {
+    post: BlogPost;
+    featured?: boolean;
+  }) => (
+    <article
+      className={cn(
+        "group bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-quantum-primary/20 hover:-translate-y-1",
+        featured && "lg:col-span-2 lg:row-span-2",
+      )}
+    >
       {post.coverImage && (
-        <div className={cn("relative overflow-hidden", featured ? "h-64" : "h-48")}>
-          <img 
-            src={post.coverImage} 
+        <div
+          className={cn("relative overflow-hidden", featured ? "h-64" : "h-48")}
+        >
+          <img
+            src={post.coverImage}
             alt={post.title}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
@@ -98,7 +125,7 @@ export default function Blog() {
           )}
         </div>
       )}
-      
+
       <div className={cn("p-6", featured && "lg:p-8")}>
         <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
           <div className="flex items-center gap-1">
@@ -117,25 +144,27 @@ export default function Blog() {
 
         <div className="space-y-3">
           <div className="flex items-start justify-between gap-4">
-            <h2 className={cn(
-              "font-bold text-foreground group-hover:text-quantum-primary transition-colors line-clamp-2",
-              featured ? "text-2xl lg:text-3xl" : "text-xl"
-            )}>
-              <Link to={`/blog/${post.slug}`}>
-                {post.title}
-              </Link>
+            <h2
+              className={cn(
+                "font-bold text-foreground group-hover:text-quantum-primary transition-colors line-clamp-2",
+                featured ? "text-2xl lg:text-3xl" : "text-xl",
+              )}
+            >
+              <Link to={`/blog/${post.slug}`}>{post.title}</Link>
             </h2>
           </div>
 
-          <p className={cn(
-            "text-muted-foreground line-clamp-3",
-            featured ? "text-base lg:text-lg" : "text-sm"
-          )}>
+          <p
+            className={cn(
+              "text-muted-foreground line-clamp-3",
+              featured ? "text-base lg:text-lg" : "text-sm",
+            )}
+          >
             {post.excerpt}
           </p>
 
           <div className="flex flex-wrap gap-2">
-            {post.tags.slice(0, featured ? 4 : 3).map(tag => (
+            {post.tags.slice(0, featured ? 4 : 3).map((tag) => (
               <button
                 key={tag}
                 onClick={() => setSelectedTag(tag)}
@@ -162,8 +191,8 @@ export default function Blog() {
                 <span>{post.comments.length}</span>
               </div>
             </div>
-            
-            <Link 
+
+            <Link
               to={`/blog/${post.slug}`}
               className="text-quantum-primary hover:text-quantum-secondary transition-colors font-medium text-sm"
             >
@@ -175,8 +204,8 @@ export default function Blog() {
     </article>
   );
 
-  const featuredPosts = filteredPosts.filter(post => post.featured);
-  const regularPosts = filteredPosts.filter(post => !post.featured);
+  const featuredPosts = filteredPosts.filter((post) => post.featured);
+  const regularPosts = filteredPosts.filter((post) => !post.featured);
 
   return (
     <div className="min-h-screen bg-background">
@@ -188,13 +217,22 @@ export default function Blog() {
               Gyan
             </Link>
             <div className="hidden md:flex space-x-8">
-              <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link
+                to="/"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
                 Home
               </Link>
-              <Link to="/work" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link
+                to="/work"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
                 Work
               </Link>
-              <Link to="/resume" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link
+                to="/resume"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
                 Resume
               </Link>
               <Link to="/blog" className="text-quantum-primary">
@@ -215,8 +253,8 @@ export default function Blog() {
             </span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Exploring the cutting edge of AI, quantum computing, and system architecture.
-            Join the conversation and share your thoughts!
+            Exploring the cutting edge of AI, quantum computing, and system
+            architecture. Join the conversation and share your thoughts!
           </p>
           <div className="mt-4 flex items-center justify-center gap-2 text-sm text-muted-foreground">
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
@@ -248,8 +286,10 @@ export default function Blog() {
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 className="bg-card/50 border border-border/50 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-quantum-primary/50"
               >
-                {categories.map(category => (
-                  <option key={category} value={category}>{category}</option>
+                {categories.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
                 ))}
               </select>
             </div>
@@ -300,7 +340,9 @@ export default function Blog() {
         {/* Featured Posts */}
         {featuredPosts.length > 0 && (
           <section className="mb-16">
-            <h2 className="text-3xl font-bold mb-8 text-center">Featured Articles</h2>
+            <h2 className="text-3xl font-bold mb-8 text-center">
+              Featured Articles
+            </h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {featuredPosts.map((post) => (
                 <BlogCard key={post.id} post={post} featured />
@@ -347,8 +389,9 @@ export default function Blog() {
         <section className="mt-20 text-center bg-card/30 rounded-2xl p-12">
           <h2 className="text-3xl font-bold mb-4">Join the Conversation</h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Have thoughts on AI, quantum computing, or system architecture? 
-            I'd love to hear from you! Connect with me and let's discuss the future of technology.
+            Have thoughts on AI, quantum computing, or system architecture? I'd
+            love to hear from you! Connect with me and let's discuss the future
+            of technology.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

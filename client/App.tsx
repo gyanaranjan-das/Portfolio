@@ -20,7 +20,7 @@ const queryClient = new QueryClient();
 const App = () => {
   useEffect(() => {
     // Apply dark mode by default
-    document.documentElement.classList.add('dark');
+    document.documentElement.classList.add("dark");
   }, []);
 
   return (

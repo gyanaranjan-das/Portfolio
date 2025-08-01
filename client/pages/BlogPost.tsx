@@ -1,7 +1,21 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Calendar, Clock, Eye, Heart, MessageCircle, User, Tag, Share2, ArrowLeft } from "lucide-react";
-import { blogManager, BlogPost as BlogPostType, Comment } from "../lib/blogData";
+import {
+  Calendar,
+  Clock,
+  Eye,
+  Heart,
+  MessageCircle,
+  User,
+  Tag,
+  Share2,
+  ArrowLeft,
+} from "lucide-react";
+import {
+  blogManager,
+  BlogPost as BlogPostType,
+  Comment,
+} from "../lib/blogData";
 import { cn } from "../lib/utils";
 
 export default function BlogPost() {
@@ -45,7 +59,7 @@ export default function BlogPost() {
       const success = blogManager.likePost(post.id);
       if (success) {
         setLiked(true);
-        setLikes(prev => prev + 1);
+        setLikes((prev) => prev + 1);
       }
     }
   };
@@ -56,7 +70,7 @@ export default function BlogPost() {
       const success = blogManager.addComment(post.id, {
         author: commentAuthor,
         avatar: "👤",
-        content: newComment
+        content: newComment,
       });
       if (success) {
         setNewComment("");
@@ -80,44 +94,47 @@ export default function BlogPost() {
   };
 
   const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     }).format(date);
   };
 
   const formatContent = (content: string) => {
     // Simple markdown-like formatting
     return content
-      .split('\n\n')
+      .split("\n\n")
       .map((paragraph, index) => {
-        if (paragraph.startsWith('# ')) {
+        if (paragraph.startsWith("# ")) {
           return `<h1 class="text-3xl font-bold mt-8 mb-4">${paragraph.slice(2)}</h1>`;
         }
-        if (paragraph.startsWith('## ')) {
+        if (paragraph.startsWith("## ")) {
           return `<h2 class="text-2xl font-bold mt-6 mb-3">${paragraph.slice(3)}</h2>`;
         }
-        if (paragraph.startsWith('### ')) {
+        if (paragraph.startsWith("### ")) {
           return `<h3 class="text-xl font-bold mt-4 mb-2">${paragraph.slice(4)}</h3>`;
         }
-        if (paragraph.startsWith('```')) {
-          const lines = paragraph.split('\n');
+        if (paragraph.startsWith("```")) {
+          const lines = paragraph.split("\n");
           const language = lines[0].slice(3);
-          const code = lines.slice(1, -1).join('\n');
+          const code = lines.slice(1, -1).join("\n");
           return `<div class="bg-muted rounded-lg p-4 my-4 overflow-x-auto"><pre class="text-sm"><code class="language-${language}">${code}</code></pre></div>`;
         }
-        if (paragraph.startsWith('- ') || paragraph.startsWith('* ')) {
-          const items = paragraph.split('\n').map(line => 
-            line.startsWith('- ') || line.startsWith('* ') 
-              ? `<li class="ml-4">${line.slice(2)}</li>` 
-              : line
-          ).join('');
+        if (paragraph.startsWith("- ") || paragraph.startsWith("* ")) {
+          const items = paragraph
+            .split("\n")
+            .map((line) =>
+              line.startsWith("- ") || line.startsWith("* ")
+                ? `<li class="ml-4">${line.slice(2)}</li>`
+                : line,
+            )
+            .join("");
           return `<ul class="list-disc ml-6 my-4">${items}</ul>`;
         }
         return `<p class="mb-4 leading-relaxed">${paragraph}</p>`;
       })
-      .join('');
+      .join("");
   };
 
   if (!post) {
@@ -125,7 +142,10 @@ export default function BlogPost() {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Post Not Found</h1>
-          <Link to="/blog" className="text-quantum-primary hover:text-quantum-secondary">
+          <Link
+            to="/blog"
+            className="text-quantum-primary hover:text-quantum-secondary"
+          >
             ← Back to Blog
           </Link>
         </div>
@@ -143,13 +163,22 @@ export default function BlogPost() {
               Gyan
             </Link>
             <div className="hidden md:flex space-x-8">
-              <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link
+                to="/"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
                 Home
               </Link>
-              <Link to="/work" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link
+                to="/work"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
                 Work
               </Link>
-              <Link to="/resume" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link
+                to="/resume"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
                 Resume
               </Link>
               <Link to="/blog" className="text-quantum-primary">
@@ -162,8 +191,8 @@ export default function BlogPost() {
 
       <article className="container mx-auto px-6 py-12 max-w-4xl">
         {/* Back Button */}
-        <Link 
-          to="/blog" 
+        <Link
+          to="/blog"
           className="inline-flex items-center gap-2 text-quantum-primary hover:text-quantum-secondary transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -173,8 +202,8 @@ export default function BlogPost() {
         {/* Cover Image */}
         {post.coverImage && (
           <div className="relative h-96 rounded-2xl overflow-hidden mb-8">
-            <img 
-              src={post.coverImage} 
+            <img
+              src={post.coverImage}
               alt={post.title}
               className="w-full h-full object-cover"
             />
@@ -185,8 +214,11 @@ export default function BlogPost() {
         {/* Article Header */}
         <header className="mb-8">
           <div className="flex flex-wrap gap-2 mb-4">
-            {post.tags.map(tag => (
-              <span key={tag} className="inline-flex items-center gap-1 text-xs bg-quantum-primary/20 text-quantum-primary px-2 py-1 rounded-full">
+            {post.tags.map((tag) => (
+              <span
+                key={tag}
+                className="inline-flex items-center gap-1 text-xs bg-quantum-primary/20 text-quantum-primary px-2 py-1 rounded-full"
+              >
                 <Tag className="w-3 h-3" />
                 {tag}
               </span>
@@ -206,11 +238,13 @@ export default function BlogPost() {
               <div className="flex items-center gap-2">
                 <div className="text-2xl">{post.authorAvatar}</div>
                 <div>
-                  <div className="font-medium text-foreground">{post.author}</div>
+                  <div className="font-medium text-foreground">
+                    {post.author}
+                  </div>
                   <div className="text-sm text-muted-foreground">Author</div>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
                   <Calendar className="w-4 h-4" />
@@ -232,15 +266,15 @@ export default function BlogPost() {
                 onClick={handleLike}
                 className={cn(
                   "flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300",
-                  liked 
-                    ? "bg-red-500/20 text-red-400" 
-                    : "bg-card/50 text-muted-foreground hover:text-quantum-primary"
+                  liked
+                    ? "bg-red-500/20 text-red-400"
+                    : "bg-card/50 text-muted-foreground hover:text-quantum-primary",
                 )}
               >
                 <Heart className={cn("w-4 h-4", liked && "fill-current")} />
                 <span>{likes}</span>
               </button>
-              
+
               <button className="flex items-center gap-2 px-4 py-2 bg-card/50 text-muted-foreground hover:text-quantum-primary rounded-lg transition-colors">
                 <Share2 className="w-4 h-4" />
                 Share
@@ -250,7 +284,7 @@ export default function BlogPost() {
         </header>
 
         {/* Article Content */}
-        <div 
+        <div
           className="prose prose-lg max-w-none text-foreground prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-code:text-quantum-primary prose-code:bg-quantum-primary/10 prose-code:rounded prose-code:px-1"
           dangerouslySetInnerHTML={{ __html: formatContent(post.content) }}
         />
@@ -305,7 +339,9 @@ export default function BlogPost() {
                   <div className="text-2xl">{comment.avatar}</div>
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <span className="font-medium text-foreground">{comment.author}</span>
+                      <span className="font-medium text-foreground">
+                        {comment.author}
+                      </span>
                       <span className="text-sm text-muted-foreground">
                         {formatDate(comment.timestamp)}
                       </span>
@@ -320,10 +356,16 @@ export default function BlogPost() {
                           "flex items-center gap-1 text-sm transition-colors",
                           blogManager.hasUserLikedComment(comment.id)
                             ? "text-red-400"
-                            : "text-muted-foreground hover:text-quantum-primary"
+                            : "text-muted-foreground hover:text-quantum-primary",
                         )}
                       >
-                        <Heart className={cn("w-3 h-3", blogManager.hasUserLikedComment(comment.id) && "fill-current")} />
+                        <Heart
+                          className={cn(
+                            "w-3 h-3",
+                            blogManager.hasUserLikedComment(comment.id) &&
+                              "fill-current",
+                          )}
+                        />
                         <span>{comment.likes}</span>
                       </button>
                       <button className="text-sm text-muted-foreground hover:text-quantum-primary transition-colors">
@@ -337,12 +379,17 @@ export default function BlogPost() {
                 {comment.replies && comment.replies.length > 0 && (
                   <div className="ml-12 mt-4 space-y-4">
                     {comment.replies.map((reply) => (
-                      <div key={reply.id} className="bg-background/50 rounded-lg p-4">
+                      <div
+                        key={reply.id}
+                        className="bg-background/50 rounded-lg p-4"
+                      >
                         <div className="flex items-start gap-3">
                           <div className="text-lg">{reply.avatar}</div>
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <span className="font-medium text-foreground text-sm">{reply.author}</span>
+                              <span className="font-medium text-foreground text-sm">
+                                {reply.author}
+                              </span>
                               <span className="text-xs text-muted-foreground">
                                 {formatDate(reply.timestamp)}
                               </span>
@@ -365,8 +412,9 @@ export default function BlogPost() {
         <section className="mt-16 border-t border-border/50 pt-12">
           <h2 className="text-2xl font-bold mb-8">Related Posts</h2>
           <div className="grid md:grid-cols-2 gap-6">
-            {blogManager.getPostsByCategory(post.category)
-              .filter(p => p.id !== post.id)
+            {blogManager
+              .getPostsByCategory(post.category)
+              .filter((p) => p.id !== post.id)
               .slice(0, 2)
               .map((relatedPost) => (
                 <Link
@@ -376,8 +424,8 @@ export default function BlogPost() {
                 >
                   {relatedPost.coverImage && (
                     <div className="h-48 rounded-lg overflow-hidden mb-4">
-                      <img 
-                        src={relatedPost.coverImage} 
+                      <img
+                        src={relatedPost.coverImage}
                         alt={relatedPost.title}
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />

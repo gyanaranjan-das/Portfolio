@@ -34,7 +34,8 @@ export const mockBlogPosts: BlogPost[] = [
     id: "1",
     title: "The Future of Quantum Computing in AI: A Deep Dive",
     slug: "quantum-computing-ai-future",
-    excerpt: "Exploring how quantum algorithms are revolutionizing machine learning and what this means for the next decade of AI development.",
+    excerpt:
+      "Exploring how quantum algorithms are revolutionizing machine learning and what this means for the next decade of AI development.",
     content: `# The Future of Quantum Computing in AI: A Deep Dive
 
 The intersection of quantum computing and artificial intelligence represents one of the most exciting frontiers in modern technology. As we stand on the brink of the quantum advantage era, it's crucial to understand how these two revolutionary fields will reshape our technological landscape.
@@ -117,7 +118,8 @@ The future belongs to those who can bridge these two worlds effectively.`,
         id: "c1",
         author: "Alex Chen",
         avatar: "👩‍🔬",
-        content: "Fascinating read! I'm particularly interested in the VQE applications. Have you experimented with any hybrid algorithms?",
+        content:
+          "Fascinating read! I'm particularly interested in the VQE applications. Have you experimented with any hybrid algorithms?",
         timestamp: new Date("2024-01-16"),
         likes: 5,
         replies: [
@@ -125,29 +127,33 @@ The future belongs to those who can bridge these two worlds effectively.`,
             id: "c1-r1",
             author: "Gyanaranjan Das",
             avatar: "👨‍💻",
-            content: "Yes! I've been working on a hybrid quantum-classical approach for portfolio optimization. The preliminary results are promising!",
+            content:
+              "Yes! I've been working on a hybrid quantum-classical approach for portfolio optimization. The preliminary results are promising!",
             timestamp: new Date("2024-01-16"),
-            likes: 3
-          }
-        ]
+            likes: 3,
+          },
+        ],
       },
       {
         id: "c2",
         author: "Dr. Sarah Kim",
         avatar: "🔬",
-        content: "Great overview! The quantum feature mapping section really clarified some concepts for me. Looking forward to more content like this.",
+        content:
+          "Great overview! The quantum feature mapping section really clarified some concepts for me. Looking forward to more content like this.",
         timestamp: new Date("2024-01-17"),
-        likes: 8
-      }
+        likes: 8,
+      },
     ],
     featured: true,
-    coverImage: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop"
+    coverImage:
+      "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop",
   },
   {
     id: "2",
     title: "Building Scalable Microservices with Kubernetes and Service Mesh",
     slug: "scalable-microservices-kubernetes",
-    excerpt: "A comprehensive guide to designing and implementing microservices architecture that can handle enterprise-scale traffic and complexity.",
+    excerpt:
+      "A comprehensive guide to designing and implementing microservices architecture that can handle enterprise-scale traffic and complexity.",
     content: `# Building Scalable Microservices with Kubernetes and Service Mesh
 
 In today's cloud-native world, microservices architecture has become the de facto standard for building scalable, maintainable applications. This post explores best practices for implementing microservices using Kubernetes and service mesh technologies.
@@ -351,27 +357,31 @@ The key is to start simple, automate early, and evolve your architecture based o
         id: "c3",
         author: "Mike Rodriguez",
         avatar: "⚙️",
-        content: "Excellent guide! The service mesh section was particularly helpful. Do you have any thoughts on when to choose Istio vs Linkerd?",
+        content:
+          "Excellent guide! The service mesh section was particularly helpful. Do you have any thoughts on when to choose Istio vs Linkerd?",
         timestamp: new Date("2024-01-11"),
-        likes: 12
+        likes: 12,
       },
       {
         id: "c4",
         author: "Jennifer Walsh",
         avatar: "☁️",
-        content: "This is exactly what I needed for our migration project. The YAML examples are super practical!",
+        content:
+          "This is exactly what I needed for our migration project. The YAML examples are super practical!",
         timestamp: new Date("2024-01-12"),
-        likes: 7
-      }
+        likes: 7,
+      },
     ],
     featured: true,
-    coverImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop"
+    coverImage:
+      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop",
   },
   {
     id: "3",
     title: "Deep Learning Model Optimization: From Research to Production",
     slug: "dl-model-optimization-production",
-    excerpt: "Practical strategies for optimizing deep learning models for production deployment, including quantization, pruning, and edge computing considerations.",
+    excerpt:
+      "Practical strategies for optimizing deep learning models for production deployment, including quantization, pruning, and edge computing considerations.",
     content: `# Deep Learning Model Optimization: From Research to Production
 
 Transitioning deep learning models from research environments to production systems requires careful consideration of performance, efficiency, and deployment constraints. This guide covers essential optimization techniques for real-world ML deployments.
@@ -676,10 +686,16 @@ Optimizing deep learning models for production is both an art and a science. The
 Start with profiling your baseline, apply optimizations incrementally, and always validate your results. Remember that the "best" optimization depends heavily on your specific use case, hardware constraints, and performance requirements.
 
 The field of model optimization is rapidly evolving, with new techniques and tools emerging regularly. Stay informed about the latest developments and continuously evaluate new optimization strategies as they become available.`,
-    author: "Gyanaranjan Das", 
+    author: "Gyanaranjan Das",
     authorAvatar: "👨‍💻",
     publishedAt: new Date("2024-01-05"),
-    tags: ["Deep Learning", "ML Optimization", "Production ML", "TensorFlow", "PyTorch"],
+    tags: [
+      "Deep Learning",
+      "ML Optimization",
+      "Production ML",
+      "TensorFlow",
+      "PyTorch",
+    ],
     category: "AI/ML",
     readTime: 15,
     likes: 89,
@@ -689,22 +705,24 @@ The field of model optimization is rapidly evolving, with new techniques and too
         id: "c5",
         author: "David Park",
         avatar: "🤖",
-        content: "Incredible depth! The quantization examples are exactly what I needed for our mobile deployment. Thanks for sharing!",
+        content:
+          "Incredible depth! The quantization examples are exactly what I needed for our mobile deployment. Thanks for sharing!",
         timestamp: new Date("2024-01-06"),
-        likes: 15
-      }
+        likes: 15,
+      },
     ],
     featured: false,
-    coverImage: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=400&fit=crop"
-  }
+    coverImage:
+      "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=400&fit=crop",
+  },
 ];
 
 // Blog management functions with dynamic data and persistence
 export class BlogManager {
   private posts: BlogPost[] = [];
   private nextId = 4;
-  private storageKey = 'gyan-blog-data';
-  private userInteractionsKey = 'gyan-blog-interactions';
+  private storageKey = "gyan-blog-data";
+  private userInteractionsKey = "gyan-blog-interactions";
 
   constructor() {
     this.loadData();
@@ -725,16 +743,16 @@ export class BlogManager {
             timestamp: new Date(comment.timestamp),
             replies: comment.replies?.map((reply: any) => ({
               ...reply,
-              timestamp: new Date(reply.timestamp)
-            }))
-          }))
+              timestamp: new Date(reply.timestamp),
+            })),
+          })),
         }));
       } else {
         this.posts = [...mockBlogPosts];
         this.saveData();
       }
     } catch (error) {
-      console.error('Failed to load blog data:', error);
+      console.error("Failed to load blog data:", error);
       this.posts = [...mockBlogPosts];
     }
   }
@@ -743,7 +761,7 @@ export class BlogManager {
     try {
       localStorage.setItem(this.storageKey, JSON.stringify(this.posts));
     } catch (error) {
-      console.error('Failed to save blog data:', error);
+      console.error("Failed to save blog data:", error);
     }
   }
 
@@ -760,9 +778,12 @@ export class BlogManager {
     try {
       const interactions = this.getUserInteractions();
       interactions.add(`${postId}-${action}`);
-      localStorage.setItem(this.userInteractionsKey, JSON.stringify([...interactions]));
+      localStorage.setItem(
+        this.userInteractionsKey,
+        JSON.stringify([...interactions]),
+      );
     } catch (error) {
-      console.error('Failed to save user interaction:', error);
+      console.error("Failed to save user interaction:", error);
     }
   }
 
@@ -774,7 +795,7 @@ export class BlogManager {
   private startOrganicGrowthSimulation(): void {
     // Simulate organic growth every 10 seconds
     setInterval(() => {
-      this.posts.forEach(post => {
+      this.posts.forEach((post) => {
         // Random chance to increase views (simulating real visitors)
         if (Math.random() < 0.3) {
           post.views += Math.floor(Math.random() * 3) + 1;
@@ -790,34 +811,39 @@ export class BlogManager {
   }
 
   getAllPosts(): BlogPost[] {
-    return this.posts.sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
+    return this.posts.sort(
+      (a, b) => b.publishedAt.getTime() - a.publishedAt.getTime(),
+    );
   }
 
   getFeaturedPosts(): BlogPost[] {
-    return this.posts.filter(post => post.featured);
+    return this.posts.filter((post) => post.featured);
   }
 
   getPostBySlug(slug: string): BlogPost | undefined {
-    return this.posts.find(post => post.slug === slug);
+    return this.posts.find((post) => post.slug === slug);
   }
 
   getPostsByCategory(category: string): BlogPost[] {
-    return this.posts.filter(post => post.category === category);
+    return this.posts.filter((post) => post.category === category);
   }
 
   getPostsByTag(tag: string): BlogPost[] {
-    return this.posts.filter(post => post.tags.includes(tag));
+    return this.posts.filter((post) => post.tags.includes(tag));
   }
 
-  addComment(postId: string, comment: Omit<Comment, 'id' | 'timestamp' | 'likes'>): boolean {
-    const post = this.posts.find(p => p.id === postId);
+  addComment(
+    postId: string,
+    comment: Omit<Comment, "id" | "timestamp" | "likes">,
+  ): boolean {
+    const post = this.posts.find((p) => p.id === postId);
     if (!post) return false;
 
     const newComment: Comment = {
       ...comment,
       id: `c${Date.now()}`,
       timestamp: new Date(),
-      likes: 0
+      likes: 0,
     };
 
     post.comments.push(newComment);
@@ -826,22 +852,22 @@ export class BlogManager {
   }
 
   likePost(postId: string): boolean {
-    const post = this.posts.find(p => p.id === postId);
+    const post = this.posts.find((p) => p.id === postId);
     if (!post) return false;
 
     // Check if user already liked this post
-    if (this.hasUserInteracted(postId, 'like')) {
+    if (this.hasUserInteracted(postId, "like")) {
       return false; // Already liked
     }
 
     post.likes += 1;
-    this.saveUserInteraction(postId, 'like');
+    this.saveUserInteraction(postId, "like");
     this.saveData();
     return true;
   }
 
   incrementViews(postId: string): boolean {
-    const post = this.posts.find(p => p.id === postId);
+    const post = this.posts.find((p) => p.id === postId);
     if (!post) return false;
 
     // Only count unique views per session
@@ -855,36 +881,36 @@ export class BlogManager {
   }
 
   likeComment(postId: string, commentId: string): boolean {
-    const post = this.posts.find(p => p.id === postId);
+    const post = this.posts.find((p) => p.id === postId);
     if (!post) return false;
 
-    const comment = post.comments.find(c => c.id === commentId);
+    const comment = post.comments.find((c) => c.id === commentId);
     if (!comment) return false;
 
-    if (this.hasUserInteracted(commentId, 'like')) {
+    if (this.hasUserInteracted(commentId, "like")) {
       return false; // Already liked
     }
 
     comment.likes += 1;
-    this.saveUserInteraction(commentId, 'like');
+    this.saveUserInteraction(commentId, "like");
     this.saveData();
     return true;
   }
 
   hasUserLikedPost(postId: string): boolean {
-    return this.hasUserInteracted(postId, 'like');
+    return this.hasUserInteracted(postId, "like");
   }
 
   hasUserLikedComment(commentId: string): boolean {
-    return this.hasUserInteracted(commentId, 'like');
+    return this.hasUserInteracted(commentId, "like");
   }
 
   getAllCategories(): string[] {
-    return [...new Set(this.posts.map(post => post.category))];
+    return [...new Set(this.posts.map((post) => post.category))];
   }
 
   getAllTags(): string[] {
-    return [...new Set(this.posts.flatMap(post => post.tags))];
+    return [...new Set(this.posts.flatMap((post) => post.tags))];
   }
 
   // Real-time data for components

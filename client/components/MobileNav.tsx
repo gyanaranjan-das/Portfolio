@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
-import { cn } from '../lib/utils';
-import ThemeToggle from './ThemeToggle';
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X } from "lucide-react";
+import { cn } from "../lib/utils";
+import ThemeToggle from "./ThemeToggle";
 
 const navItems = [
-  { href: '/', label: 'Home' },
-  { href: '/work', label: 'Work' },
-  { href: '/resume', label: 'Resume' },
-  { href: '/blog', label: 'Blog' },
+  { href: "/", label: "Home" },
+  { href: "/work", label: "Work" },
+  { href: "/resume", label: "Resume" },
+  { href: "/blog", label: "Blog" },
 ];
 
 export default function MobileNav() {
@@ -28,30 +28,44 @@ export default function MobileNav() {
           className="p-2 rounded-lg bg-card/50 border border-border/50 hover:bg-card transition-all duration-300"
           aria-label="Toggle menu"
         >
-          <Menu className={cn("w-5 h-5 transition-all duration-300", isOpen && "rotate-90 opacity-0")} />
-          <X className={cn("w-5 h-5 absolute transition-all duration-300", !isOpen && "-rotate-90 opacity-0")} />
+          <Menu
+            className={cn(
+              "w-5 h-5 transition-all duration-300",
+              isOpen && "rotate-90 opacity-0",
+            )}
+          />
+          <X
+            className={cn(
+              "w-5 h-5 absolute transition-all duration-300",
+              !isOpen && "-rotate-90 opacity-0",
+            )}
+          />
         </button>
       </div>
 
       {/* Mobile Menu Overlay */}
-      <div 
+      <div
         className={cn(
           "fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-all duration-300 md:hidden",
-          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          isOpen ? "opacity-100" : "opacity-0 pointer-events-none",
         )}
         onClick={closeMenu}
       />
 
       {/* Mobile Menu */}
-      <div 
+      <div
         className={cn(
           "fixed top-0 right-0 h-full w-80 bg-background border-l border-border/50 z-50 transition-transform duration-300 ease-out md:hidden",
-          isOpen ? "translate-x-0" : "translate-x-full"
+          isOpen ? "translate-x-0" : "translate-x-full",
         )}
       >
         <div className="p-6">
           <div className="flex items-center justify-between mb-8">
-            <Link to="/" className="text-2xl font-bold text-quantum-primary" onClick={closeMenu}>
+            <Link
+              to="/"
+              className="text-2xl font-bold text-quantum-primary"
+              onClick={closeMenu}
+            >
               Gyan
             </Link>
             <button
@@ -72,7 +86,7 @@ export default function MobileNav() {
                   "block px-4 py-3 rounded-lg text-lg font-medium transition-all duration-300",
                   location.pathname === item.href
                     ? "bg-quantum-primary text-background"
-                    : "text-foreground hover:bg-card/50"
+                    : "text-foreground hover:bg-card/50",
                 )}
               >
                 {item.label}
@@ -83,15 +97,15 @@ export default function MobileNav() {
           <div className="mt-8 pt-8 border-t border-border/50">
             <p className="text-sm text-muted-foreground mb-4">Follow me</p>
             <div className="flex gap-4">
-              <a 
+              <a
                 href="https://github.com/gyanaranjan-das"
                 target="_blank"
-                rel="noopener noreferrer" 
+                rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-quantum-primary transition-colors"
               >
                 GitHub
               </a>
-              <a 
+              <a
                 href="https://www.linkedin.com/in/gyanaranjan-das"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -99,7 +113,7 @@ export default function MobileNav() {
               >
                 LinkedIn
               </a>
-              <a 
+              <a
                 href="mailto:dasgyanaranjan835@gmail.com"
                 className="text-muted-foreground hover:text-quantum-primary transition-colors"
               >
