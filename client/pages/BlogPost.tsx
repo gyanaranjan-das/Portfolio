@@ -314,8 +314,16 @@ export default function BlogPost() {
                       {comment.content}
                     </p>
                     <div className="flex items-center gap-4">
-                      <button className="flex items-center gap-1 text-sm text-muted-foreground hover:text-quantum-primary transition-colors">
-                        <Heart className="w-3 h-3" />
+                      <button
+                        onClick={() => handleCommentLike(comment.id)}
+                        className={cn(
+                          "flex items-center gap-1 text-sm transition-colors",
+                          blogManager.hasUserLikedComment(comment.id)
+                            ? "text-red-400"
+                            : "text-muted-foreground hover:text-quantum-primary"
+                        )}
+                      >
+                        <Heart className={cn("w-3 h-3", blogManager.hasUserLikedComment(comment.id) && "fill-current")} />
                         <span>{comment.likes}</span>
                       </button>
                       <button className="text-sm text-muted-foreground hover:text-quantum-primary transition-colors">
