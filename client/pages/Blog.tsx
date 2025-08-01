@@ -215,9 +215,13 @@ export default function Blog() {
             </span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Exploring the cutting edge of AI, quantum computing, and system architecture. 
+            Exploring the cutting edge of AI, quantum computing, and system architecture.
             Join the conversation and share your thoughts!
           </p>
+          <div className="mt-4 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span>Live engagement tracking</span>
+          </div>
         </div>
 
         {/* Search and Filters */}
