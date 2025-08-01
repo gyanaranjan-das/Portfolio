@@ -68,6 +68,17 @@ export default function BlogPost() {
     }
   };
 
+  const handleCommentLike = (commentId: string) => {
+    if (post) {
+      const success = blogManager.likeComment(post.id, commentId);
+      if (success) {
+        // Refresh post to show updated likes
+        const updatedPost = blogManager.getPostBySlug(slug!);
+        if (updatedPost) setPost(updatedPost);
+      }
+    }
+  };
+
   const formatDate = (date: Date) => {
     return new Intl.DateTimeFormat('en-US', {
       year: 'numeric',
