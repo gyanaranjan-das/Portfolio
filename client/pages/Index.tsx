@@ -12,7 +12,7 @@ const techIcons = {
   "TensorFlow": "🧠",
   "PyTorch": "🔥",
   "Docker": "🐳",
-  "Kubernetes": "☸️",
+  "Kubernetes": "⭐",
   "AWS": "☁️",
   "MongoDB": "🍃"
 };
