@@ -404,8 +404,63 @@ export default function Index() {
             </div>
 
             <div className="relative animate-slide-in-right">
-              <div className="w-full h-96 bg-gradient-to-br from-quantum-primary/20 to-quantum-secondary/20 rounded-2xl flex items-center justify-center">
-                <div className="text-8xl opacity-50">🚀</div>
+              <div className="w-full h-96 bg-gradient-to-br from-quantum-primary/20 to-quantum-secondary/20 rounded-2xl flex items-center justify-center overflow-hidden">
+                {/* Quantum Circuit Visualization */}
+                <div className="relative">
+                  {/* Central Brain/AI Core */}
+                  <div className="relative z-10">
+                    <div className="w-32 h-32 rounded-full bg-gradient-to-br from-quantum-primary via-quantum-secondary to-quantum-accent p-1">
+                      <div className="w-full h-full rounded-full bg-background/90 flex items-center justify-center">
+                        <div className="text-4xl">🧠</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Quantum Circuits */}
+                  <div className="absolute inset-0 animate-spin" style={{ animationDuration: '20s' }}>
+                    {[0, 60, 120, 180, 240, 300].map((angle, i) => (
+                      <div
+                        key={i}
+                        className="absolute top-1/2 left-1/2 w-24 h-0.5 bg-quantum-primary/40"
+                        style={{
+                          transform: `translate(-50%, -50%) rotate(${angle}deg)`,
+                          transformOrigin: 'center'
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Orbiting Particles */}
+                  {[...Array(6)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="absolute top-1/2 left-1/2 w-3 h-3 rounded-full animate-pulse"
+                      style={{
+                        background: i % 3 === 0 ? 'hsl(var(--quantum-primary))' :
+                                   i % 3 === 1 ? 'hsl(var(--quantum-secondary))' :
+                                   'hsl(var(--quantum-accent))',
+                        transform: `translate(-50%, -50%) rotate(${i * 60}deg) translateX(60px)`,
+                        animationDelay: `${i * 0.3}s`,
+                        animationDuration: '2s'
+                      }}
+                    />
+                  ))}
+
+                  {/* Data Streams */}
+                  <div className="absolute inset-0 opacity-30">
+                    {[...Array(4)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="absolute top-1/2 left-1/2 w-16 h-0.5 bg-gradient-to-r from-transparent via-quantum-accent to-transparent animate-pulse"
+                        style={{
+                          transform: `translate(-50%, -50%) rotate(${i * 45 + 22.5}deg)`,
+                          animationDelay: `${i * 0.5}s`,
+                          animationDuration: '3s'
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-quantum-accent/20 rounded-full animate-pulse"></div>
               <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-quantum-primary/20 rounded-full animate-ping"></div>
