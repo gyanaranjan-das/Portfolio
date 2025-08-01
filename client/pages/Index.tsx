@@ -171,38 +171,52 @@ export default function Index() {
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="text-2xl font-bold text-quantum-primary">Gyan</div>
-            <div className="hidden md:flex space-x-8">
-              {[
-                { id: "hero", label: "Home", isHash: true },
-                { id: "about", label: "About", isHash: true },
-                { id: "skills", label: "Skills", isHash: true },
-                { id: "projects", label: "Projects", isHash: true },
-                { id: "contact", label: "Contact", isHash: true }
-              ].map(({ id, label, isHash }) => (
-                <a
-                  key={id}
-                  href={isHash ? `#${id}` : `/${id}`}
-                  className={`transition-colors duration-300 ${
-                    activeSection === id
-                      ? "text-quantum-primary"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
+            <div className="flex items-center gap-4">
+              <div className="hidden md:flex space-x-8">
+                {[
+                  { id: "hero", label: "Home", isHash: true },
+                  { id: "about", label: "About", isHash: true },
+                  { id: "skills", label: "Skills", isHash: true },
+                  { id: "projects", label: "Projects", isHash: true },
+                  { id: "contact", label: "Contact", isHash: true }
+                ].map(({ id, label, isHash }) => (
+                  <a
+                    key={id}
+                    href={isHash ? `#${id}` : `/${id}`}
+                    className={`transition-colors duration-300 ${
+                      activeSection === id
+                        ? "text-quantum-primary"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {label}
+                  </a>
+                ))}
+                <Link
+                  to="/work"
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-300"
                 >
-                  {label}
-                </a>
-              ))}
-              <a
-                href="/resume"
-                className="text-muted-foreground hover:text-foreground transition-colors duration-300"
-              >
-                Resume
-              </a>
-              <a
-                href="/blog"
-                className="text-muted-foreground hover:text-foreground transition-colors duration-300"
-              >
-                Blog
-              </a>
+                  Work
+                </Link>
+                <Link
+                  to="/resume"
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-300"
+                >
+                  Resume
+                </Link>
+                <Link
+                  to="/blog"
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-300"
+                >
+                  Blog
+                </Link>
+              </div>
+
+              <div className="hidden md:block">
+                <ThemeToggle />
+              </div>
+
+              <MobileNav />
             </div>
           </div>
         </div>
