@@ -11,6 +11,7 @@ export default function BlogPost() {
   const [commentAuthor, setCommentAuthor] = useState("");
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(0);
+  const [views, setViews] = useState(0);
 
   useEffect(() => {
     if (slug) {
@@ -18,17 +19,34 @@ export default function BlogPost() {
       if (foundPost) {
         setPost(foundPost);
         setLikes(foundPost.likes);
+        setViews(foundPost.views);
+        setLiked(blogManager.hasUserLikedPost(foundPost.id));
+
         // Increment view count
         blogManager.incrementViews(foundPost.id);
+
+        // Set up real-time updates
+        const updateInterval = setInterval(() => {
+          const updatedPost = blogManager.getPostBySlug(slug);
+          if (updatedPost) {
+            setLikes(updatedPost.likes);
+            setViews(updatedPost.views);
+            setPost(updatedPost);
+          }
+        }, 3000); // Update every 3 seconds
+
+        return () => clearInterval(updateInterval);
       }
     }
   }, [slug]);
 
   const handleLike = () => {
     if (post && !liked) {
-      setLiked(true);
-      setLikes(prev => prev + 1);
-      blogManager.likePost(post.id);
+      const success = blogManager.likePost(post.id);
+      if (success) {
+        setLiked(true);
+        setLikes(prev => prev + 1);
+      }
     }
   };
 
