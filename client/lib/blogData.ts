@@ -699,10 +699,95 @@ The field of model optimization is rapidly evolving, with new techniques and too
   }
 ];
 
-// Blog management functions
+// Blog management functions with dynamic data and persistence
 export class BlogManager {
-  private posts: BlogPost[] = [...mockBlogPosts];
+  private posts: BlogPost[] = [];
   private nextId = 4;
+  private storageKey = 'gyan-blog-data';
+  private userInteractionsKey = 'gyan-blog-interactions';
+
+  constructor() {
+    this.loadData();
+    this.startOrganicGrowthSimulation();
+  }
+
+  private loadData(): void {
+    try {
+      const savedData = localStorage.getItem(this.storageKey);
+      if (savedData) {
+        const parsed = JSON.parse(savedData);
+        this.posts = parsed.map((post: any) => ({
+          ...post,
+          publishedAt: new Date(post.publishedAt),
+          updatedAt: post.updatedAt ? new Date(post.updatedAt) : undefined,
+          comments: post.comments.map((comment: any) => ({
+            ...comment,
+            timestamp: new Date(comment.timestamp),
+            replies: comment.replies?.map((reply: any) => ({
+              ...reply,
+              timestamp: new Date(reply.timestamp)
+            }))
+          }))
+        }));
+      } else {
+        this.posts = [...mockBlogPosts];
+        this.saveData();
+      }
+    } catch (error) {
+      console.error('Failed to load blog data:', error);
+      this.posts = [...mockBlogPosts];
+    }
+  }
+
+  private saveData(): void {
+    try {
+      localStorage.setItem(this.storageKey, JSON.stringify(this.posts));
+    } catch (error) {
+      console.error('Failed to save blog data:', error);
+    }
+  }
+
+  private getUserInteractions(): Set<string> {
+    try {
+      const saved = localStorage.getItem(this.userInteractionsKey);
+      return saved ? new Set(JSON.parse(saved)) : new Set();
+    } catch {
+      return new Set();
+    }
+  }
+
+  private saveUserInteraction(postId: string, action: string): void {
+    try {
+      const interactions = this.getUserInteractions();
+      interactions.add(`${postId}-${action}`);
+      localStorage.setItem(this.userInteractionsKey, JSON.stringify([...interactions]));
+    } catch (error) {
+      console.error('Failed to save user interaction:', error);
+    }
+  }
+
+  private hasUserInteracted(postId: string, action: string): boolean {
+    const interactions = this.getUserInteractions();
+    return interactions.has(`${postId}-${action}`);
+  }
+
+  private startOrganicGrowthSimulation(): void {
+    // Simulate organic growth every 10 seconds
+    setInterval(() => {
+      this.posts.forEach(post => {
+        // Random chance to increase views (simulating real visitors)
+        if (Math.random() < 0.3) {
+          post.views += Math.floor(Math.random() * 3) + 1;
+        }
+
+        // Smaller chance for likes
+        if (Math.random() < 0.1) {
+          post.likes += Math.floor(Math.random() * 2);
+        }
+      });
+      this.saveData();
+    }, 10000); // Every 10 seconds
+  }
 
   getAllPosts(): BlogPost[] {
     return this.posts.sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
@@ -736,23 +821,62 @@ export class BlogManager {
     };
 
     post.comments.push(newComment);
+    this.saveData();
     return true;
   }
 
   likePost(postId: string): boolean {
     const post = this.posts.find(p => p.id === postId);
     if (!post) return false;
-    
+
+    // Check if user already liked this post
+    if (this.hasUserInteracted(postId, 'like')) {
+      return false; // Already liked
+    }
+
     post.likes += 1;
+    this.saveUserInteraction(postId, 'like');
+    this.saveData();
     return true;
   }
 
   incrementViews(postId: string): boolean {
     const post = this.posts.find(p => p.id === postId);
     if (!post) return false;
-    
-    post.views += 1;
+
+    // Only count unique views per session
+    const viewKey = `view-${Date.now()}`;
+    if (!this.hasUserInteracted(postId, viewKey)) {
+      post.views += 1;
+      this.saveUserInteraction(postId, viewKey);
+      this.saveData();
+    }
     return true;
+  }
+
+  likeComment(postId: string, commentId: string): boolean {
+    const post = this.posts.find(p => p.id === postId);
+    if (!post) return false;
+
+    const comment = post.comments.find(c => c.id === commentId);
+    if (!comment) return false;
+
+    if (this.hasUserInteracted(commentId, 'like')) {
+      return false; // Already liked
+    }
+
+    comment.likes += 1;
+    this.saveUserInteraction(commentId, 'like');
+    this.saveData();
+    return true;
+  }
+
+  hasUserLikedPost(postId: string): boolean {
+    return this.hasUserInteracted(postId, 'like');
+  }
+
+  hasUserLikedComment(commentId: string): boolean {
+    return this.hasUserInteracted(commentId, 'like');
   }
 
   getAllCategories(): string[] {
@@ -761,6 +885,12 @@ export class BlogManager {
 
   getAllTags(): string[] {
     return [...new Set(this.posts.flatMap(post => post.tags))];
+  }
+
+  // Real-time data for components
+  subscribeToUpdates(callback: () => void): () => void {
+    const interval = setInterval(callback, 5000); // Update every 5 seconds
+    return () => clearInterval(interval);
   }
 }
 
