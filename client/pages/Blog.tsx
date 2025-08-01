@@ -181,6 +181,12 @@ export default function Blog() {
               <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">
                 Home
               </Link>
+              <Link to="/work" className="text-muted-foreground hover:text-foreground transition-colors">
+                Work
+              </Link>
+              <Link to="/resume" className="text-muted-foreground hover:text-foreground transition-colors">
+                Resume
+              </Link>
               <Link to="/blog" className="text-quantum-primary">
                 Blog
               </Link>
