@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import { Home, ArrowLeft, Search, Zap } from "lucide-react";
-import ThemeToggle from "../components/ThemeToggle";
-import MobileNav from "../components/MobileNav";
 
 export default function NotFound() {
   return (
