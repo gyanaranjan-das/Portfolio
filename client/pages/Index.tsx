@@ -3,7 +3,7 @@ import { Github, Linkedin, Mail, Download, ExternalLink, ChevronDown } from "luc
 import Preloader from "../components/Preloader";
 
 const techIcons = {
-  "Python": "🐍",
+  "Python": "����",
   "JavaScript": "🟨",
   "Java": "☕",
   "C++": "⚡",
@@ -304,12 +304,12 @@ export default function Index() {
               </p>
               <div className="grid grid-cols-2 gap-4 pt-4">
                 <div className="text-center p-4 bg-quantum-primary/10 rounded-lg">
-                  <div className="text-2xl font-bold text-quantum-primary">15+</div>
+                  <div className="text-2xl font-bold text-quantum-primary">8+</div>
                   <div className="text-sm text-muted-foreground">Projects Completed</div>
                 </div>
                 <div className="text-center p-4 bg-quantum-secondary/10 rounded-lg">
-                  <div className="text-2xl font-bold text-quantum-secondary">4+</div>
-                  <div className="text-sm text-muted-foreground">Years of Experience</div>
+                  <div className="text-2xl font-bold text-quantum-secondary">2+</div>
+                  <div className="text-sm text-muted-foreground">Years Learning</div>
                 </div>
               </div>
             </div>
