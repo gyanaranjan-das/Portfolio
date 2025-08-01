@@ -253,9 +253,12 @@ export default function Index() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button className="px-8 py-3 bg-quantum-primary text-background font-semibold rounded-lg hover:bg-quantum-secondary transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-quantum-primary/25">
+              <Link
+                to="/work"
+                className="px-8 py-3 bg-quantum-primary text-background font-semibold rounded-lg hover:bg-quantum-secondary transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-quantum-primary/25 inline-block text-center"
+              >
                 View My Work
-              </button>
+              </Link>
               <button className="px-8 py-3 border border-quantum-primary text-quantum-primary font-semibold rounded-lg hover:bg-quantum-primary hover:text-background transition-all duration-300 flex items-center gap-2">
                 <Download className="w-4 h-4" />
                 Download Resume
