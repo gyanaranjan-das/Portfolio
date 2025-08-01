@@ -496,35 +496,77 @@ export default function Index() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20">
-        <div className="container mx-auto px-6 text-center">
-          <div className="mb-16">
+      <section id="contact" className="py-20 bg-card/30">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">Let's Connect</h2>
             <div className="w-20 h-1 bg-gradient-to-r from-quantum-primary to-quantum-secondary mx-auto"></div>
-          </div>
-
-          <div className="max-w-2xl mx-auto space-y-8">
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-muted-foreground mt-6 max-w-3xl mx-auto">
               Ready to build the future together? Let's discuss how we can leverage cutting-edge technology to solve complex problems.
             </p>
+          </div>
 
-            <div className="flex justify-center space-x-8 pt-8">
-              {[
-                { icon: Github, href: "https://github.com/gyanaranjan-das", label: "GitHub", external: true },
-                { icon: Linkedin, href: "https://www.linkedin.com/in/gyanaranjan-das", label: "LinkedIn", external: true },
-                { icon: Mail, href: "mailto:dasgyanaranjan835@gmail.com", label: "Email", external: false }
-              ].map(({ icon: Icon, href, label, external }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target={external ? "_blank" : undefined}
-                  rel={external ? "noopener noreferrer" : undefined}
-                  className="flex flex-col items-center gap-2 text-muted-foreground hover:text-quantum-primary transition-all duration-300 hover:scale-110 group"
-                >
-                  <Icon className="w-8 h-8" />
-                  <span className="text-sm opacity-0 group-hover:opacity-100 transition-opacity">{label}</span>
-                </a>
-              ))}
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Contact Form */}
+            <ContactForm />
+
+            {/* Contact Info & Social Links */}
+            <div className="space-y-8">
+              <div className="tech-card">
+                <h3 className="text-xl font-bold mb-6">Get in Touch</h3>
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-medium text-foreground mb-2">Email</h4>
+                    <a
+                      href="mailto:dasgyanaranjan835@gmail.com"
+                      className="text-quantum-primary hover:text-quantum-secondary transition-colors"
+                    >
+                      dasgyanaranjan835@gmail.com
+                    </a>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-foreground mb-2">Response Time</h4>
+                    <p className="text-muted-foreground">Usually within 24 hours</p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-foreground mb-2">Best Time to Reach</h4>
+                    <p className="text-muted-foreground">Monday - Friday, 9 AM - 6 PM IST</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="tech-card">
+                <h3 className="text-xl font-bold mb-6">Follow My Journey</h3>
+                <div className="grid grid-cols-3 gap-4">
+                  {[
+                    { icon: Github, href: "https://github.com/gyanaranjan-das", label: "GitHub", external: true },
+                    { icon: Linkedin, href: "https://www.linkedin.com/in/gyanaranjan-das", label: "LinkedIn", external: true },
+                    { icon: Mail, href: "mailto:dasgyanaranjan835@gmail.com", label: "Email", external: false }
+                  ].map(({ icon: Icon, href, label, external }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target={external ? "_blank" : undefined}
+                      rel={external ? "noopener noreferrer" : undefined}
+                      className="flex flex-col items-center gap-3 p-4 rounded-lg border border-border/50 text-muted-foreground hover:text-quantum-primary hover:border-quantum-primary/50 transition-all duration-300 hover:scale-105 group"
+                    >
+                      <Icon className="w-6 h-6" />
+                      <span className="text-sm font-medium">{label}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <div className="tech-card bg-quantum-primary/5 border-quantum-primary/20">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                  <h3 className="text-lg font-bold">Available for Opportunities</h3>
+                </div>
+                <p className="text-muted-foreground text-sm">
+                  I'm currently open to internship opportunities in AI/ML, Quantum Computing,
+                  and Backend Development. Let's build something amazing together!
+                </p>
+              </div>
             </div>
           </div>
         </div>
