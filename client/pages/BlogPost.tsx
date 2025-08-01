@@ -211,7 +211,7 @@ export default function BlogPost() {
                 </div>
                 <div className="flex items-center gap-1">
                   <Eye className="w-4 h-4" />
-                  <span>{post.views}</span>
+                  <span>{views}</span>
                 </div>
               </div>
             </div>
