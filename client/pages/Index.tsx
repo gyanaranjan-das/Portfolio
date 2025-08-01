@@ -411,20 +411,28 @@ export default function Index() {
                     <div className="w-3 h-3 rounded-full bg-red-400"></div>
                     <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
                     <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                    <span className="text-muted-foreground ml-4">~/gyan-portfolio</span>
+                    <span className="text-muted-foreground ml-4">
+                      ~/gyan-portfolio
+                    </span>
                   </div>
                   <div className="mt-6 space-y-1">
                     <div className="flex items-center">
                       <span className="text-quantum-primary">$</span>
                       <span className="ml-2 text-foreground">whoami</span>
                     </div>
-                    <div className="text-quantum-secondary ml-4">gyanaranjan-das</div>
+                    <div className="text-quantum-secondary ml-4">
+                      gyanaranjan-das
+                    </div>
 
                     <div className="flex items-center mt-3">
                       <span className="text-quantum-primary">$</span>
-                      <span className="ml-2 text-foreground">cat skills.txt</span>
+                      <span className="ml-2 text-foreground">
+                        cat skills.txt
+                      </span>
                     </div>
-                    <div className="ml-4 text-quantum-accent">AI/ML • Quantum • DevOps</div>
+                    <div className="ml-4 text-quantum-accent">
+                      AI/ML • Quantum • DevOps
+                    </div>
 
                     <div className="flex items-center mt-3">
                       <span className="text-quantum-primary">$</span>
@@ -436,7 +444,9 @@ export default function Index() {
 
                     <div className="flex items-center mt-3">
                       <span className="text-quantum-primary">$</span>
-                      <span className="ml-2 text-foreground animate-pulse">|</span>
+                      <span className="ml-2 text-foreground animate-pulse">
+                        |
+                      </span>
                     </div>
                   </div>
                 </div>
