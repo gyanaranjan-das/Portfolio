@@ -3,7 +3,7 @@ import { Github, Linkedin, Mail, Download, ExternalLink, ChevronDown } from "luc
 import Preloader from "../components/Preloader";
 
 const techIcons = {
-  "Python": "����",
+  "Python": "🐍",
   "JavaScript": "🟨",
   "Java": "☕",
   "C++": "⚡",
