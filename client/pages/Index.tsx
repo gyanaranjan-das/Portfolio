@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Github, Linkedin, Mail, Download, ExternalLink, ChevronDown } from "lucide-react";
 import Preloader from "../components/Preloader";
+import ThemeToggle from "../components/ThemeToggle";
+import MobileNav from "../components/MobileNav";
+import ContactForm from "../components/ContactForm";
 
 const techIcons = {
   "Python": "🐍",
