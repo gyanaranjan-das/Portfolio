@@ -4,7 +4,7 @@ import Preloader from "../components/Preloader";
 
 const techIcons = {
   "Python": "🐍",
-  "JavaScript": "🟨",
+  "JavaScript": "💛",
   "Java": "☕",
   "C++": "⚡",
   "React": "⚛️",
