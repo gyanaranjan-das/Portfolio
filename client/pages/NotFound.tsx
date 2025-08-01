@@ -11,39 +11,31 @@ export default function NotFound() {
             <Link to="/" className="text-2xl font-bold text-quantum-primary">
               Gyan
             </Link>
-            <div className="flex items-center gap-4">
-              <div className="hidden md:flex space-x-8">
-                <Link
-                  to="/"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Home
-                </Link>
-                <Link
-                  to="/work"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Work
-                </Link>
-                <Link
-                  to="/resume"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Resume
-                </Link>
-                <Link
-                  to="/blog"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Blog
-                </Link>
-              </div>
-
-              <div className="hidden md:block">
-                <ThemeToggle />
-              </div>
-
-              <MobileNav />
+            <div className="hidden md:flex space-x-8">
+              <Link
+                to="/"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Home
+              </Link>
+              <Link
+                to="/work"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Work
+              </Link>
+              <Link
+                to="/resume"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Resume
+              </Link>
+              <Link
+                to="/blog"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Blog
+              </Link>
             </div>
           </div>
         </div>
