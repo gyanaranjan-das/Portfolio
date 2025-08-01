@@ -5,6 +5,8 @@ import Preloader from "../components/Preloader";
 import ThemeToggle from "../components/ThemeToggle";
 import MobileNav from "../components/MobileNav";
 import ContactForm from "../components/ContactForm";
+import Analytics from "../components/Analytics";
+import SkillsChart from "../components/SkillsChart";
 
 const techIcons = {
   "Python": "🐍",
