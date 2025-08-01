@@ -405,60 +405,49 @@ export default function Index() {
 
             <div className="relative animate-slide-in-right">
               <div className="w-full h-96 bg-gradient-to-br from-quantum-primary/20 to-quantum-secondary/20 rounded-2xl flex items-center justify-center overflow-hidden">
-                {/* Quantum Circuit Visualization */}
-                <div className="relative">
-                  {/* Central Brain/AI Core */}
-                  <div className="relative z-10">
-                    <div className="w-32 h-32 rounded-full bg-gradient-to-br from-quantum-primary via-quantum-secondary to-quantum-accent p-1">
-                      <div className="w-full h-full rounded-full bg-background/90 flex items-center justify-center">
-                        <div className="text-4xl">🧠</div>
-                      </div>
+                {/* Clean Terminal/Code Style */}
+                <div className="font-mono text-left space-y-2 text-sm">
+                  <div className="flex items-center gap-2 opacity-80">
+                    <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                    <span className="text-muted-foreground ml-4">
+                      ~/gyan-portfolio
+                    </span>
+                  </div>
+                  <div className="mt-6 space-y-1">
+                    <div className="flex items-center">
+                      <span className="text-quantum-primary">$</span>
+                      <span className="ml-2 text-foreground">whoami</span>
                     </div>
-                  </div>
+                    <div className="text-quantum-secondary ml-4">
+                      gyanaranjan-das
+                    </div>
 
-                  {/* Quantum Circuits */}
-                  <div className="absolute inset-0 animate-spin" style={{ animationDuration: '20s' }}>
-                    {[0, 60, 120, 180, 240, 300].map((angle, i) => (
-                      <div
-                        key={i}
-                        className="absolute top-1/2 left-1/2 w-24 h-0.5 bg-quantum-primary/40"
-                        style={{
-                          transform: `translate(-50%, -50%) rotate(${angle}deg)`,
-                          transformOrigin: 'center'
-                        }}
-                      />
-                    ))}
-                  </div>
+                    <div className="flex items-center mt-3">
+                      <span className="text-quantum-primary">$</span>
+                      <span className="ml-2 text-foreground">
+                        cat skills.txt
+                      </span>
+                    </div>
+                    <div className="ml-4 text-quantum-accent">
+                      AI/ML • Quantum • DevOps
+                    </div>
 
-                  {/* Orbiting Particles */}
-                  {[...Array(6)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="absolute top-1/2 left-1/2 w-3 h-3 rounded-full animate-pulse"
-                      style={{
-                        background: i % 3 === 0 ? 'hsl(var(--quantum-primary))' :
-                                   i % 3 === 1 ? 'hsl(var(--quantum-secondary))' :
-                                   'hsl(var(--quantum-accent))',
-                        transform: `translate(-50%, -50%) rotate(${i * 60}deg) translateX(60px)`,
-                        animationDelay: `${i * 0.3}s`,
-                        animationDuration: '2s'
-                      }}
-                    />
-                  ))}
+                    <div className="flex items-center mt-3">
+                      <span className="text-quantum-primary">$</span>
+                      <span className="ml-2 text-foreground">ls projects/</span>
+                    </div>
+                    <div className="ml-4 text-muted-foreground">
+                      <div>harmoniQ/ quantum-simulator/ face-lock/</div>
+                    </div>
 
-                  {/* Data Streams */}
-                  <div className="absolute inset-0 opacity-30">
-                    {[...Array(4)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="absolute top-1/2 left-1/2 w-16 h-0.5 bg-gradient-to-r from-transparent via-quantum-accent to-transparent animate-pulse"
-                        style={{
-                          transform: `translate(-50%, -50%) rotate(${i * 45 + 22.5}deg)`,
-                          animationDelay: `${i * 0.5}s`,
-                          animationDuration: '3s'
-                        }}
-                      />
-                    ))}
+                    <div className="flex items-center mt-3">
+                      <span className="text-quantum-primary">$</span>
+                      <span className="ml-2 text-foreground animate-pulse">
+                        |
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
