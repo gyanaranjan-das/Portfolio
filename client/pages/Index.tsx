@@ -448,7 +448,7 @@ export default function Index() {
 
                     <div className="flex items-center mt-3">
                       <span className="text-quantum-primary">$</span>
-                      <span className="ml-2 text-foreground">
+                      <span className="ml-2 text-foreground animate-pulse">
                         █
                       </span>
                     </div>
