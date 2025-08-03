@@ -14,7 +14,7 @@ const aimlFrameworks = [
   { name: "TensorFlow", icon: "🧠", description: "Deep Learning & Neural Networks" },
   { name: "PyTorch", icon: "🔥", description: "Research & Computer Vision" },
   { name: "OpenCV", icon: "👁️", description: "Computer Vision & Image Processing" },
-  { name: "Scikit-learn", icon: "📊", description: "Machine Learning & Data Analysis" }
+  { name: "Scikit-learn", icon: "���", description: "Machine Learning & Data Analysis" }
 ];
 
 const quantumTools = [
@@ -108,10 +108,14 @@ export default function Resume() {
 
             {/* Download Resume */}
             <div className="tech-card text-center">
-              <button className="w-full flex items-center justify-center gap-3 bg-quantum-primary text-background px-6 py-3 rounded-lg hover:bg-quantum-secondary transition-all duration-300 hover:scale-105 font-semibold">
+              <a
+                href="/resume.pdf"
+                download="Gyanaranjan_Das_Resume.pdf"
+                className="w-full flex items-center justify-center gap-3 bg-quantum-primary text-background px-6 py-3 rounded-lg hover:bg-quantum-secondary transition-all duration-300 hover:scale-105 font-semibold"
+              >
                 <Download className="w-5 h-5" />
                 Download Resume (PDF)
-              </button>
+              </a>
             </div>
           </div>
 
