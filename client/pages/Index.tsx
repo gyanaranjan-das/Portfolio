@@ -13,12 +13,12 @@ import ContactForm from "../components/ContactForm";
 
 const techIcons = {
   Python: "🐍",
-  JavaScript: "💛",
+  JavaScript: "��",
   Java: "☕",
   "C++": "⚡",
   React: "⚛️",
   "Node.js": "🟢",
-  TensorFlow: "���",
+  TensorFlow: "🧠",
   PyTorch: "🔥",
   Docker: "🐳",
   Kubernetes: "⭐",
