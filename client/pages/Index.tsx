@@ -73,7 +73,7 @@ const devopsTools = [
 ];
 
 const cloudServices = [
-  { name: "AWS", icon: "���️", description: "Cloud Infrastructure" },
+  { name: "AWS", icon: "☁️", description: "Cloud Infrastructure" },
   { name: "Firebase", icon: "🔥", description: "Backend Services" },
   { name: "MongoDB", icon: "🍃", description: "NoSQL Database" },
   { name: "PostgreSQL", icon: "🐘", description: "Relational Database" },
@@ -316,10 +316,14 @@ export default function Index() {
               >
                 View My Work
               </Link>
-              <button className="px-8 py-3 border border-quantum-primary text-quantum-primary font-semibold rounded-lg hover:bg-quantum-primary hover:text-background transition-all duration-300 flex items-center gap-2">
+              <a
+                href="/resume.pdf"
+                download="Gyanaranjan_Das_Resume.pdf"
+                className="px-8 py-3 border border-quantum-primary text-quantum-primary font-semibold rounded-lg hover:bg-quantum-primary hover:text-background transition-all duration-300 flex items-center gap-2 inline-flex"
+              >
                 <Download className="w-4 h-4" />
                 Download Resume
-              </button>
+              </a>
             </div>
 
             <div className="flex justify-center space-x-6 pt-8">
@@ -444,8 +448,8 @@ export default function Index() {
 
                     <div className="flex items-center mt-3">
                       <span className="text-quantum-primary">$</span>
-                      <span className="ml-2 text-foreground animate-pulse">
-                        |
+                      <span className="ml-2 text-foreground">
+                        █
                       </span>
                     </div>
                   </div>
