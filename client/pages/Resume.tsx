@@ -14,7 +14,7 @@ const aimlFrameworks = [
   { name: "TensorFlow", icon: "🧠", description: "Deep Learning & Neural Networks" },
   { name: "PyTorch", icon: "🔥", description: "Research & Computer Vision" },
   { name: "OpenCV", icon: "👁️", description: "Computer Vision & Image Processing" },
-  { name: "Scikit-learn", icon: "���", description: "Machine Learning & Data Analysis" }
+  { name: "Scikit-learn", icon: "📊", description: "Machine Learning & Data Analysis" }
 ];
 
 const quantumTools = [
