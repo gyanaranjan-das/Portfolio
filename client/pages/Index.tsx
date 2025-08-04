@@ -267,22 +267,41 @@ export default function Index() {
         {/* Background Effects */}
         <div className="absolute inset-0 bg-quantum-grid opacity-10" />
 
-        {/* Floating Tech Icons */}
+        {/* Modern Geometric Background */}
         <div className="absolute inset-0 overflow-hidden">
-          {Object.entries(techIcons).map(([tech, icon], index) => (
-            <div
-              key={tech}
-              className="absolute text-2xl opacity-20 animate-float"
-              style={{
-                left: `${10 + ((index * 13) % 80)}%`,
-                top: `${20 + ((index * 17) % 60)}%`,
-                animationDelay: `${index * 0.5}s`,
-                animationDuration: `${3 + (index % 3)}s`,
-              }}
-            >
-              {icon}
-            </div>
-          ))}
+          {/* Animated Geometric Shapes */}
+          <div className="absolute top-20 left-10 w-32 h-32 border border-quantum-primary/20 rounded-lg rotate-45 animate-spin-slow"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-r from-quantum-secondary/10 to-quantum-accent/10 rounded-full animate-pulse"></div>
+          <div className="absolute bottom-32 left-1/4 w-16 h-16 border-2 border-quantum-accent/30 transform rotate-12 animate-bounce"></div>
+          <div className="absolute top-1/3 right-1/3 w-20 h-20 bg-quantum-primary/10 transform skew-x-12 animate-float"></div>
+          <div className="absolute bottom-20 right-10 w-28 h-28 border border-quantum-secondary/20 rounded-full animate-ping"></div>
+
+          {/* Floating Code Elements */}
+          <div className="absolute top-16 right-1/4 text-quantum-primary/30 font-mono text-sm animate-float">
+            &lt;/&gt;
+          </div>
+          <div className="absolute bottom-40 left-1/3 text-quantum-secondary/30 font-mono text-lg animate-float" style={{animationDelay: '1s'}}>
+            {}
+          </div>
+          <div className="absolute top-1/2 left-16 text-quantum-accent/30 font-mono text-xs animate-float" style={{animationDelay: '2s'}}>
+            const AI = () =&gt;
+          </div>
+
+          {/* Particle Grid */}
+          <div className="absolute inset-0">
+            {[...Array(12)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute w-1 h-1 bg-quantum-primary/20 rounded-full animate-pulse"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 3}s`,
+                  animationDuration: `${2 + Math.random() * 3}s`,
+                }}
+              ></div>
+            ))}
+          </div>
         </div>
 
         <div className="container mx-auto px-6 text-center relative z-10">
