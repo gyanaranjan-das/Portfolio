@@ -280,10 +280,16 @@ export default function Index() {
           <div className="absolute top-16 right-1/4 text-quantum-primary/30 font-mono text-sm animate-float">
             &lt;/&gt;
           </div>
-          <div className="absolute bottom-40 left-1/3 text-quantum-secondary/30 font-mono text-lg animate-float" style={{animationDelay: '1s'}}>
+          <div
+            className="absolute bottom-40 left-1/3 text-quantum-secondary/30 font-mono text-lg animate-float"
+            style={{ animationDelay: "1s" }}
+          >
             {}
           </div>
-          <div className="absolute top-1/2 left-16 text-quantum-accent/30 font-mono text-xs animate-float" style={{animationDelay: '2s'}}>
+          <div
+            className="absolute top-1/2 left-16 text-quantum-accent/30 font-mono text-xs animate-float"
+            style={{ animationDelay: "2s" }}
+          >
             const AI = () =&gt;
           </div>
 
@@ -342,7 +348,7 @@ export default function Index() {
               >
                 <Download className="w-4 h-4" />
                 Download Resume
-              </a>                
+              </a>
             </div>
 
             <div className="flex justify-center space-x-6 pt-8">
@@ -467,9 +473,7 @@ export default function Index() {
 
                     <div className="flex items-center mt-3">
                       <span className="text-quantum-primary">$</span>
-                      <span className="ml-2 text-foreground">
-                        █
-                      </span>
+                      <span className="ml-2 text-foreground">█</span>
                     </div>
                   </div>
                 </div>
