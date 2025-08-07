@@ -1,210 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My JavaScript Portfolio</title>
-  <script defer src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
 </head>
 <body>
-  <div id="app"></div>
-  <script>
-    const app = document.getElementById("app");
+    <section>
+        <nav class="nav-1">
+            <header id = header>Gyanaranjan</header>
+            <div class="nav-2">
+                <button  id ="Home" text="Home" >Home</button>
 
-    // Basic Styles
-    document.body.style.margin = "0";
-    document.body.style.fontFamily = "Arial, sans-serif";
-    document.body.style.backgroundColor = "#f4f4f4";
-    document.body.style.color = "#333";
+                <button id = "About" text = "About">
+                    About
+                </button>
 
-    // Loading Animation
-    const loader = document.createElement("div");
-    loader.textContent = "Loading...";
-    loader.style.fontSize = "24px";
-    loader.style.textAlign = "center";
-    loader.style.marginTop = "20%";
-    app.appendChild(loader);
+                <button id="Skills" text=
+                "Skills">Skills</button>
 
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        loader.remove();
-        buildPortfolio();
-      }, 1500);
-    });
+                <button id = "projects" text = "projects" >Projects</button>
+                
+                <button id = "Contact" text = "contact" >Contact</button>
 
-    function createSection(titleText) {
-      const section = document.createElement("section");
-      section.style.padding = "40px";
-      section.style.borderBottom = "1px solid #ddd";
+                <button id= "Work" text = "work"></button>
 
-      const title = document.createElement("h2");
-      title.textContent = titleText;
-      title.style.fontSize = "32px";
-      title.style.marginBottom = "20px";
-      section.appendChild(title);
+                <button id = "Resume" text = "Resume">Resume</button>
 
-      return { section, title };
-    }
+                <button id = "Blog" text = "Blog">Blog</button>
+                
+            </div>
+        </nav>
+    </section>
+    <section>   
+        <div class="title">
+            <h1>Gyanaranjan Das</h1>
+            <p>Engineering the future with Code and Qubits</p>
+             <ul>
+                <li>AI/ML Engineer</li>
+                <li>Quantum Computing</li>
+                <li>DevOps Architect</li>
+                <li>System Designer</li>
+             </ul>
+        </div>
+        <div class="div1">
+            <button type="button" id = "Work" >View My Work</button>
+            <button type="button" id = "Resume">Download Resume</button>
+        </div>
 
-    function buildPortfolio() {
-      // Home Section
-      const home = createSection("Home");
-      const name = document.createElement("h1");
-      name.textContent = "Gyan";
-      name.style.fontSize = "48px";
-      home.section.insertBefore(name, home.title);
+        <div class="social-icons">
+            <a href="https://github.com/gyanaranjan-das" target="_blank" rel="noopener noreferrer" class="github-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github w-6 h-6"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a>
 
-      const tagline = document.createElement("p");
-      tagline.textContent = "Aspiring Polymath | Full-Stack Dev | AI Explorer";
-      home.section.appendChild(tagline);
+            <a href="https://www.linkedin.com/in/gyanaranjan-das" target="_blank" rel="noopener noreferrer" class="text-muted-foreground hover:text-quantum-primary transition-all duration-300 hover:scale-110"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin w-6 h-6"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
 
-      const typewriter = document.createElement("div");
-      typewriter.style.fontSize = "24px";
-      home.section.appendChild(typewriter);
+            <a href="mailto:dasgyanaranjan835@gmail.com" class="text-muted-foreground hover:text-quantum-primary transition-all duration-300 hover:scale-110"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail w-6 h-6"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg></a>
+        </div>
+    </section>
+    <section>
+        <div class="about">
+            <h1>About Me</h1>
+        </div>
 
-      const skills = ["AI", "Quantum Computing", "JavaScript", "Python", "Java"];
-      let skillIndex = 0;
-      let charIndex = 0;
+        <div class="p">
+            <p>
+                I'm a passionate B.Tech Computer Science Engineering student with a deep fascination for cutting-edge technologies that shape our future. My journey spans across artificial intelligence, quantum computing, and scalable system architecture.
 
-      function typeSkill() {
-        if (charIndex <= skills[skillIndex].length) {
-          typewriter.textContent = skills[skillIndex].slice(0, charIndex++);
-          setTimeout(typeSkill, 150);
-        } else {
-          setTimeout(() => {
-            charIndex = 0;
-            skillIndex = (skillIndex + 1) % skills.length;
-            typeSkill();
-          }, 1000);
-        }
-      }
-      typeSkill();
+                With expertise in machine learning frameworks, quantum algorithms, and cloud-native architectures, I bridge the gap between theoretical computer science and practical engineering solutions.  
+            </p>
+        </div>
+    </section>
 
-      app.appendChild(home.section);
+    <section class="Tech-aresnal">
+        <div class="Tech-aresnal1">
+            <h1>Technical Aresnal</h1>
+        </div>
+        <div class="heading1">
+            <h3>
+            Programming Languages
+            </h3>
+        </div>
+        <div class="programming">
+        <ul>
+            <li>Python</li>
+            <li>Javascript</li>
+            <li>Java</li>
+            <li>C++</li>
+            <li>Typescript</li>
+            <li>Go</li>
+        </ul>
+        </div>
+        <div class="AI/MLFrameworks">
+            <h3>
+                AI/ML Frameworks
+            </h3>
+            <ul>
+                <li>TensorFlow
+                    <p>Deep Learning & Neural Networks
+                    </p>
+                </li>
+                <li>PyTorch
+                    <p>Research & Computer Vision</p>
+                </li>
+                <li>OpenCV
+                    <p>Computer Vision & Image Processing
+                    </p>
+                </li>
+                <li>Scikit-learn
+                    <p>Machine Learning & Data Analysis
+                  </p>
+                </li>
+                <li>Pandas
+                    <p>Data Manipulation & Analysis</p>
+                </li>
+                <li>
+                    Numpy
+                    <p>Numerical Computing</p>
+                </li>
+            </ul>
+        </div>
 
-      // About Section
-      const about = createSection("About");
-      about.section.appendChild(document.createTextNode(
-        "I am a passionate Computer Science student exploring Artificial Intelligence, Quantum Computing, and futuristic technologies."
-      ));
-      app.appendChild(about.section);
+        <div class="QuantumComputing">
+            <h3>Quantum Computing</h3>
+            <ul>
+                <li>Qiskit
+                    <p>IBM Quantum Development</p>
+                </li>
+                <li>Cirq
+                    <p>Google Quantum AI</p>
+                </li>
+                <li>PennyLane
+                    <p>Quantum Machine Learning</p>
+                </li>
+                <li>Quantum Inspire
+                    <p>QuTech Platform</p>
+                </li>
+            </ul>
+        </div>
 
-      // Skills Section
-      const skillsSec = createSection("Skills");
-      const ul = document.createElement("ul");
-      ["JavaScript", "Python", "Java", "OpenCV", "TensorFlow", "Qiskit"].forEach(skill => {
-        const li = document.createElement("li");
-        li.textContent = skill;
-        ul.appendChild(li);
-      });
-      skillsSec.section.appendChild(ul);
-      app.appendChild(skillsSec.section);
+        <div class="DevOps&Tools">
+            <h3>DevOps & Tools</h3>
+            <ul>
+                <li>Docker
+                    <p>Containerization</p>
+                </li>
+                <li>Kubernates
+                    <p>Kubernation</p>
+                </li>
+                <li>GitHub Actions
+                    <p>CI/CD Automation</p>
+                </li>
+                <li>Jenkins
+                    <p>Build Automation</p>
+                </li>
+                <li>Terraform
+                    <p>Infrastructure</p>
+                </li>
+                <li>Ansible
+                    <p>Configuration Management</p>
+                </li>
+            </ul>
+        </div>
 
-      // Projects Section
-      const projects = createSection("Projects");
-      const projectList = [
-        { title: "EvoAI", desc: "Self-evolving desktop AI assistant.", link: "#" },
-        { title: "HarmoniQ", desc: "AI-integrated music platform.", link: "#" },
-      ];
-      projectList.forEach(p => {
-        const card = document.createElement("div");
-        card.style.border = "1px solid #ccc";
-        card.style.padding = "20px";
-        card.style.marginBottom = "10px";
-        const h3 = document.createElement("h3");
-        h3.textContent = p.title;
-        const pDesc = document.createElement("p");
-        pDesc.textContent = p.desc;
-        const a = document.createElement("a");
-        a.href = p.link;
-        a.textContent = "View Project";
-        card.append(h3, pDesc, a);
-        projects.section.appendChild(card);
-      });
-      app.appendChild(projects.section);
+        <div class="Cloud&Databases ">
+            <h3>Cloud & Databses</h3>
+            <ul>
+                <li>AWS
+                    <P>Cloud Infrastructure</P>
+                </li>
+                <li>Firebase
+                    <p>Backend Services</p>
+                </li>
+                <li>MongoDB
+                    <p>NoSQL Database</p>
+                </li>
+                <li>PostgreSQL
+                    <p>Relational Database</p></li>
+                <li>
+                    Redis
+                    <p>In-Memory Cache</p>
+                </li>
+                <li>GraphQL
+                    <p>API Query Language</p>
+                </li>
+            </ul>
+        </div>
+        <div class="System Design&Architecture">
+            <h3>System Design & Architecture</h3>
+        </div>
 
-      // GitHub Stats Section
-      const github = createSection("GitHub Stats");
-      const githubInfo = document.createElement("div");
-      githubInfo.textContent = "Fetching GitHub data...";
-      github.section.appendChild(githubInfo);
-      fetch("https://api.github.com/users/octocat")
-        .then(res => res.json())
-        .then(data => {
-          githubInfo.textContent = `User: ${data.login}, Public Repos: ${data.public_repos}`;
-        });
-      app.appendChild(github.section);
+        <ul>
+            <li>Distributed Systems
+                    <ul>
+                    <li>Microservices
+                    </li>
+                    <li>Event-Driven Architecture
+                    </li>
+                    <li>CQRS</li>
+                    <li>Saga Pattern</li>
+                    </ul>
+            </li>
+            <li>Scalability
+                <ul>
+                <li>Load Balancing</li>
+                <li>Horizontal Scaling</li>
+                <li>Caching Strategies</li>
+                <li>CDN</li>
+                </ul>
+            </li>
+            <li>
+                <p>Data Engineering</p>
+                <ul>
+                    <li>Apache Kafka</li>
+                    <li>Apache Spark</li>
+                    <li>ETL Pipelines</li>
+                    <li>Data Leaks</li>
+                </ul>
+            </li>
+            <li>
+                Security
+                <ul>
+                    <li>
+                    OAuth 2.0
+                    </li>
+                    <li>JWT</li>
+                    <LI>API Srcurity</LI>
+                    <li>Zero Trust</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
 
-      // Contact Section
-      const contact = createSection("Contact");
-      const form = document.createElement("form");
-      ["Name", "Email", "Message"].forEach(label => {
-        const input = document.createElement(label === "Message" ? "textarea" : "input");
-        input.placeholder = label;
-        input.style.display = "block";
-        input.style.marginBottom = "10px";
-        input.style.padding = "10px";
-        input.style.width = "100%";
-        form.appendChild(input);
-      });
-      const submit = document.createElement("button");
-      submit.textContent = "Send";
-      submit.onclick = (e) => {
-        e.preventDefault();
-        const [name, email, message] = form.querySelectorAll("input, textarea");
-        console.log("Form Submitted:", {
-          name: name.value,
-          email: email.value,
-          message: message.value,
-        });
-        alert("Message logged to console!");
-      };
-      form.appendChild(submit);
-      contact.section.appendChild(form);
-      app.appendChild(contact.section);
+    <section class="Project-section">
+        <h1>Featured Projects</h1>
+    </section>
 
-      // Footer
-      const footer = document.createElement("footer");
-      footer.style.textAlign = "center";
-      footer.style.padding = "20px";
-      footer.style.background = "#222";
-      footer.style.color = "#fff";
-      footer.textContent = "© 2025 Gyan | Follow me @gyan.dev";
-      app.appendChild(footer);
+    <section class="Certifications">
+        <h1>Certifications</h1>
+    </section>
 
-      // Easter Egg
-      let cheatCode = "gyan";
-      let inputStr = "";
-      document.addEventListener("keydown", e => {
-        inputStr += e.key;
-        if (inputStr.includes(cheatCode)) {
-          alert("✨ Hidden Feature Activated!");
-          inputStr = "";
-        }
-      });
+    <section class="connect">
+        <h1>Let's Connect</h1>
+        <p>Reply to build the future together? Let's discuss how we can leverage cutting-edge technology to solve complex problems.</p>
 
-      // Theme Toggle
-      const toggleBtn = document.createElement("button");
-      toggleBtn.textContent = "Toggle Theme";
-      toggleBtn.style.position = "fixed";
-      toggleBtn.style.top = "10px";
-      toggleBtn.style.right = "10px";
-      toggleBtn.onclick = () => {
-        const isDark = document.body.style.backgroundColor === "#222";
-        if (isDark) {
-          document.body.style.backgroundColor = "#f4f4f4";
-          document.body.style.color = "#333";
-          localStorage.setItem("theme", "light");
-        } else {
-          document.body.style.backgroundColor = "#222";
-          document.body.style.color = "#f4f4f4";
-          localStorage.setItem("theme", "dark");
-        }
-      };
-      document.body.appendChild(toggleBtn);
+        <div class="message-box">
+            <label for="name">Name*
+                <input type="text" name="Name*" id="name" placeholder="Your full name">
+            </label>
 
-      if (localStorage.getItem("theme") === "dark") toggleBtn.click();
-    }
-  </script>
+            <label for="email">Email*
+                <input type="text" name="Email*" id="email" placeholder="your.email@example.com">
+            <label for="subject">Subject*    
+                <input type="text" name="Subject*" id="subject" placeholder="What's this about?"></label>
+            <Label for="message">Message*
+                <input type="text" name="Message" id="message" placeholder="Tell me about your project, ideas, or just say hello!">
+            </Label>
+
+            <button id="Send-message" type="button" >Send Message</button>
+            <p>Or reach me directly at
+                <a href="mailto:dasgyanaranjan835@gmail.com">dasgyanaranjan835@gmail.com</a>
+            </p>
+        </div>
+
+        <div class="get-in-touch">
+            <h3>Get in Touch</h3>
+            <div class="contents">
+                <p><h5>Email</h5>
+                    <a href="mailto:dasgyanaranjan835@gmail.com">dasgyanaranjan835@gmail.com</a>
+                </p>
+                <h5>Response Time</h5>
+                    <p>Usually within 24 hours</p>
+                
+                <h5>Best Time to Reach</h5>
+
+                    <p>Monday - Friday, 9 AM - 6 PM IST</p>
+            </div>
+        </div>
+
+        <div class="journey">
+            <a href="https://github.com/gyanaranjan-das" target="_blank" rel="noopener noreferrer" class="github-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github w-6 h-6"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a>
+
+            <a href="https://www.linkedin.com/in/gyanaranjan-das" target="_blank" rel="noopener noreferrer" class="text-muted-foreground hover:text-quantum-primary transition-all duration-300 hover:scale-110"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin w-6 h-6"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+
+            <a href="mailto:dasgyanaranjan835@gmail.com" class="text-muted-foreground hover:text-quantum-primary transition-all duration-300 hover:scale-110"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail w-6 h-6"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg></a>
+        </div>
+
+        <div class="opportunities">
+            <h3>Available for Opportunities</h3>
+            <p>I'm currently open to internship opportunities in AI/ML, Quantum Computing, and Backend Development. Let's build something amazing together!</p>
+        </div>
+    </section>
+
+    <section class="footer">
+        <footer>© 2025 Gyanaranjan Das. Crafted with quantum precision and classical elegance.</footer>
+    </section>
+
 </body>
 </html>
