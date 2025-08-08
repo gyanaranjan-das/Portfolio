@@ -4,30 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
+     <script src="js\index.js"></script>
 </head>
 <body>
     <section>
         <nav class="nav-1">
             <header id = header>Gyanaranjan</header>
             <div class="nav-2">
-                <button  id ="Home" text="Home" >Home</button>
+                <button  id ="Home" text="Home" onclick = "scrollToSection('Home')">Home</button>
 
-                <button id = "About" text = "About">
+                <button id = "About" text = "About"
+                onclick="scrollToSection('About')">
                     About
                 </button>
 
                 <button id="Skills" text=
-                "Skills">Skills</button>
+                "Skills" onclick="scrollToSection('Skills')">Skills</button>
 
-                <button id = "projects" text = "projects" >Projects</button>
+                <button id = "projects" text = "projects" onclick="scrollToSection('projects')">Projects</button>
                 
-                <button id = "Contact" text = "contact" >Contact</button>
+                <button id = "Contact" text = "contact" onclick="scrollTOSection('Contact')">Contact</button>
 
-                <button id= "Work" text = "work"></button>
+                <button id= "Work" text = "work" onclick="goToPage('html/Work.html')">Work</button>
 
-                <button id = "Resume" text = "Resume">Resume</button>
+                <button id = "Resume" text = "Resume" onclick="goToPage('html/Resume.html')">Resume</button>
 
-                <button id = "Blog" text = "Blog">Blog</button>
+                <button id = "Blog" text = "Blog" onclick="goToPage('html/Blog.html')">Blog</button>
                 
             </div>
         </nav>
