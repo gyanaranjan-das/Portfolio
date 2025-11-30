@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyan | Creative Technologist</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- GSAP & Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script> <!-- Added ScrollToPlugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #ffffff;
+            --accent: #6d28d9;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            cursor: none; /* Custom cursor */
+        }
+
+        h1, h2, h3, .font-syne {
+            font-family: 'Syne', sans-serif;
+        }
+
+        /* Hide Scrollbar */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        /* 3D Canvas */
+        #webgl-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 1px solid white;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+            mix-blend-mode: difference;
+        }
+        .cursor.hovered {
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            border-color: transparent;
+        }
+
+        /* Loader */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .loader-bar {
+            width: 0%;
+            height: 2px;
+            background: #fff;
+            transition: width 0.5s ease;
+        }
+
+        /* Horizontal Scroll Section */
+        .horizontal-section {
+            width: 400%; /* 4 sections wide */
+            height: 100vh;
+            display: flex;
+            flex-wrap: nowrap;
+        }
+        .panel {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 2rem;
+        }
+
+        /* Marquee Animation */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: max-content;
+            animation: marquee 30s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+
+        /* Text Reveal Helper */
+        .reveal-text {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+        .char {
+            transform: translateY(115%);
+            transition: transform 0.5s;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Loader -->
+    <div class="loader">
+        <h1 class="text-4xl font-syne font-bold mb-4 tracking-tighter">GYAN</h1>
+        <div class="w-64 h-[1px] bg-gray-800 rounded overflow-hidden">
+            <div class="loader-bar h-full"></div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <!-- 3D Background -->
+    <div id="webgl-container"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full p-8 flex justify-between items-center z-50 mix-blend-difference">
+        <a href="#hero" class="text-2xl font-syne font-bold tracking-tighter hover-trigger nav-link">GYAN.</a>
+        
+        <!-- Updated Navbar Links -->
+        <div class="hidden md:flex gap-8 text-sm uppercase tracking-widest">
+            <a href="#hero" class="hover-trigger hover:text-purple-400 transition-colors nav-link">Home</a>
+            <a href="#about" class="hover-trigger hover:text-purple-400 transition-colors nav-link">About</a>
+            <a href="#work" class="hover-trigger hover:text-purple-400 transition-colors nav-link">Projects</a>
+            <a href="#tools" class="hover-trigger hover:text-purple-400 transition-colors nav-link">Tools</a>
+            <a href="#contact" class="hover-trigger hover:text-purple-400 transition-colors nav-link">Contact</a>
+        </div>
+        
+        <button class="md:hidden text-2xl hover-trigger"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        
+        <!-- Hero Section -->
+        <section class="h-screen w-full flex flex-col justify-center items-center px-6 relative" id="hero">
+            <div class="overflow-hidden">
+                <h1 class="text-[12vw] leading-[0.85] font-syne font-bold text-center tracking-tighter hero-title">
+                    CREATIVE
+                </h1>
+            </div>
+            <div class="overflow-hidden">
+                <h1 class="text-[12vw] leading-[0.85] font-syne font-bold text-center tracking-tighter text-transparent stroke-text hero-title" style="-webkit-text-stroke: 1px rgba(255,255,255,0.8);">
+                    TECHNOLOGIST
+                </h1>
+            </div>
+            
+            <div class="mt-12 flex flex-col items-center gap-4 opacity-0 hero-sub">
+                <p class="text-gray-400 text-lg md:text-xl font-light tracking-wide text-center max-w-lg">
+                    AI Developer &bull; Designer &bull; Mentor
+                </p>
+                <div class="h-16 w-[1px] bg-gradient-to-b from-white to-transparent"></div>
+            </div>
+
+            <div class="absolute bottom-10 left-10 hidden md:block opacity-0 hero-sub">
+                <p class="text-xs text-gray-500 uppercase tracking-widest">Based in the Digital Realm</p>
+            </div>
+            <div class="absolute bottom-10 right-10 hidden md:block opacity-0 hero-sub">
+                <p class="text-xs text-gray-500 uppercase tracking-widest">Scroll to Explore</p>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="min-h-screen w-full flex items-center justify-center py-20 relative z-10 bg-black/20 backdrop-blur-sm">
+            <div class="max-w-6xl w-full px-6 grid md:grid-cols-2 gap-16 items-center">
+                <div class="order-2 md:order-1">
+                    <h2 class="text-sm text-purple-400 uppercase tracking-[0.2em] mb-4 section-label">Who I Am</h2>
+                    <h3 class="text-4xl md:text-6xl font-syne font-bold mb-8 leading-tight split-text">
+                        Bridging the gap between <span class="italic text-purple-400">logic</span> and <span class="italic text-cyan-400">emotion</span>.
+                    </h3>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8 max-w-md reveal-para">
+                        I am Gyan. A multi-disciplinary creator who doesn't believe in boxes. I build neural networks that dream and interfaces that feel alive. My work sits at the intersection of robust engineering and cinematic storytelling.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4 text-sm font-mono text-gray-500 reveal-para">
+                        <div class="border-l border-gray-800 pl-4">
+                            <strong class="text-white block mb-1">Development</strong>
+                            Python, React, Node.js, TensorFlow, Three.js
+                        </div>
+                        <div class="border-l border-gray-800 pl-4">
+                            <strong class="text-white block mb-1">Design</strong>
+                            Figma, Blender, After Effects, Spline
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Visual Element -->
+                <div class="order-1 md:order-2 flex justify-center relative">
+                    <div class="w-64 h-64 md:w-96 md:h-96 border border-white/10 rounded-full flex items-center justify-center relative spin-container">
+                        <div class="absolute inset-0 border border-white/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                        <div class="absolute inset-4 border border-purple-500/30 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+                        <div class="text-center z-10">
+                            <div class="text-6xl font-syne font-bold">4+</div>
+                            <div class="text-xs uppercase tracking-widest text-gray-500 mt-2">Years Exp</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Horizontal Scroll Projects Wrapper -->
+        <div id="work" class="overflow-hidden bg-[#0a0a0a]">
+            <div class="horizontal-section" id="projects-container">
+                
+                <!-- Intro Panel -->
+                <div class="panel bg-black border-r border-white/5">
+                    <div class="text-center">
+                        <h2 class="text-[10vw] font-syne font-bold text-transparent" style="-webkit-text-stroke: 2px #333;">SELECTED</h2>
+                        <h2 class="text-[10vw] font-syne font-bold text-white -mt-4 md:-mt-8">WORKS</h2>
+                        <p class="mt-6 text-gray-400 max-w-md mx-auto">Drag or Scroll to navigate through the digital archive.</p>
+                        <div class="mt-8 text-2xl animate-bounce text-purple-500">&rarr;</div>
+                    </div>
+                </div>
+
+                <!-- Project 1 -->
+                <div class="panel bg-[#080808] border-r border-white/5 group">
+                    <div class="grid grid-cols-1 md:grid-cols-12 w-full max-w-7xl px-6 gap-8 items-center">
+                        <div class="md:col-span-7 overflow-hidden relative rounded-lg aspect-video">
+                            <div class="absolute inset-0 bg-purple-900/20 z-10 group-hover:bg-transparent transition-all duration-500"></div>
+                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1600&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" alt="NeuroGen">
+                        </div>
+                        <div class="md:col-span-5">
+                            <span class="text-purple-500 font-mono text-xs mb-2 block">01 / ARTIFICIAL INTELLIGENCE</span>
+                            <h3 class="text-4xl md:text-5xl font-syne font-bold mb-4">NeuroGen Vision</h3>
+                            <p class="text-gray-400 mb-6">Real-time object detection system optimized for low-light environments using TensorFlow and OpenCV.</p>
+                            <ul class="flex flex-wrap gap-2 mb-8 text-xs font-mono text-gray-500">
+                                <li class="px-2 py-1 border border-white/10 rounded">Python</li>
+                                <li class="px-2 py-1 border border-white/10 rounded">CV</li>
+                                <li class="px-2 py-1 border border-white/10 rounded">Flask</li>
+                            </ul>
+                            <a href="#" class="inline-flex items-center gap-2 text-white hover:text-purple-400 transition-colors uppercase tracking-widest text-sm font-bold hover-trigger">
+                                View Case Study <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="panel bg-[#050505] border-r border-white/5 group">
+                    <div class="grid grid-cols-1 md:grid-cols-12 w-full max-w-7xl px-6 gap-8 items-center">
+                        <div class="md:col-span-5 order-2 md:order-1">
+                            <span class="text-cyan-500 font-mono text-xs mb-2 block">02 / WEB DEVELOPMENT</span>
+                            <h3 class="text-4xl md:text-5xl font-syne font-bold mb-4">E-Comm Core</h3>
+                            <p class="text-gray-400 mb-6">A headless commerce architecture handling 10k+ concurrent users with sub-second latency.</p>
+                            <ul class="flex flex-wrap gap-2 mb-8 text-xs font-mono text-gray-500">
+                                <li class="px-2 py-1 border border-white/10 rounded">Node.js</li>
+                                <li class="px-2 py-1 border border-white/10 rounded">React</li>
+                                <li class="px-2 py-1 border border-white/10 rounded">MongoDB</li>
+                            </ul>
+                            <a href="#" class="inline-flex items-center gap-2 text-white hover:text-cyan-400 transition-colors uppercase tracking-widest text-sm font-bold hover-trigger">
+                                View Live <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="md:col-span-7 order-1 md:order-2 overflow-hidden relative rounded-lg aspect-video">
+                            <div class="absolute inset-0 bg-cyan-900/20 z-10 group-hover:bg-transparent transition-all duration-500"></div>
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1600&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" alt="E-Comm">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="panel bg-[#080808] group">
+                    <div class="grid grid-cols-1 md:grid-cols-12 w-full max-w-7xl px-6 gap-8 items-center">
+                        <div class="md:col-span-7 overflow-hidden relative rounded-lg aspect-video">
+                            <div class="absolute inset-0 bg-pink-900/20 z-10 group-hover:bg-transparent transition-all duration-500"></div>
+                            <img src="https://images.unsplash.com/photo-1535189043414-47a3c49a0bed?q=80&w=1600&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" alt="CyberPunk">
+                        </div>
+                        <div class="md:col-span-5">
+                            <span class="text-pink-500 font-mono text-xs mb-2 block">03 / MOTION DESIGN</span>
+                            <h3 class="text-4xl md:text-5xl font-syne font-bold mb-4">Cyber Motion</h3>
+                            <p class="text-gray-400 mb-6">Award-winning motion graphics intro sequence for a tech channel, utilizing complex 3D camera mapping.</p>
+                            <ul class="flex flex-wrap gap-2 mb-8 text-xs font-mono text-gray-500">
+                                <li class="px-2 py-1 border border-white/10 rounded">After Effects</li>
+                                <li class="px-2 py-1 border border-white/10 rounded">Blender</li>
+                                <li class="px-2 py-1 border border-white/10 rounded">SFX</li>
+                            </ul>
+                            <a href="#" class="inline-flex items-center gap-2 text-white hover:text-pink-400 transition-colors uppercase tracking-widest text-sm font-bold hover-trigger">
+                                Watch Video <i class="fas fa-play"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- NEW TOOLS SECTION -->
+        <section id="tools" class="py-24 bg-[#050505] border-t border-white/10 relative z-20 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 mb-16 text-center">
+                <span class="text-purple-500 font-mono text-xs mb-2 block uppercase tracking-widest section-label">The Arsenal</span>
+                <h2 class="text-4xl md:text-6xl font-syne font-bold">TECHNOLOGIES</h2>
+            </div>
+            
+            <div class="relative w-full overflow-hidden mask-linear-gradient" style="-webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);">
+                <div class="animate-marquee flex gap-12 md:gap-24 items-center">
+                    <!-- Set 1 -->
+                    <div class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger">
+                        <i class="fab fa-react text-5xl md:text-7xl"></i>
+                        <span class="font-mono text-xs uppercase">React</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger">
+                        <i class="fab fa-python text-5xl md:text-7xl"></i>
+                        <span class="font-mono text-xs uppercase">Python</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger">
+                        <i class="fab fa-js text-5xl md:text-7xl"></i>
+                        <span class="font-mono text-xs uppercase">JavaScript</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger">
+                        <i class="fab fa-node text-5xl md:text-7xl"></i>
+                        <span class="font-mono text-xs uppercase">Node.js</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger">
+                        <i class="fab fa-figma text-5xl md:text-7xl"></i>
+                        <span class="font-mono text-xs uppercase">Figma</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger">
+                        <i class="fas fa-cube text-5xl md:text-7xl"></i>
+                        <span class="font-mono text-xs uppercase">Three.js</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger">
+                        <i class="fab fa-github text-5xl md:text-7xl"></i>
+                        <span class="font-mono text-xs uppercase">GitHub</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger">
+                        <i class="fab fa-docker text-5xl md:text-7xl"></i>
+                        <span class="font-mono text-xs uppercase">Docker</span>
+                    </div>
+
+                    <!-- Duplicate Set for Seamless Loop -->
+                    <div class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger">
+                        <i class="fab fa-react text-5xl md:text-7xl"></i>
+                        <span class="font-mono text-xs uppercase">React</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger">
+                        <i class="fab fa-python text-5xl md:text-7xl"></i>
+                        <span class="font-mono text-xs uppercase">Python</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger">
+                        <i class="fab fa-js text-5xl md:text-7xl"></i>
+                        <span class="font-mono text-xs uppercase">JavaScript</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger">
+                        <i class="fab fa-node text-5xl md:text-7xl"></i>
+                        <span class="font-mono text-xs uppercase">Node.js</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger">
+                        <i class="fab fa-figma text-5xl md:text-7xl"></i>
+                        <span class="font-mono text-xs uppercase">Figma</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger">
+                        <i class="fas fa-cube text-5xl md:text-7xl"></i>
+                        <span class="font-mono text-xs uppercase">Three.js</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger">
+                        <i class="fab fa-github text-5xl md:text-7xl"></i>
+                        <span class="font-mono text-xs uppercase">GitHub</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger">
+                        <i class="fab fa-docker text-5xl md:text-7xl"></i>
+                        <span class="font-mono text-xs uppercase">Docker</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="min-h-screen flex flex-col justify-center items-center py-20 px-6 relative bg-black">
+            <div class="max-w-4xl w-full text-center z-10">
+                <p class="text-sm text-gray-500 uppercase tracking-[0.3em] mb-6">The Next Step</p>
+                <h2 class="text-5xl md:text-8xl font-syne font-bold mb-12 hover-trigger cursor-pointer text-white">
+                    LET'S TALK.
+                </h2>
+                
+                <div class="flex flex-col md:flex-row justify-center gap-8 md:gap-16 mb-20">
+                    <a href="mailto:gyan@example.com" class="text-xl text-gray-400 hover:text-white transition-colors border-b border-transparent hover:border-white pb-1 hover-trigger">gyan@example.com</a>
+                    <a href="#" class="text-xl text-gray-400 hover:text-white transition-colors border-b border-transparent hover:border-white pb-1 hover-trigger">LinkedIn</a>
+                    <a href="#" class="text-xl text-gray-400 hover:text-white transition-colors border-b border-transparent hover:border-white pb-1 hover-trigger">GitHub</a>
+                </div>
+
+                <form class="max-w-md mx-auto space-y-6 text-left">
+                    <div class="relative group">
+                        <input type="text" class="w-full bg-transparent border-b border-gray-800 py-4 text-white focus:outline-none focus:border-purple-500 transition-colors" placeholder=" ">
+                        <label class="absolute left-0 top-4 text-gray-500 transition-all pointer-events-none group-focus-within:-top-4 group-focus-within:text-xs group-focus-within:text-purple-500">Your Name</label>
+                    </div>
+                    <div class="relative group">
+                        <input type="email" class="w-full bg-transparent border-b border-gray-800 py-4 text-white focus:outline-none focus:border-purple-500 transition-colors" placeholder=" ">
+                        <label class="absolute left-0 top-4 text-gray-500 transition-all pointer-events-none group-focus-within:-top-4 group-focus-within:text-xs group-focus-within:text-purple-500">Your Email</label>
+                    </div>
+                    <button class="w-full py-4 bg-white text-black font-bold uppercase tracking-widest hover:bg-purple-500 hover:text-white transition-all mt-8 hover-trigger">
+                        Initialize Contact
+                    </button>
+                </form>
+            </div>
+            
+            <footer class="absolute bottom-8 w-full text-center text-xs text-gray-800 font-mono">
+                &copy; 2025 GYAN | SYSTEM ONLINE
+            </footer>
+        </section>
+
+    </main>
+
+    <script>
+        // --- 1. Three.js Setup (Digital Flow Field) ---
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('webgl-container').appendChild(renderer.domElement);
+
+        // Create Particles for Flow Field
+        const particleCount = 6000;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const spread = 30; // How wide the field is
+
+        for(let i = 0; i < particleCount; i++) {
+            const i3 = i * 3;
+            // Spread randomly across a wide area on X and Y axis
+            positions[i3] = (Math.random() - 0.5) * spread;     // x
+            positions[i3 + 1] = (Math.random() - 0.5) * spread; // y
+            positions[i3 + 2] = (Math.random() - 0.5) * 5;      // z depth
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+        // Material for small, glowing dots
+        const material = new THREE.PointsMaterial({
+            size: 0.015,
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.6,
+            blending: THREE.AdditiveBlending // Gives them a slight glow look
+        });
+
+        const particlesMesh = new THREE.Points(geometry, material);
+        scene.add(particlesMesh);
+
+        camera.position.z = 5;
+
+        // Mouse Interaction
+        let mouseX = 0;
+        let mouseY = 0;
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - windowHalfX);
+            mouseY = (event.clientY - windowHalfY);
+        });
+
+        // Animation Loop
+        const clock = new THREE.Clock();
+
+        function animate() {
+            const time = clock.getElapsedTime();
+            const positionsArray = geometry.attributes.position.array;
+            
+            // Calculate mouse influence factors
+            const mouseInfluenceX = mouseX * 0.0005;
+            const mouseInfluenceY = mouseY * 0.0005;
+
+            for(let i = 0; i < particleCount; i++) {
+                const i3 = i * 3;
+                const x = positionsArray[i3];
+                const y = positionsArray[i3 + 1];
+
+                // Calculate flow angle based on position, time, and mouse influence using sine/cosine patterns
+                const angle = (Math.cos(x * 0.3 + time * 0.1 + mouseInfluenceX) + Math.sin(y * 0.3 + time * 0.1 + mouseInfluenceY)) * Math.PI;
+
+                // Calculate velocity based on the angle
+                const vx = Math.cos(angle) * 0.01;
+                const vy = Math.sin(angle) * 0.01;
+
+                // Move particle
+                positionsArray[i3] += vx;
+                positionsArray[i3 + 1] += vy;
+
+                // Wrap around edges to create endless flow pattern
+                if(positionsArray[i3] > spread/2) positionsArray[i3] = -spread/2;
+                if(positionsArray[i3] < -spread/2) positionsArray[i3] = spread/2;
+                if(positionsArray[i3+1] > spread/2) positionsArray[i3+1] = -spread/2;
+                if(positionsArray[i3+1] < -spread/2) positionsArray[i3+1] = spread/2;
+            }
+            
+            // Flag geometry for update
+            geometry.attributes.position.needsUpdate = true;
+
+            // Subtle overall rotation for extra dynamism
+            particlesMesh.rotation.z += 0.0002;
+
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+
+        // --- 2. GSAP Animations ---
+        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+        // Preloader
+        window.addEventListener('load', () => {
+            const tl = gsap.timeline();
+            
+            tl.to('.loader-bar', {
+                width: '100%',
+                duration: 1.5,
+                ease: "power2.inOut"
+            })
+            .to('.loader', {
+                y: '-100%',
+                duration: 1,
+                ease: "power4.inOut",
+                delay: 0.2
+            })
+            .from('.hero-title', {
+                y: 150,
+                opacity: 0,
+                duration: 1.5,
+                stagger: 0.2,
+                ease: "power4.out"
+            }, "-=0.5")
+            .to('.hero-sub', {
+                opacity: 1,
+                duration: 1,
+                stagger: 0.2
+            }, "-=1");
+        });
+
+        // Smooth Scroll for Nav Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = this.getAttribute('href');
+                if (target === "#") return;
+                
+                gsap.to(window, {
+                    duration: 1.5,
+                    scrollTo: {
+                        y: target,
+                        autoKill: false
+                    },
+                    ease: "power3.inOut"
+                });
+            });
+        });
+
+        // About Section Text Reveal
+        gsap.utils.toArray('.section-label, .split-text, .reveal-para').forEach(element => {
+            gsap.from(element, {
+                scrollTrigger: {
+                    trigger: element,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
+        });
+
+        // Horizontal Scroll Logic
+        const projectsContainer = document.getElementById("projects-container");
+        
+        let scrollTween = gsap.to(projectsContainer, {
+            xPercent: -100 * (4 - 1) / 4, // Move by (number of panels - 1) / total panels
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#work",
+                pin: true,
+                scrub: 1,
+                snap: 1 / (4 - 1),
+                end: "+=3000", // Length of the scroll
+            }
+        });
+
+        // Background Color Shift on Scroll
+        gsap.to("body", {
+            scrollTrigger: {
+                trigger: "#contact",
+                start: "top center",
+                end: "bottom bottom",
+                toggleActions: "play none none reverse"
+            },
+            backgroundColor: "#000000",
+            duration: 1
+        });
+
+        // --- 3. Custom Cursor Logic ---
+        const cursor = document.querySelector('.cursor');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Hover Effect
+        document.querySelectorAll('.hover-trigger').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+
+    </script>
+</body>
+</html>

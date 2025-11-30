@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gyan | Creative Technologist</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%236d28d9'/><text x='50' y='72' font-size='65' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>G</text></svg>">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP & Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- EmailJS SDK (Added for Email Feature) -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
+
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-color: #050505;
+        --text-color: #ffffff;
+        --accent: #6d28d9;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: "Space Grotesk", sans-serif;
+        overflow-x: hidden;
+        margin: 0;
+        cursor: none;
+      }
+
+      h1,
+      h2,
+      h3,
+      .font-syne {
+        font-family: "Syne", sans-serif;
+      }
+
+      /* Hide Scrollbar */
+      ::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+      }
+
+      /* 3D Canvas */
+      #webgl-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.6;
+        pointer-events: none;
+      }
+
+      /* Custom Cursor */
+      .cursor {
+        width: 20px;
+        height: 20px;
+        border: 1px solid white;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: width 0.3s, height 0.3s, background-color 0.3s;
+        mix-blend-mode: difference;
+      }
+      .cursor.hovered {
+        width: 50px;
+        height: 50px;
+        background-color: white;
+        border-color: transparent;
+      }
+
+      /* Loader */
+      .loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 10000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .loader-bar {
+        width: 0%;
+        height: 2px;
+        background: #fff;
+        transition: width 0.5s ease;
+      }
+
+      /* Horizontal Scroll Section */
+      .horizontal-section {
+        width: 200%;
+        height: 100vh;
+        display: flex;
+        flex-wrap: nowrap;
+      }
+      .panel {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        padding: 2rem;
+        flex-shrink: 0;
+      }
+
+      /* Category Item Styles */
+      .category-item {
+        transition: all 0.4s ease;
+        cursor: none;
+      }
+      .category-item:hover {
+        padding-left: 20px;
+        color: #a855f7;
+      }
+
+      /* Modal Styles */
+      #project-modal {
+        clip-path: circle(0% at 50% 50%);
+        transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+      }
+      #project-modal.active {
+        clip-path: circle(150% at 50% 50%);
+      }
+
+      /* Marquee Animation */
+      @keyframes marquee {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+      .animate-marquee {
+        display: flex;
+        width: max-content;
+        animation: marquee 30s linear infinite;
+      }
+      .animate-marquee:hover {
+        animation-play-state: paused;
+      }
+
+      .reveal-text {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- Loader -->
+    <div class="loader">
+      <h1 class="text-4xl font-syne font-bold mb-4 tracking-tighter">GYAN</h1>
+      <div class="w-64 h-[1px] bg-gray-800 rounded overflow-hidden">
+        <div class="loader-bar h-full"></div>
+      </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <!-- 3D Background -->
+    <div id="webgl-container"></div>
+
+    <!-- Navigation -->
+    <nav
+      class="fixed top-0 left-0 w-full p-8 flex justify-between items-center z-50 mix-blend-difference"
+    >
+      <a
+        href="#hero"
+        class="text-2xl font-syne font-bold tracking-tighter hover-trigger nav-link"
+        >GYAN.</a
+      >
+
+      <div class="hidden md:flex gap-8 text-sm uppercase tracking-widest">
+        <a
+          href="#hero"
+          class="hover-trigger hover:text-purple-400 transition-colors nav-link"
+          >Home</a
+        >
+        <a
+          href="#about"
+          class="hover-trigger hover:text-purple-400 transition-colors nav-link"
+          >About</a
+        >
+        <a
+          href="#work"
+          class="hover-trigger hover:text-purple-400 transition-colors nav-link"
+          >Projects</a
+        >
+        <a
+          href="#tools"
+          class="hover-trigger hover:text-purple-400 transition-colors nav-link"
+          >Tools</a
+        >
+        <a
+          href="#contact"
+          class="hover-trigger hover:text-purple-400 transition-colors nav-link"
+          >Contact</a
+        >
+      </div>
+
+      <button class="md:hidden text-2xl hover-trigger">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+      <!-- Hero Section -->
+      <section
+        class="h-screen w-full flex flex-col justify-center items-center px-6 relative"
+        id="hero"
+      >
+        <div class="overflow-hidden">
+          <h1
+            class="text-[12vw] leading-[0.85] font-syne font-bold text-center tracking-tighter hero-title"
+          >
+            CREATIVE
+          </h1>
+        </div>
+        <div class="overflow-hidden">
+          <h1
+            class="text-[12vw] leading-[0.85] font-syne font-bold text-center tracking-tighter text-transparent stroke-text hero-title"
+            style="-webkit-text-stroke: 1px rgba(255, 255, 255, 0.8)"
+          >
+            TECHNOLOGIST
+          </h1>
+        </div>
+
+        <div class="mt-12 flex flex-col items-center gap-4 opacity-0 hero-sub">
+          <p
+            class="text-gray-400 text-lg md:text-xl font-light tracking-wide text-center max-w-lg"
+          >
+            AI Developer &bull; Designer &bull; Mentor
+          </p>
+          <div
+            class="h-16 w-[1px] bg-gradient-to-b from-white to-transparent"
+          ></div>
+        </div>
+
+        <div
+          class="absolute bottom-10 left-10 hidden md:block opacity-0 hero-sub"
+        >
+          <p class="text-xs text-gray-500 uppercase tracking-widest">
+            Based in the Digital Realm
+          </p>
+        </div>
+        <div
+          class="absolute bottom-10 right-10 hidden md:block opacity-0 hero-sub"
+        >
+          <p class="text-xs text-gray-500 uppercase tracking-widest">
+            Scroll to Explore
+          </p>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section
+        id="about"
+        class="min-h-screen w-full flex items-center justify-center py-20 relative z-10 bg-black/20 backdrop-blur-sm"
+      >
+        <div
+          class="max-w-6xl w-full px-6 grid md:grid-cols-2 gap-16 items-center"
+        >
+          <div class="order-2 md:order-1">
+            <h2
+              class="text-sm text-purple-400 uppercase tracking-[0.2em] mb-4 section-label"
+            >
+              Who I Am
+            </h2>
+            <h3
+              class="text-4xl md:text-6xl font-syne font-bold mb-8 leading-tight split-text"
+            >
+              Bridging the gap between
+              <span class="italic text-purple-400">logic</span> and
+              <span class="italic text-cyan-400">emotion</span>.
+            </h3>
+            <p
+              class="text-gray-400 text-lg leading-relaxed mb-8 max-w-md reveal-para"
+            >
+              I am Gyan. A multi-disciplinary creator who doesn't believe in
+              boxes. I build neural networks that dream and interfaces that feel
+              alive. My work sits at the intersection of robust engineering and
+              cinematic storytelling.
+            </p>
+
+            <div
+              class="grid grid-cols-2 gap-4 text-sm font-mono text-gray-500 reveal-para"
+            >
+              <div class="border-l border-gray-800 pl-4">
+                <strong class="text-white block mb-1">Development</strong>
+                Python, React, Node.js, TensorFlow, Three.js
+              </div>
+              <div class="border-l border-gray-800 pl-4">
+                <strong class="text-white block mb-1">Design</strong>
+                Figma, Blender, After Effects, Spline
+              </div>
+            </div>
+          </div>
+
+          <div class="order-1 md:order-2 flex justify-center relative">
+            <div
+              class="w-64 h-64 md:w-96 md:h-96 border border-white/10 rounded-full flex items-center justify-center relative spin-container"
+            >
+              <div
+                class="absolute inset-0 border border-white/20 rounded-full animate-[spin_10s_linear_infinite]"
+              ></div>
+              <div
+                class="absolute inset-4 border border-purple-500/30 rounded-full animate-[spin_15s_linear_infinite_reverse]"
+              ></div>
+              <div class="text-center z-10">
+                <div class="text-6xl font-syne font-bold">4+</div>
+                <div
+                  class="text-xs uppercase tracking-widest text-gray-500 mt-2"
+                >
+                  Years Exp
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <div id="work" class="overflow-hidden bg-[#0a0a0a]">
+        <div class="horizontal-section" id="projects-container">
+          <!-- Intro Panel -->
+          <div class="panel bg-black border-r border-white/5">
+            <div class="text-center">
+              <h2
+                class="text-[10vw] font-syne font-bold text-transparent"
+                style="-webkit-text-stroke: 2px #333"
+              >
+                SELECTED
+              </h2>
+              <h2
+                class="text-[10vw] font-syne font-bold text-white -mt-4 md:-mt-8"
+              >
+                DOMAINS
+              </h2>
+              <p class="mt-6 text-gray-400 max-w-md mx-auto">
+                Explore my work across five key creative and technical
+                dimensions.
+              </p>
+              <div class="mt-8 text-2xl animate-bounce text-purple-500">
+                &rarr;
+              </div>
+            </div>
+          </div>
+
+          <!-- Categories Panel -->
+          <div class="panel bg-[#050505]">
+            <div
+              class="grid md:grid-cols-2 w-full max-w-7xl gap-12 items-center"
+            >
+              <!-- Left: List -->
+              <div class="space-y-2">
+                <h3
+                  class="text-xs font-mono text-gray-500 uppercase mb-8 tracking-widest"
+                >
+                  Select a Category
+                </h3>
+
+                <div
+                  class="category-item text-3xl md:text-5xl font-syne font-bold text-white/50 hover:text-white cursor-pointer hover-trigger"
+                  onclick="openCategory('ai')"
+                >
+                  01. AI & Machine Learning
+                </div>
+                <div
+                  class="category-item text-3xl md:text-5xl font-syne font-bold text-white/50 hover:text-white cursor-pointer hover-trigger"
+                  onclick="openCategory('uiux')"
+                >
+                  02. UI / UX Design
+                </div>
+                <div
+                  class="category-item text-3xl md:text-5xl font-syne font-bold text-white/50 hover:text-white cursor-pointer hover-trigger"
+                  onclick="openCategory('fullstack')"
+                >
+                  03. Full Stack Dev
+                </div>
+                <div
+                  class="category-item text-3xl md:text-5xl font-syne font-bold text-white/50 hover:text-white cursor-pointer hover-trigger"
+                  onclick="openCategory('graphic')"
+                >
+                  04. Graphic Design
+                </div>
+                <div
+                  class="category-item text-3xl md:text-5xl font-syne font-bold text-white/50 hover:text-white cursor-pointer hover-trigger"
+                  onclick="openCategory('video')"
+                >
+                  05. Video & Animation
+                </div>
+              </div>
+
+              <!-- Right: Dynamic Preview (Placeholder) -->
+              <div
+                class="hidden md:flex justify-center items-center h-[50vh] relative bg-white/5 rounded-2xl overflow-hidden border border-white/10"
+              >
+                <div
+                  class="absolute inset-0 flex items-center justify-center text-gray-700 font-mono text-sm"
+                >
+                  [ SELECT DOMAIN ]
+                </div>
+                <img
+                  src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop"
+                  class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-screen pointer-events-none"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project List Modal (Overlay) -->
+      <div
+        id="project-modal"
+        class="fixed inset-0 z-[100] bg-[#050505] text-white flex flex-col pointer-events-none opacity-0"
+      >
+        <!-- Modal Header -->
+        <div
+          class="flex justify-between items-center p-8 border-b border-white/10 bg-black/50 backdrop-blur-md sticky top-0 z-50"
+        >
+          <h2
+            id="modal-title"
+            class="text-2xl font-syne font-bold text-purple-400 uppercase"
+          >
+            Category Name
+          </h2>
+          <button
+            onclick="closeCategory()"
+            class="text-white hover:text-red-500 text-lg uppercase tracking-widest font-mono hover-trigger"
+          >
+            [ Close ]
+          </button>
+        </div>
+
+        <!-- Modal Content -->
+        <div class="flex-1 overflow-y-auto p-8">
+          <div
+            id="modal-grid"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-8xl mx-auto"
+          >
+            <!-- Dynamic Projects Injected Here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools Section -->
+      <section
+        id="tools"
+        class="py-24 bg-[#050505] border-t border-white/10 relative z-20 overflow-hidden"
+      >
+        <div class="max-w-7xl mx-auto px-6 mb-16 text-center">
+          <span
+            class="text-purple-500 font-mono text-xs mb-2 block uppercase tracking-widest section-label"
+            >The Arsenal</span
+          >
+          <h2 class="text-4xl md:text-6xl font-syne font-bold">TECHNOLOGIES</h2>
+        </div>
+
+        <div
+          class="relative w-full overflow-hidden mask-linear-gradient"
+          style="
+            -webkit-mask-image: linear-gradient(
+              to right,
+              transparent,
+              black 10%,
+              black 90%,
+              transparent
+            );
+          "
+        >
+          <div class="animate-marquee flex gap-12 md:gap-24 items-center">
+            <div
+              class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger"
+            >
+              <i class="fab fa-react text-5xl md:text-7xl"></i
+              ><span class="font-mono text-xs uppercase">React</span>
+            </div>
+            <div
+              class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger"
+            >
+              <i class="fab fa-python text-5xl md:text-7xl"></i
+              ><span class="font-mono text-xs uppercase">Python</span>
+            </div>
+            <div
+              class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger"
+            >
+              <i class="fab fa-js text-5xl md:text-7xl"></i
+              ><span class="font-mono text-xs uppercase">JavaScript</span>
+            </div>
+            <div
+              class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger"
+            >
+              <i class="fab fa-node text-5xl md:text-7xl"></i
+              ><span class="font-mono text-xs uppercase">Node.js</span>
+            </div>
+            <div
+              class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger"
+            >
+              <i class="fab fa-figma text-5xl md:text-7xl"></i
+              ><span class="font-mono text-xs uppercase">Figma</span>
+            </div>
+            <div
+              class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger"
+            >
+              <i class="fas fa-cube text-5xl md:text-7xl"></i
+              ><span class="font-mono text-xs uppercase">Three.js</span>
+            </div>
+            <!-- Duplicate -->
+            <div
+              class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger"
+            >
+              <i class="fab fa-react text-5xl md:text-7xl"></i
+              ><span class="font-mono text-xs uppercase">React</span>
+            </div>
+            <div
+              class="flex flex-col items-center gap-4 text-gray-500 hover:text-white transition-colors hover-trigger"
+            >
+              <i class="fab fa-python text-5xl md:text-7xl"></i
+              ><span class="font-mono text-xs uppercase">Python</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section
+        id="contact"
+        class="min-h-screen flex flex-col justify-center items-center py-20 px-6 relative bg-black"
+      >
+        <div class="max-w-4xl w-full text-center z-10">
+          <p class="text-sm text-gray-500 uppercase tracking-[0.3em] mb-6">
+            The Next Step
+          </p>
+          <h2
+            class="text-5xl md:text-8xl font-syne font-bold mb-12 hover-trigger cursor-pointer text-white"
+          >
+            LET'S TALK.
+          </h2>
+
+          <div
+            class="flex flex-col md:flex-row justify-center gap-8 md:gap-16 mb-16"
+          >
+            <a
+              href="mailto:dasgyanaranjan835@example.com"
+              class="text-xl text-gray-400 hover:text-white transition-colors border-b border-transparent hover:border-white pb-1 hover-trigger"
+              >Email</a
+            >
+            <a
+              href="https://www.linkedin.com/in/gyanaranjan-das"
+              class="text-xl text-gray-400 hover:text-white transition-colors border-b border-transparent hover:border-white pb-1 hover-trigger"
+              >LinkedIn</a
+            >
+            <a
+              href="https://github.com/gyanaranjandas"
+              class="text-xl text-gray-400 hover:text-white transition-colors border-b border-transparent hover:border-white pb-1 hover-trigger"
+              >GitHub</a
+            >
+          </div>
+
+          <!-- Contact Form -->
+          <form
+            id="contact-form"
+            class="max-w-md mx-auto space-y-6 text-left mb-8"
+          >
+            <div class="relative group">
+              <input
+                type="text"
+                id="name"
+                class="w-full bg-transparent border-b border-gray-800 py-4 text-white focus:outline-none focus:border-purple-500 transition-colors"
+                placeholder=" "
+                required
+              />
+              <label
+                class="absolute left-0 top-4 text-gray-500 transition-all pointer-events-none group-focus-within:-top-4 group-focus-within:text-xs group-focus-within:text-purple-500"
+                >Your Name</label
+              >
+            </div>
+            <div class="relative group">
+              <input
+                type="email"
+                id="email"
+                class="w-full bg-transparent border-b border-gray-800 py-4 text-white focus:outline-none focus:border-purple-500 transition-colors"
+                placeholder=" "
+                required
+              />
+              <label
+                class="absolute left-0 top-4 text-gray-500 transition-all pointer-events-none group-focus-within:-top-4 group-focus-within:text-xs group-focus-within:text-purple-500"
+                >Your Email</label
+              >
+            </div>
+            <div class="relative group">
+              <input
+                type="tel"
+                id="phone"
+                class="w-full bg-transparent border-b border-gray-800 py-4 text-white focus:outline-none focus:border-purple-500 transition-colors"
+                placeholder=" "
+              />
+              <label
+                class="absolute left-0 top-4 text-gray-500 transition-all pointer-events-none group-focus-within:-top-4 group-focus-within:text-xs group-focus-within:text-purple-500"
+                >Phone Number (Optional)</label
+              >
+            </div>
+            <div class="relative group">
+              <textarea
+                id="message"
+                class="w-full bg-transparent border-b border-gray-800 py-4 text-white focus:outline-none focus:border-purple-500 transition-colors resize-none h-24"
+                placeholder=" "
+                required
+              ></textarea>
+              <label
+                class="absolute left-0 top-4 text-gray-500 transition-all pointer-events-none group-focus-within:-top-4 group-focus-within:text-xs group-focus-within:text-purple-500"
+                >Message</label
+              >
+            </div>
+            <button
+              type="submit"
+              class="w-full py-4 bg-white text-black font-bold uppercase tracking-widest hover:bg-purple-500 hover:text-white transition-all mt-8 hover-trigger"
+            >
+              Send Message
+            </button>
+            <p id="form-status" class="text-center text-sm mt-4 h-6"></p>
+          </form>
+
+        <footer
+          class="absolute bottom-8 left-0 w-full text-center text-xs text-gray-800 font-mono"
+        >
+          &copy; 2025 GYAN | SYSTEM ONLINE
+        </footer>
+      </section>
+    </main>
+
+    <!-- MAIN LOGIC SCRIPT (Non-Module for Reliability) -->
+    <script>
+      // --- 0. Project Data ---
+      const projectsData = {
+        ai: [
+          {
+            title: "Neural Style Transfer",
+            description:
+              "Deep learning model for artistic style transfer using CNNs",
+            image:
+              "https://images.unsplash.com/photo-1737505599159-5ffc1dcbc08f?q=80&w=800&auto=format&fit=crop",
+            tools: ["TensorFlow", "Python"],
+          },
+          {
+            title: "Predictive Dashboard",
+            description:
+              "Real-time ML pipeline for customer behavior prediction",
+            image:
+              "https://images.unsplash.com/photo-1529078155058-5d716f45d604?q=80&w=800&auto=format&fit=crop",
+            tools: ["Scikit-learn", "Pandas"],
+          },
+          {
+            title: "Computer Vision",
+            description:
+              "Object detection and tracking system for smart surveillance",
+            image:
+              "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?q=80&w=800&auto=format&fit=crop",
+            tools: ["YOLO", "PyTorch"],
+          },
+          {
+            title: "NLP Sentiment Analyzer",
+            description: "Advanced sentiment analysis using transformer models",
+            image:
+              "https://images.unsplash.com/photo-1761740533449-b8d4385e60b0?q=80&w=800&auto=format&fit=crop",
+            tools: ["BERT", "SpaCy"],
+          },
+        ],
+        uiux: [
+          {
+            title: "FinTech Mobile App",
+            description: "Modern banking app with seamless user experience",
+            image:
+              "https://images.unsplash.com/photo-1602064172250-43f8909056c7?q=80&w=800&auto=format&fit=crop",
+            tools: ["Figma", "Protopie"],
+          },
+          {
+            title: "E-Commerce Redesign",
+            description: "Complete UX overhaul increasing conversion by 45%",
+            image:
+              "https://images.unsplash.com/photo-1609921212029-bb5a28e60960?q=80&w=800&auto=format&fit=crop",
+            tools: ["Sketch", "InVision"],
+          },
+          {
+            title: "SaaS Dashboard",
+            description:
+              "Enterprise analytics platform with data visualization",
+            image:
+              "https://images.unsplash.com/photo-1481487196290-c152efe083f5?q=80&w=800&auto=format&fit=crop",
+            tools: ["Figma", "Framer"],
+          },
+          {
+            title: "Healthcare Portal",
+            description: "Patient-centric design with accessibility focus",
+            image:
+              "https://images.unsplash.com/photo-1680016661694-1cd3faf31c3a?q=80&w=800&auto=format&fit=crop",
+            tools: ["Figma", "UserTesting"],
+          },
+        ],
+        fullstack: [
+          {
+            title: "Collaboration Tool",
+            description: "WebSocket-based team workspace with live editing",
+            image:
+              "https://images.unsplash.com/photo-1546900703-cf06143d1239?q=80&w=800&auto=format&fit=crop",
+            tools: ["React", "Node.js"],
+          },
+          {
+            title: "E-Learning Platform",
+            description:
+              "Scalable LMS with video streaming and progress tracking",
+            image:
+              "https://images.unsplash.com/photo-1624996752380-8ec242e0f85d?q=80&w=800&auto=format&fit=crop",
+            tools: ["Next.js", "PostgreSQL"],
+          },
+          {
+            title: "Project Manager",
+            description: "Kanban-style task manager with team analytics",
+            image:
+              "https://images.unsplash.com/photo-1632910110458-435eb54b8d9a?q=80&w=800&auto=format&fit=crop",
+            tools: ["Vue.js", "Express"],
+          },
+          {
+            title: "API Gateway",
+            description: "Microservices architecture with rate limiting",
+            image:
+              "https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=800&auto=format&fit=crop",
+            tools: ["GraphQL", "Docker"],
+          },
+        ],
+        graphic: [
+          {
+            title: "Startup Branding",
+            description: "Complete brand identity from logo to style guide",
+            image:
+              "https://images.unsplash.com/photo-1664520132859-727fc515fc8d?q=80&w=800&auto=format&fit=crop",
+            tools: ["Illustrator", "Photoshop"],
+          },
+          {
+            title: "Corporate Identity",
+            description:
+              "Multi-channel brand guidelines for Fortune 500 company",
+            image:
+              "https://images.unsplash.com/photo-1627577741083-506d0b15a56a?q=80&w=800&auto=format&fit=crop",
+            tools: ["InDesign", "Illustrator"],
+          },
+          {
+            title: "Product Packaging",
+            description: "Eco-friendly packaging for sustainable beauty brand",
+            image:
+              "https://images.unsplash.com/photo-1713616147761-c126f8009c6f?q=80&w=800&auto=format&fit=crop",
+            tools: ["Dimension", "Photoshop"],
+          },
+          {
+            title: "Viral Campaign",
+            description: "Marketing assets generating 2M+ impressions",
+            image:
+              "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?q=80&w=800&auto=format&fit=crop",
+            tools: ["Canva", "Figma"],
+          },
+        ],
+        video: [
+          {
+            title: "Product Launch",
+            description: "3D animated explainer video with motion graphics",
+            image:
+              "https://images.unsplash.com/photo-1627244714766-94dab62ed964?q=80&w=800&auto=format&fit=crop",
+            tools: ["Premiere", "After Effects"],
+          },
+          {
+            title: "Brand Reel",
+            description: "Dynamic logo animations and brand transitions",
+            image:
+              "https://images.unsplash.com/photo-1740174459682-4dd3f72e2512?q=80&w=800&auto=format&fit=crop",
+            tools: ["After Effects", "Lottie"],
+          },
+          {
+            title: "Documentary",
+            description: "Award-winning short film about climate change",
+            image:
+              "https://images.unsplash.com/photo-1625690303837-654c9666d2d0?q=80&w=800&auto=format&fit=crop",
+            tools: ["DaVinci", "Premiere"],
+          },
+          {
+            title: "UI Animation",
+            description: "Reusable micro-interactions for web applications",
+            image:
+              "https://images.unsplash.com/photo-1628494391268-c9935bc384d5?q=80&w=800&auto=format&fit=crop",
+            tools: ["Framer", "GSAP"],
+          },
+        ],
+      };
+
+      const categoryNames = {
+        ai: "AI & Machine Learning",
+        uiux: "UI / UX Design",
+        fullstack: "Full Stack Development",
+        graphic: "Graphic Design",
+        video: "Video & Animation",
+      };
+
+      // --- 1. Category Modal Logic ---
+      function openCategory(type) {
+        const data = projectsData[type];
+        const modal = document.getElementById("project-modal");
+        const modalGrid = document.getElementById("modal-grid");
+        const modalTitle = document.getElementById("modal-title");
+
+        modalTitle.innerText = categoryNames[type];
+        modalGrid.innerHTML = "";
+
+        data.forEach((p, index) => {
+          const card = document.createElement("div");
+          card.className =
+            "group relative bg-[#111] rounded-xl overflow-hidden border border-white/10 opacity-0 transform translate-y-8";
+          card.innerHTML = `
+                    <div class="aspect-video overflow-hidden">
+                        <img src="${
+                          p.image
+                        }" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-3">
+                            ${p.tools
+                              .map(
+                                (t) =>
+                                  `<span class="text-[10px] border border-white/20 px-2 py-1 rounded text-gray-400 uppercase">${t}</span>`
+                              )
+                              .join("")}
+                        </div>
+                        <h3 class="text-xl font-bold font-syne mb-2 text-white">${
+                          p.title
+                        }</h3>
+                        <p class="text-sm text-gray-400">${p.description}</p>
+                    </div>
+                `;
+          modalGrid.appendChild(card);
+        });
+
+        modal.style.pointerEvents = "auto";
+        modal.style.opacity = "1";
+        modal.classList.add("active");
+
+        gsap.to(modalGrid.children, {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          delay: 0.3,
+          ease: "power3.out",
+        });
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeCategory() {
+        const modal = document.getElementById("project-modal");
+        modal.classList.remove("active");
+        modal.style.opacity = "0";
+        modal.style.pointerEvents = "none";
+        document.body.style.overflow = "auto";
+      }
+
+      // Attach to window so HTML can see them
+      window.openCategory = openCategory;
+      window.closeCategory = closeCategory;
+
+      // --- 2. Three.js Flow Field ---
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+      const renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: true,
+      });
+
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document
+        .getElementById("webgl-container")
+        .appendChild(renderer.domElement);
+
+      const particleCount = 6000;
+      const geometry = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      const spread = 30;
+
+      for (let i = 0; i < particleCount; i++) {
+        const i3 = i * 3;
+        positions[i3] = (Math.random() - 0.5) * spread;
+        positions[i3 + 1] = (Math.random() - 0.5) * spread;
+        positions[i3 + 2] = (Math.random() - 0.5) * 5;
+      }
+
+      geometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(positions, 3)
+      );
+      const material = new THREE.PointsMaterial({
+        size: 0.015,
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.6,
+        blending: THREE.AdditiveBlending,
+      });
+      const particlesMesh = new THREE.Points(geometry, material);
+      scene.add(particlesMesh);
+      camera.position.z = 5;
+
+      let mouseX = 0,
+        mouseY = 0;
+      document.addEventListener("mousemove", (event) => {
+        mouseX = event.clientX - window.innerWidth / 2;
+        mouseY = event.clientY - window.innerHeight / 2;
+      });
+
+      const clock = new THREE.Clock();
+      function animate() {
+        const time = clock.getElapsedTime();
+        const positionsArray = geometry.attributes.position.array;
+        const mouseInfluenceX = mouseX * 0.0005;
+        const mouseInfluenceY = mouseY * 0.0005;
+
+        for (let i = 0; i < particleCount; i++) {
+          const i3 = i * 3;
+          const x = positionsArray[i3];
+          const y = positionsArray[i3 + 1];
+          const angle =
+            (Math.cos(x * 0.3 + time * 0.1 + mouseInfluenceX) +
+              Math.sin(y * 0.3 + time * 0.1 + mouseInfluenceY)) *
+            Math.PI;
+          positionsArray[i3] += Math.cos(angle) * 0.01;
+          positionsArray[i3 + 1] += Math.sin(angle) * 0.01;
+
+          if (positionsArray[i3] > spread / 2) positionsArray[i3] = -spread / 2;
+          if (positionsArray[i3] < -spread / 2) positionsArray[i3] = spread / 2;
+          if (positionsArray[i3 + 1] > spread / 2)
+            positionsArray[i3 + 1] = -spread / 2;
+          if (positionsArray[i3 + 1] < -spread / 2)
+            positionsArray[i3 + 1] = spread / 2;
+        }
+        geometry.attributes.position.needsUpdate = true;
+        particlesMesh.rotation.z += 0.0002;
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      // --- 3. GSAP Animations & Interactions ---
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+      // Preloader Logic
+      window.addEventListener("load", () => {
+        const tl = gsap.timeline();
+        tl.to(".loader-bar", {
+          width: "100%",
+          duration: 1.5,
+          ease: "power2.inOut",
+        })
+          .to(".loader", {
+            y: "-100%",
+            duration: 1,
+            ease: "power4.inOut",
+            delay: 0.2,
+          })
+          .from(
+            ".hero-title",
+            {
+              y: 150,
+              opacity: 0,
+              duration: 1.5,
+              stagger: 0.2,
+              ease: "power4.out",
+            },
+            "-=0.5"
+          )
+          .to(".hero-sub", { opacity: 1, duration: 1, stagger: 0.2 }, "-=1");
+      });
+
+      // Smooth Scroll
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = this.getAttribute("href");
+          if (target === "#") return;
+          gsap.to(window, {
+            duration: 1.5,
+            scrollTo: { y: target, autoKill: false },
+            ease: "power3.inOut",
+          });
+        });
+      });
+
+      // Horizontal Scroll
+      const projectsContainer = document.getElementById("projects-container");
+      let scrollTween = gsap.to(projectsContainer, {
+        xPercent: -50,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#work",
+          pin: true,
+          scrub: 1,
+          end: "+=1500",
+        },
+      });
+
+      // Cursor
+      const cursor = document.querySelector(".cursor");
+      document.addEventListener("mousemove", (e) => {
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+      });
+      document.querySelectorAll(".hover-trigger").forEach((el) => {
+        el.addEventListener("mouseenter", () =>
+          cursor.classList.add("hovered")
+        );
+        el.addEventListener("mouseleave", () =>
+          cursor.classList.remove("hovered")
+        );
+      });
+    </script>
+
+    <!-- FIREBASE MODULE SCRIPT (Isolated) -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+      import {
+        getAuth,
+        signInAnonymously,
+        signInWithCustomToken,
+      } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+      import {
+        getFirestore,
+        collection,
+        addDoc,
+        getDocs,
+        query,
+        orderBy,
+        serverTimestamp,
+      } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+      // --- CONFIGURATION: EMAIL & SHEETS ---
+      // 1. For Email: Create an account at https://www.emailjs.com/
+      //    Replace these placeholders with your actual keys.
+      const EMAILJS_SERVICE_ID = "service_cexmqao";
+      const EMAILJS_TEMPLATE_ID = "template_tj0iuaf";
+      const EMAILJS_PUBLIC_KEY = "QN4R3qTkaEV9WJI8G";
+
+      // 2. For Google Sheets: Create a Google Apps Script Web App
+      //    Paste the deployment URL here.
+      const GOOGLE_SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbww2a_CvvBQTluRxDk_2kjwiZFipjfB1xl1FpbWu1MS3-P99nrNV9wpFc-8b9Zyfz8Nnw/exec";
+
+      // -------------------------------------
+
+      const firebaseConfig = JSON.parse(
+        typeof __firebase_config !== "undefined" ? __firebase_config : "{}"
+      );
+      const appId =
+        typeof __app_id !== "undefined" ? __app_id : "default-app-id";
+
+      let db;
+      let auth;
+      let authInitialized = false;
+
+      // Initialize EmailJS
+      if (typeof emailjs !== "undefined") {
+        emailjs.init(EMAILJS_PUBLIC_KEY);
+      }
+
+      // Auth initialization function
+      const initAuth = async () => {
+        if (authInitialized) return;
+        try {
+          if (
+            typeof __initial_auth_token !== "undefined" &&
+            __initial_auth_token
+          ) {
+            await signInWithCustomToken(auth, __initial_auth_token);
+          } else {
+            await signInAnonymously(auth);
+          }
+          authInitialized = true;
+        } catch (error) {
+          console.error("Auth Init Error:", error);
+        }
+      };
+
+      // Init Firebase safely
+      try {
+        if (firebaseConfig.apiKey) {
+          const app = initializeApp(firebaseConfig);
+          auth = getAuth(app);
+          db = getFirestore(app);
+          initAuth();
+        }
+      } catch (e) {
+        console.warn("Firebase failed to init:", e);
+      }
+
+      // --- Helper: Send Email via EmailJS ---
+      const sendEmail = (details) => {
+        if (EMAILJS_SERVICE_ID === "YOUR_SERVICE_ID") {
+          console.warn("EmailJS not configured. Skipping email.");
+          return;
+        }
+        emailjs
+          .send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, details)
+          .then(() => console.log("Email sent successfully!"))
+          .catch((err) => console.error("Email failed:", err));
+      };
+
+      // --- Helper: Send to Google Sheet ---
+      const saveToGoogleSheet = (details) => {
+        if (GOOGLE_SCRIPT_URL === "YOUR_GOOGLE_SCRIPT_WEB_APP_URL") {
+          console.warn(
+            "Google Sheet Script URL not configured. Skipping sheet save."
+          );
+          return;
+        }
+        // Use no-cors mode for Google Scripts to avoid CORS errors (opaque response)
+        fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(details),
+        })
+          .then(() => console.log("Sent to Google Sheet"))
+          .catch((err) => console.error("Sheet save error:", err));
+      };
+
+      // --- Form Handling ---
+      const contactForm = document.getElementById("contact-form");
+      const formStatus = document.getElementById("form-status");
+
+      if (contactForm) {
+        contactForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          formStatus.innerText = "Processing secure transmission...";
+          formStatus.className =
+            "text-center text-sm mt-4 h-6 text-purple-400 animate-pulse";
+
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const phone = document.getElementById("phone").value;
+          const message = document.getElementById("message").value;
+
+          const formData = {
+            name,
+            email,
+            phone,
+            message,
+            date: new Date().toISOString(),
+          };
+
+          // 1. Send Email (Client-side)
+          sendEmail(formData);
+
+          // 2. Save to Google Sheet (Client-side fetch)
+          saveToGoogleSheet(formData);
+
+          // 3. Save to Firebase (Database)
+          if (db) {
+            try {
+              if (!auth.currentUser) await initAuth();
+              await addDoc(
+                collection(
+                  db,
+                  "artifacts",
+                  appId,
+                  "public",
+                  "data",
+                  "contact_messages"
+                ),
+                {
+                  ...formData,
+                  timestamp: serverTimestamp(),
+                }
+              );
+              console.log("Saved to Firebase");
+            } catch (error) {
+              console.error("Firebase save error:", error);
+            }
+          }
+
+          // Final Success UI
+          formStatus.innerText = "Message sent successfully!";
+          formStatus.className = "text-center text-sm mt-4 h-6 text-green-400";
+          contactForm.reset();
+          setTimeout(() => {
+            formStatus.innerText = "";
+          }, 4000);
+        });
+      }
+    </script>
+  </body>
+</html>
