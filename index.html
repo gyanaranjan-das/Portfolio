@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- 1. SEO META TAGS -->
     <title>Gyanaranjan Das | Creative Technologist & AI Developer</title>
@@ -11,11 +11,10 @@
     <meta name="author" content="Gyanaranjan Das" />
     <meta name="robots" content="index, follow" />
     
-    <!-- Canonical URL (Replace with your actual domain when live) -->
+    <!-- Canonical URL -->
     <link rel="canonical" href="https://gyanaranjandas.me/" />
 
-
-    <!-- 2. OPEN GRAPH (For Social Media Previews) -->
+    <!-- 2. OPEN GRAPH -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://gyanaranjan-das.github.io/portfolio" />
     <meta property="og:title" content="Gyanaranjan Das | Creative Technologist" />
@@ -60,14 +59,14 @@
       rel="stylesheet"
     />
 
-    <!-- 4. SCHEMA.ORG STRUCTURED DATA (JSON-LD) -->
+    <!-- 4. SCHEMA.ORG STRUCTURED DATA -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Gyanaranjan Das",
       "jobTitle": "Creative Technologist & AI Developer",
-      "url": "https://gyanaranjan-das.github.io/portfolio",
+      "url": "https://gyanaranjandas.me",
       "sameAs": [
         "https://www.linkedin.com/in/gyanaranjan-das",
         "https://github.com/gyanaranjandas"
@@ -89,7 +88,7 @@
         font-family: "Space Grotesk", sans-serif;
         overflow-x: hidden;
         margin: 0;
-        cursor: none;
+        cursor: none; /* Hidden by default for desktop custom cursor */
       }
 
       h1,
@@ -117,7 +116,7 @@
         pointer-events: none;
       }
 
-      /* Custom Cursor */
+      /* Custom Cursor (DESKTOP ONLY) */
       .cursor {
         width: 20px;
         height: 20px;
@@ -135,6 +134,28 @@
         height: 50px;
         background-color: white;
         border-color: transparent;
+      }
+
+      /* --- MOBILE OPTIMIZATION: REMOVE CUSTOM CURSOR --- */
+      @media (max-width: 768px) {
+        .cursor {
+            display: none !important;
+        }
+        body {
+            cursor: auto !important; /* Restore default touch cursor */
+        }
+        .category-item:hover {
+            padding-left: 0; /* Remove hover movement on mobile */
+        }
+      }
+      
+      @media (hover: none) {
+        .cursor {
+            display: none !important;
+        }
+        body {
+            cursor: auto !important;
+        }
       }
 
       /* Loader */
