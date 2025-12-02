@@ -1,10 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gyan | Creative Technologist</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%236d28d9'/><text x='50' y='72' font-size='65' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>G</text></svg>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 1. SEO META TAGS -->
+    <title>Gyanaranjan Das | Creative Technologist & AI Developer</title>
+    <meta name="description" content="Portfolio of Gyanaranjan Das, an AI Developer and Creative Technologist specializing in Machine Learning, Full Stack Development, and Immersive Web Experiences." />
+    <meta name="keywords" content="Gyanaranjan Das, AI Developer, Creative Technologist, Full Stack Developer, Machine Learning Engineer, Three.js Developer, Portfolio" />
+    <meta name="author" content="Gyanaranjan Das" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Canonical URL (Replace with your actual domain when live) -->
+    <link rel="canonical" href="https://gyanaranjan-das.github.io/portfolio" />
+
+    <!-- 2. OPEN GRAPH (For Social Media Previews) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://gyanaranjan-das.github.io/portfolio" />
+    <meta property="og:title" content="Gyanaranjan Das | Creative Technologist" />
+    <meta property="og:description" content="Explore the intersection of AI, Design, and Technology. View my projects in Machine Learning and Web Development." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop" />
+
+    <!-- 3. TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Gyanaranjan Das Portfolio" />
+    <meta name="twitter:description" content="AI Developer & Designer. Building the future of digital interaction." />
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop" />
+
+    <!-- CUSTOM FAVICON -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%236d28d9'/><text x='50' y='72' font-size='65' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>G</text></svg>">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -15,7 +39,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-    <!-- EmailJS SDK (Added for Email Feature) -->
+    <!-- EmailJS SDK -->
     <script
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
@@ -34,6 +58,22 @@
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;700;800&display=swap"
       rel="stylesheet"
     />
+
+    <!-- 4. SCHEMA.ORG STRUCTURED DATA (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Gyanaranjan Das",
+      "jobTitle": "Creative Technologist & AI Developer",
+      "url": "https://gyanaranjan-das.github.io/portfolio",
+      "sameAs": [
+        "https://www.linkedin.com/in/gyanaranjan-das",
+        "https://github.com/gyanaranjandas"
+      ],
+      "knowsAbout": ["Artificial Intelligence", "Machine Learning", "Web Development", "Three.js", "React", "Python"]
+    }
+    </script>
 
     <style>
       :root {
@@ -176,6 +216,19 @@
       .reveal-text {
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
       }
+      
+      /* SEO Hidden H1 */
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
     </style>
   </head>
   <body class="antialiased">
@@ -199,10 +252,12 @@
     >
       <a
         href="#hero"
-        class="text-2xl font-syne font-bold tracking-tighter hover-trigger nav-link"
+        class="text-2xl font-syne font-bold tracking-tighter hover-trigger nav-link relative z-50"
+        aria-label="Home"
         >GYAN.</a
       >
 
+      <!-- Desktop Menu -->
       <div class="hidden md:flex gap-8 text-sm uppercase tracking-widest">
         <a
           href="#hero"
@@ -231,10 +286,20 @@
         >
       </div>
 
-      <button class="md:hidden text-2xl hover-trigger">
+      <!-- Hamburger Button (Visible on Mobile) -->
+      <button id="menu-btn" class="md:hidden text-2xl hover-trigger relative z-50 text-white" aria-label="Toggle Menu">
         <i class="fas fa-bars"></i>
       </button>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black flex flex-col items-center justify-center space-y-8 transform translate-x-full transition-transform duration-300 md:hidden">
+        <a href="#hero" class="text-2xl font-syne font-bold text-white hover:text-purple-400 mobile-link">Home</a>
+        <a href="#about" class="text-2xl font-syne font-bold text-white hover:text-purple-400 mobile-link">About</a>
+        <a href="#work" class="text-2xl font-syne font-bold text-white hover:text-purple-400 mobile-link">Projects</a>
+        <a href="#tools" class="text-2xl font-syne font-bold text-white hover:text-purple-400 mobile-link">Tools</a>
+        <a href="#contact" class="text-2xl font-syne font-bold text-white hover:text-purple-400 mobile-link">Contact</a>
+    </div>
 
     <!-- Main Content -->
     <main>
@@ -243,28 +308,31 @@
         class="h-screen w-full flex flex-col justify-center items-center px-6 relative"
         id="hero"
       >
+        <!-- SEO Optimized Hidden Title -->
+        <h1 class="sr-only">Gyanaranjan Das - AI Developer and Creative Technologist</h1>
+        
         <div class="overflow-hidden">
-          <h1
-            class="text-[12vw] leading-[0.85] font-syne font-bold text-center tracking-tighter hero-title"
+          <span
+            class="text-[12vw] leading-[0.85] font-syne font-bold text-center tracking-tighter hero-title block text-white"
           >
             CREATIVE
-          </h1>
+          </span>
         </div>
         <div class="overflow-hidden">
-          <h1
-            class="text-[12vw] leading-[0.85] font-syne font-bold text-center tracking-tighter text-transparent stroke-text hero-title"
+          <span
+            class="text-[12vw] leading-[0.85] font-syne font-bold text-center tracking-tighter text-transparent stroke-text hero-title block"
             style="-webkit-text-stroke: 1px rgba(255, 255, 255, 0.8)"
           >
             TECHNOLOGIST
-          </h1>
+          </span>
         </div>
 
         <div class="mt-12 flex flex-col items-center gap-4 opacity-0 hero-sub">
-          <p
+          <h2
             class="text-gray-400 text-lg md:text-xl font-light tracking-wide text-center max-w-lg"
           >
             AI Developer &bull; Designer &bull; Mentor
-          </p>
+          </h2>
           <div
             class="h-16 w-[1px] bg-gradient-to-b from-white to-transparent"
           ></div>
@@ -295,11 +363,11 @@
           class="max-w-6xl w-full px-6 grid md:grid-cols-2 gap-16 items-center"
         >
           <div class="order-2 md:order-1">
-            <h2
-              class="text-sm text-purple-400 uppercase tracking-[0.2em] mb-4 section-label"
+            <span
+              class="text-sm text-purple-400 uppercase tracking-[0.2em] mb-4 section-label block"
             >
               Who I Am
-            </h2>
+            </span>
             <h3
               class="text-4xl md:text-6xl font-syne font-bold mb-8 leading-tight split-text"
             >
@@ -436,6 +504,8 @@
                 </div>
                 <img
                   src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop"
+                  alt="Portfolio Domain Preview"
+                  loading="lazy"
                   class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-screen pointer-events-none"
                 />
               </div>
@@ -462,6 +532,7 @@
           <button
             onclick="closeCategory()"
             class="text-white hover:text-red-500 text-lg uppercase tracking-widest font-mono hover-trigger"
+            aria-label="Close Modal"
           >
             [ Close ]
           </button>
@@ -848,11 +919,10 @@
           const card = document.createElement("div");
           card.className =
             "group relative bg-[#111] rounded-xl overflow-hidden border border-white/10 opacity-0 transform translate-y-8";
+          // Added alt text and loading="lazy" for SEO
           card.innerHTML = `
                     <div class="aspect-video overflow-hidden">
-                        <img src="${
-                          p.image
-                        }" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <img src="${p.image}" alt="${p.title} Project Screenshot" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     </div>
                     <div class="p-6">
                         <div class="flex gap-2 mb-3">
@@ -1061,6 +1131,33 @@
           cursor.classList.remove("hovered")
         );
       });
+
+      // --- Mobile Menu Toggle Logic ---
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const mobileLinks = document.querySelectorAll(".mobile-link");
+      let isMenuOpen = false;
+
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener("click", () => {
+          isMenuOpen = !isMenuOpen;
+          if (isMenuOpen) {
+            mobileMenu.classList.remove("translate-x-full");
+            menuBtn.innerHTML = '<i class="fas fa-times"></i>';
+          } else {
+            mobileMenu.classList.add("translate-x-full");
+            menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+          }
+        });
+
+        mobileLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            isMenuOpen = false;
+            mobileMenu.classList.add("translate-x-full");
+            menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+          });
+        });
+      }
     </script>
 
     <!-- FIREBASE MODULE SCRIPT (Isolated) -->
