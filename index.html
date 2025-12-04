@@ -16,7 +16,7 @@
 
     <!-- 2. OPEN GRAPH -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://gyanaranjan-das.github.io/portfolio" />
+    <meta property="og:url" content="https://gyanaranjandas.me" />
     <meta property="og:title" content="Gyanaranjan Das | Creative Technologist" />
     <meta property="og:description" content="Explore the intersection of AI, Design, and Technology. View my projects in Machine Learning and Web Development." />
     <meta property="og:image" content="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop" />
@@ -262,7 +262,7 @@
       </div>
     </div>
 
-    <!-- Custom Cursor -->
+    <!-- Custom Cursor (Desktop Only) -->
     <div class="cursor"></div>
 
     <!-- 3D Background -->
@@ -839,7 +839,9 @@
               "Scalable LMS with video streaming and progress tracking",
             image:
               "https://images.unsplash.com/photo-1624996752380-8ec242e0f85d?q=80&w=800&auto=format&fit=crop",
-            tools: ["Next.js", "PostgreSQL"],
+            tools: ["React.js", "PostgreSQL"],
+            link: "https://portfolio-five-iota-23.vercel.app/",
+            github: "https://github.com/gyanaranjandas"
           },
           {
             title: "Project Manager",
@@ -941,7 +943,14 @@
           const card = document.createElement("div");
           card.className =
             "group relative bg-[#111] rounded-xl overflow-hidden border border-white/10 opacity-0 transform translate-y-8";
-          // Added alt text and loading="lazy" for SEO
+          
+          // Make card clickable if link exists
+          if (p.link) {
+            card.style.cursor = "pointer";
+            card.onclick = () => window.open(p.link, "_blank");
+          }
+
+          // Added alt text, loading="lazy", and link/github icons
           card.innerHTML = `
                     <div class="aspect-video overflow-hidden">
                         <img src="${p.image}" alt="${p.title} Project Screenshot" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -955,9 +964,11 @@
                               )
                               .join("")}
                         </div>
-                        <h3 class="text-xl font-bold font-syne mb-2 text-white">${
-                          p.title
-                        }</h3>
+                        <h3 class="text-xl font-bold font-syne mb-2 text-white group-hover:text-purple-400 transition-colors flex items-center">
+                          ${p.title}
+                          ${p.link ? '<i class="fas fa-external-link-alt text-xs ml-2 opacity-70" title="Live Demo"></i>' : ''}
+                          ${p.github ? `<a href="${p.github}" target="_blank" onclick="event.stopPropagation()" class="ml-2 hover:text-white text-gray-400"><i class="fab fa-github text-sm" title="View Code"></i></a>` : ''}
+                        </h3>
                         <p class="text-sm text-gray-400">${p.description}</p>
                     </div>
                 `;
