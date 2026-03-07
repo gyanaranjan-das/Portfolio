@@ -1,0 +1,24 @@
+/* Google Fonts: Manrope & Wix Madefor Text */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Wix+Madefor+Text:ital,wght@0,400..800;1,400..800&display=swap');
+
+/* Adobe Typekit: Reross Quadratic */
+@import url('https://use.typekit.net/oqd4bjo.css');
+
+@import 'tailwindcss';
+
+/* Local font: Nevera Regular */
+@font-face {
+  font-family: 'Nevera';
+  src: url('/fontsource-converted/Nevera-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Register all custom fonts as Tailwind v4 utilities */
+/* Usage: font-nevera, font-manrope, font-wix, font-reross */
+@theme {
+  --font-nevera: 'Nevera', sans-serif;
+  --font-manrope: 'Manrope', sans-serif;
+  --font-wix: 'Wix Madefor Text', sans-serif;
+  --font-reross: 'reross-quadratic', sans-serif;
+}
