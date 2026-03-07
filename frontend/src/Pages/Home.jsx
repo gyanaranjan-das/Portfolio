@@ -42,7 +42,7 @@ const Home = () => {
                 className={
                   char === " "
                     ? "inline-block w-4 md:w-8"
-                    : "transition-colors duration-300 hover:text-gray-500"
+                    : "transition-colors duration-300 hover:text-transparent"
                 }
               >
                 {char}
