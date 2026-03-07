@@ -20,8 +20,8 @@ const siteConfigSchema = new mongoose.Schema({
     socialLinks: {
         github: { type: String, default: 'https://github.com/gyanaranjan-das' },
         linkedin: { type: String, default: 'https://www.linkedin.com/in/gyanaranjan-das/' },
-        instagram: { type: String, default: 'https://www.instagram.com/gyanaranjan.20/' },
-        email: { type: String, default: 'dasgyanaranjan835@gmail.com' },
+        instagram: { type: String, default: 'https://www.instagram.com/gyanlabs.io/' },
+        email: { type: String, default: 'gyanlabs.io@gmail.com' },
     },
     resumeUrl: {
         type: String,
