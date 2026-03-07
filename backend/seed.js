@@ -39,8 +39,8 @@ const seedData = async () => {
             socialLinks: {
                 github: 'https://github.com/gyanaranjan-das',
                 linkedin: 'https://www.linkedin.com/in/gyanaranjan-das/',
-                instagram: 'https://www.instagram.com/gyanaranjan.20/',
-                email: 'dasgyanaranjan835@gmail.com',
+                instagram: 'https://www.instagram.com/gyanlabs.io/',
+                email: 'gyanlabs.io@gmail.com',
             },
         });
         console.log('✅ Site config created');

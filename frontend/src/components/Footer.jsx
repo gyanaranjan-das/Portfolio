@@ -25,11 +25,11 @@ const Footer = () => {
             className='w-10 h-10 rounded-full border border-[#ff3300]/40 flex items-center justify-center text-[#ff3300] hover:bg-[#ff3300]/10 transition-colors'>
             <Linkedin className='w-4 h-4' />
           </a>
-          <a href="mailto:dasgyanaranjan835@gmail.com" target="_blank" rel="noopener noreferrer"
+          <a href="mailto:gyanlabs.io@gmail.com" target="_blank" rel="noopener noreferrer"
             className='w-10 h-10 rounded-full border border-[#ff3300]/40 flex items-center justify-center text-[#ff3300] hover:bg-[#ff3300]/10 transition-colors'>
             <Mail className='w-4 h-4' />
           </a>
-          <a href="https://www.instagram.com/gyanaranjan.20/" target="_blank" rel="noopener noreferrer"
+          <a href="https://www.instagram.com/gyanlabs.io/" target="_blank" rel="noopener noreferrer"
             className='w-10 h-10 rounded-full border border-[#ff3300]/40 flex items-center justify-center text-[#ff3300] hover:bg-[#ff3300]/10 transition-colors'>
             <Instagram className='w-4 h-4' />
           </a>
