@@ -22,3 +22,15 @@
   --font-wix: 'Wix Madefor Text', sans-serif;
   --font-reross: 'reross-quadratic', sans-serif;
 }
+
+@layer base {
+  body {
+    background-color: #000000;
+    background-image:
+      linear-gradient(to right, rgba(255, 51, 0, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 51, 0, 0.08) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: center center;
+    color: white;
+  }
+}

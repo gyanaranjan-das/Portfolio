@@ -3,7 +3,7 @@ import bioProfileImage from '../assets/ChatGPT Image Mar 2, 2026, 09_49_15 PM.pn
 
 const Bio = () => {
   return (
-    <div className="w-full bg-black">
+    <div className="w-full">
       {/* First screen: Centered Biography heading with background image */}
       <section className="relative flex items-center justify-center min-h-screen w-full px-4 overflow-hidden">
         <img
@@ -17,16 +17,28 @@ const Bio = () => {
       </section>
 
       {/* Second screen: Bio content with image and scrollable text */}
-      <section className="w-full min-h-screen flex flex-col md:flex-row bg-black">
+      <section className="w-full min-h-screen flex flex-col md:flex-row">
         {/* Left: Image Section */}
-        <div className="w-full md:w-1/2 h-[50vh] md:h-full flex items-center justify-center bg-black p-6 md:p-0">
-          <div className="relative w-full sm:w-4/5 md:w-4/5 h-full md:h-4/5 rounded-xl shadow-lg border border-white/10 overflow-hidden">
+        <div className="w-full md:w-1/2 h-[50vh] md:h-full flex items-center justify-center p-6 md:p-0">
+          <div className="relative w-full sm:w-4/5 md:w-4/5 h-full md:h-4/5 rounded-xl shadow-lg border border-white/10 overflow-hidden group">
+
+            {/* Base Red Image */}
             <img
               src={bioProfileImage}
               alt="Profile"
-              className="w-full h-full object-cover grayscale brightness-75"
+              className="w-full h-full object-cover grayscale brightness-75 z-10 relative"
             />
-            <div className="absolute inset-0 bg-[#b30000] mix-blend-multiply opacity-90 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-[#b30000] mix-blend-multiply opacity-90 pointer-events-none z-20"></div>
+
+            {/* Full Color Image Reveal - Clipped to bottom right by default, expands to full on hover */}
+            <div className='absolute inset-0 z-30 transition-all duration-700 ease-in-out [clip-path:polygon(100%_100%,100%_100%,100%_100%,100%_100%)] group-hover:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)]'>
+              <img
+                src={bioProfileImage}
+                alt="Profile Original"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
           </div>
         </div>
         {/* Right: Bio Text Section (scrolls if needed) */}

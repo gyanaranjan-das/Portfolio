@@ -1,16 +1,11 @@
 import { useState } from 'react'
-import { submitContact, subscribe } from '../api/contact'
+import { submitContact } from '../api/contact'
 
 const Contact = () => {
   // Contact form state
   const [contactData, setContactData] = useState({ name: '', email: '', subject: '', message: '' })
   const [contactStatus, setContactStatus] = useState(null)
   const [contactLoading, setContactLoading] = useState(false)
-
-  // Subscribe form state
-  const [subEmail, setSubEmail] = useState('')
-  const [subStatus, setSubStatus] = useState(null)
-  const [subLoading, setSubLoading] = useState(false)
 
   const handleContactChange = (e) => {
     setContactData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -31,25 +26,10 @@ const Contact = () => {
     }
   }
 
-  const handleSubscribe = async (e) => {
-    e.preventDefault()
-    setSubLoading(true)
-    setSubStatus(null)
-    try {
-      const { data } = await subscribe(subEmail)
-      setSubStatus({ type: 'success', message: data.message })
-      setSubEmail('')
-    } catch (error) {
-      setSubStatus({ type: 'error', message: error.response?.data?.message || 'Failed to subscribe.' })
-    } finally {
-      setSubLoading(false)
-    }
-  }
-
   return (
     <>
       {/* Contact Form Section */}
-      <section className="bg-black text-white py-20 px-6 md:px-12">
+      <section className="text-white py-20 px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
           <h2 className='text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold font-nevera text-[#ff3300] tracking-tighter leading-none mb-4'>
             GET IN TOUCH
@@ -109,41 +89,6 @@ const Contact = () => {
               )}
             </div>
           </form>
-        </div>
-      </section>
-
-      {/* Subscribe Section */}
-      <section className="bg-black text-white py-20 px-6 md:px-12 border-t border-white/5">
-        <div className="max-w-7xl mx-auto">
-          <h2 className='text-4xl md:text-5xl lg:text-6xl font-bold font-nevera text-[#ff3300] tracking-tighter leading-none mb-4'>
-            NEVER MISS A THING
-          </h2>
-          <p className="font-manrope text-gray-400 text-lg mb-8 max-w-2xl">
-            Stay in the loop with the latest projects, blog posts, and updates.
-          </p>
-
-          <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-xl">
-            <input
-              type="email"
-              value={subEmail}
-              onChange={(e) => setSubEmail(e.target.value)}
-              placeholder="Enter your email"
-              required
-              className="flex-1 bg-white text-black px-6 py-4 rounded-full focus:outline-none focus:ring-2 focus:ring-[#ff3300]/60 font-manrope placeholder:text-gray-500 transition-colors"
-            />
-            <button
-              type="submit"
-              disabled={subLoading}
-              className="bg-[#ff3300] hover:bg-[#e62e00] disabled:opacity-50 transition-colors px-10 py-4 rounded-full text-white font-bold tracking-wide font-reross uppercase whitespace-nowrap"
-            >
-              {subLoading ? 'Subscribing...' : 'Subscribe'}
-            </button>
-          </form>
-          {subStatus && (
-            <p className={`font-manrope text-sm mt-3 ${subStatus.type === 'success' ? 'text-green-400' : 'text-red-400'}`}>
-              {subStatus.message}
-            </p>
-          )}
         </div>
       </section>
     </>

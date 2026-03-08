@@ -4,7 +4,7 @@ import aboutImage from '../assets/ChatGPT Image Mar 2, 2026, 09_55_22 PM.png'
 
 const About = () => {
   return (
-    <section className='min-h-screen bg-black text-white flex items-center justify-center py-24'>
+    <section className='min-h-screen text-white flex items-center justify-center py-24'>
       <div className='max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-x-12 xl:gap-x-24 gap-y-10 lg:gap-y-16 px-6 md:px-12 items-center'>
 
         {/* Left Side - Text (appears below image on mobile) */}
@@ -22,31 +22,37 @@ const About = () => {
 
           <div className='pt-6'>
             <Link to='/Bio'
-              className='text-[#ff3300] relative text-xl  tracking-wide group pb-1 font-reross quadratic regular inline-block'>
+              className='text-[#ff3300] hover:text-white transition-colors duration-500 relative text-xl  tracking-wide group pb-1 font-reross quadratic regular inline-block'>
               Find Out More
-              <span className='absolute left-0 bottom-0 w-full h-[2px] bg-[#ff3300] opacity-30'></span>
-              <span className='absolute left-0 bottom-0 w-0 h-[2px] bg-[#ff3300] transition-all duration-300 group-hover:w-full'></span>
+              <span className='absolute left-0 bottom-0 w-full h-[2px] bg-[#ff3300] transition-all duration-500 group-hover:w-0'></span>
             </Link>
           </div>
         </div>
 
         {/* Right Side - Image with Red Vibe tint & Accent Block (appears on top on mobile) */}
-        <div className='relative w-full aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden order-1 lg:order-2'>
-
-          {/* Decorative White Box over image - matching reference UI */}
-          <div className='absolute top-0 left-6 md:left-12 w-16 h-20 bg-[#f4ebd0] z-20 flex items-center justify-center'>
+        <div className='relative w-full aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden order-1 lg:order-2 group'>
+          <div className='absolute top-0 left-6 md:left-12 w-16 h-20 bg-[#f4ebd0] z-40 flex items-center justify-center'>
             <div className='w-8 h-8 rounded-full bg-black'></div>
           </div>
 
+          {/* Base Red Image */}
           <img src={aboutImage}
             alt="Portrait"
-            className='absolute inset-0 w-full h-full object-contain grayscale brightness-75'
+            className='absolute inset-0 w-full h-full object-contain grayscale brightness-75 z-10'
           />
-
           {/* Red Tint Overlay matching reference */}
-          <div className='absolute inset-0 bg-[#b30000] mix-blend-multiply opacity-95 pointer-events-none'></div>
+          <div className='absolute inset-0 bg-[#b30000] mix-blend-multiply opacity-95 pointer-events-none z-20'></div>
+
+          {/* Full Color Image Reveal - Clipped to bottom right by default, expands to full on hover */}
+          <div className='absolute inset-0 z-30 transition-all duration-700 ease-in-out [clip-path:polygon(100%_100%,100%_100%,100%_100%,100%_100%)] group-hover:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)]'>
+            <img src={aboutImage}
+              alt="Portrait original"
+              className='absolute inset-0 w-full h-full object-contain'
+            />
+          </div>
+
           {/* Subtle gradient to deepen shadows at the edge blending into black */}
-          <div className='absolute inset-0 bg-gradient-to-l from-black/60 to-transparent pointer-events-none'></div>
+          <div className='absolute inset-0 bg-gradient-to-l from-black/60 to-transparent pointer-events-none z-40'></div>
 
         </div>
 

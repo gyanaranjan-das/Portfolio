@@ -26,7 +26,7 @@ const BlogPost = () => {
 
     if (loading) {
         return (
-            <div className='min-h-screen bg-black flex items-center justify-center'>
+            <div className='min-h-screen flex items-center justify-center'>
                 <div className='w-8 h-8 border-2 border-[#ff3300] border-t-transparent rounded-full animate-spin'></div>
             </div>
         )
@@ -34,7 +34,7 @@ const BlogPost = () => {
 
     if (error || !post) {
         return (
-            <div className='min-h-screen bg-black text-white flex flex-col items-center justify-center gap-4'>
+            <div className='min-h-screen text-white flex flex-col items-center justify-center gap-4'>
                 <p className='text-gray-400 font-manrope text-lg'>{error || 'Post not found'}</p>
                 <Link to='/blog' className='text-[#ff3300] font-reross uppercase tracking-wide hover:underline'>
                     ← Back to Blog
@@ -44,7 +44,7 @@ const BlogPost = () => {
     }
 
     return (
-        <article className='min-h-screen bg-black text-white pt-24 pb-16 px-6 md:px-12'>
+        <article className='min-h-screen text-white pt-24 pb-16 px-6 md:px-12'>
             <SEO title={post.title} description={post.excerpt} image={post.featuredImage} />
             <div className='max-w-3xl mx-auto'>
 

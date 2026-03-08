@@ -5,18 +5,28 @@ import updateImage from '../assets/ChatGPT Image Feb 27, 2026, 06_15_59 AM.png'
 
 const LatestUpdates = () => {
   return (
-    <section className='min-h-screen bg-black text-white flex items-center justify-center py-24'>
+    <section className='min-h-screen text-white flex items-center justify-center py-24'>
       <div className='max-w-6xl w-full flex flex-col lg:flex-row gap-12 lg:gap-16 px-6 md:px-10 items-center lg:items-start'>
 
         {/* Left Side - Image with Red Vibe tint (on top on mobile) */}
         <div className='w-full sm:w-[320px] lg:w-[320px] shrink-0 mx-auto lg:mx-0'>
-          <div className='relative overflow-hidden rounded-2xl border border-white/10 h-[380px] sm:h-[450px] lg:h-[520px]'>
+          <div className='relative overflow-hidden rounded-2xl border border-white/10 h-[380px] sm:h-[450px] lg:h-[520px] group'>
+
+            {/* Base Red Image */}
             <img src={updateImage}
               alt="Latest update preview"
-              className='w-full h-full object-contain grayscale brightness-75 mx-auto block relative z-10'
+              className='absolute inset-0 w-full h-full object-contain grayscale brightness-75 mx-auto block z-10'
             />
-            {/* Red Tint Overlay */}
             <div className='absolute inset-0 bg-[#b30000] mix-blend-multiply opacity-90 pointer-events-none z-20'></div>
+
+            {/* Full Color Image Reveal - Clipped to bottom right by default, expands to full on hover */}
+            <div className='absolute inset-0 z-30 transition-all duration-700 ease-in-out [clip-path:polygon(100%_100%,100%_100%,100%_100%,100%_100%)] group-hover:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)]'>
+              <img src={updateImage}
+                alt="Latest update preview original"
+                className='w-full h-full object-contain mx-auto block'
+              />
+            </div>
+
           </div>
         </div>
 
@@ -33,7 +43,7 @@ const LatestUpdates = () => {
               <div className='w-12 h-12 rounded-full bg-[#ff3300]/20 flex items-center justify-center shrink-0 border border-[#ff3300]/30'>
                 <Rocket className='w-5 h-5 text-[#ff3300]' />
               </div>
-              <p className='font-manrope text-sm md:text-base text-gray-300'>
+              <p className='font-manrope regular text-sm md:text-base text-gray-300'>
                 Just launched my latest <span className='text-white font-semibold'>full-stack project</span>.
               </p>
             </div>
@@ -72,10 +82,9 @@ const LatestUpdates = () => {
 
           <div className='pt-2'>
             <Link to='/Projects'
-              className='text-[#ff0000] relative text-lg tracking-wide group pb-1 font-reross font-normal inline-block'>
+              className='text-white relative text-lg tracking-wide group pb-1 font-reross font-normal inline-block'>
               View All
-              <span className='absolute left-0 bottom-0 w-full h-[2px] bg-[#ff3300] opacity-30'></span>
-              <span className='absolute left-0 bottom-0 w-0 h-[2px] bg-[#ff3300] transition-all duration-300 group-hover:w-full'></span>
+              <span className='absolute left-0 bottom-0 w-full h-[2px] bg-[#ff3300] transition-all duration-500 group-hover:w-0'></span>
             </Link>
           </div>
         </div>

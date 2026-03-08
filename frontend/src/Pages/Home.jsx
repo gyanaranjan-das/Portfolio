@@ -8,7 +8,7 @@ import heroImage from '../assets/ChatGPT Image Feb 27, 2026, 06_37_00 AM.png'
 const Home = () => {
   return (
     <div>
-      <section className='relative h-screen flex flex-col justify-center items-center bg-black text-white overflow-hidden -mt-22 pt-22'>
+      <section className='relative h-screen flex flex-col justify-center items-center text-white overflow-hidden -mt-22 pt-22'>
         {/* Background Image - using img element for precise positioning */}
         <img
           src={heroImage}
@@ -36,13 +36,13 @@ const Home = () => {
         {/* Text Container - Push down to chest area */}
         <div className='relative z-10 flex flex-col items-center mt-24 sm:mt-32 md:mt-72 px-4'>
           <h1 className='text-3xl sm:text-5xl md:text-7xl lg:text-8xl text-center font-bold tracking-widest font-nevera leading-tight uppercase cursor-default'>
-            {"GYANARANJAN DAS".split("").map((char, index) => (
+            {"GYANARANJAN".split("").map((char, index) => (
               <span
                 key={index}
                 className={
                   char === " "
                     ? "inline-block w-4 md:w-8"
-                    : "transition-colors duration-300 hover:text-transparent"
+                    : "transition-colors duration-300 hover:text-white/30"
                 }
               >
                 {char}
@@ -52,7 +52,7 @@ const Home = () => {
           <div className='mt-4 sm:mt-6 md:mt-8'>
             <Link to='/Bio'
               className='text-white relative text-sm sm:text-base md:text-lg tracking-wide group pb-1 font-reross '>Learn More
-              <span className='absolute left-0 bottom-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full'></span></Link>
+              <span className='absolute left-0 bottom-0 w-full h-0.5 bg-white transition-all duration-500 group-hover:w-0'></span></Link>
           </div>
         </div>
       </section>

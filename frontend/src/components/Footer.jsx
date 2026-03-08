@@ -4,7 +4,7 @@ import { Github, Linkedin, Mail, Instagram } from 'lucide-react'
 
 const Footer = () => {
   return (
-    <footer className='bg-black text-white px-6 md:px-12 pb-8 pt-12'>
+    <footer className='text-white px-6 md:px-12 pb-8 pt-12'>
       <div className='max-w-7xl mx-auto space-y-8'>
 
         {/* Footer Nav Links */}
