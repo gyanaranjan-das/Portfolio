@@ -1,26 +1,24 @@
 import { useState, useEffect } from 'react'
-import { FolderKanban, FileText, Mail, Users } from 'lucide-react'
+import { FolderKanban, FileText, Mail } from 'lucide-react'
 import { getProjects } from '../../api/projects'
 import { getPosts } from '../../api/blog'
-import { getContacts, getSubscribers } from '../../api/contact'
+import { getContacts } from '../../api/contact'
 
 const Dashboard = () => {
-    const [stats, setStats] = useState({ projects: 0, posts: 0, contacts: 0, subscribers: 0 })
+    const [stats, setStats] = useState({ projects: 0, posts: 0, contacts: 0 })
 
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                const [projRes, postRes, contactRes, subRes] = await Promise.allSettled([
+                const [projRes, postRes, contactRes] = await Promise.allSettled([
                     getProjects(),
                     getPosts(true),
                     getContacts(),
-                    getSubscribers(),
                 ])
                 setStats({
                     projects: projRes.status === 'fulfilled' ? projRes.value.data.count : 0,
                     posts: postRes.status === 'fulfilled' ? postRes.value.data.count : 0,
                     contacts: contactRes.status === 'fulfilled' ? contactRes.value.data.count : 0,
-                    subscribers: subRes.status === 'fulfilled' ? subRes.value.data.count : 0,
                 })
             } catch {
                 // stats remain 0
@@ -32,8 +30,7 @@ const Dashboard = () => {
     const cards = [
         { label: 'Projects', value: stats.projects, icon: FolderKanban, color: '#ff3300' },
         { label: 'Blog Posts', value: stats.posts, icon: FileText, color: '#ff6600' },
-        { label: 'Messages', value: stats.contacts, icon: Mail, color: '#ff0066' },
-        { label: 'Subscribers', value: stats.subscribers, icon: Users, color: '#9933ff' },
+        { label: 'Messages', value: stats.contacts, icon: Mail, color: '#ff0066' }
     ]
 
     return (

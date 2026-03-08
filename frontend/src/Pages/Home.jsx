@@ -1,11 +1,30 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { getSiteConfig } from '../api/admin'
 import LatestUpdates from './LatestUpdates'
 import About from './About'
 import Projects from './Projects'
 import heroImage from '../assets/ChatGPT Image Feb 27, 2026, 06_37_00 AM.png'
 
 const Home = () => {
+  const [config, setConfig] = useState(null)
+
+  useEffect(() => {
+    const fetchConfig = async () => {
+      try {
+        const { data } = await getSiteConfig()
+        setConfig(data.data)
+      } catch (err) {
+        console.error('Failed to load site config in Home', err)
+      }
+    }
+    fetchConfig()
+  }, [])
+
+  // If the backend has the title as 'GYANARANJAN DAS', but the user wants just 'GYANARANJAN' as requested previously, we might split it or just display what's in the DB.
+  // Actually, we should just display what's in the DB and let the user modify it from Admin.
+  const heroName = config?.heroTitle || "GYANARANJAN"
+
   return (
     <div>
       <section className='relative h-screen flex flex-col justify-center items-center text-white overflow-hidden -mt-22 pt-22'>
@@ -36,7 +55,7 @@ const Home = () => {
         {/* Text Container - Push down to chest area */}
         <div className='relative z-10 flex flex-col items-center mt-24 sm:mt-32 md:mt-72 px-4'>
           <h1 className='text-3xl sm:text-5xl md:text-7xl lg:text-8xl text-center font-bold tracking-widest font-nevera leading-tight uppercase cursor-default'>
-            {"GYANARANJAN".split("").map((char, index) => (
+            {heroName.split("").map((char, index) => (
               <span
                 key={index}
                 className={

@@ -95,7 +95,7 @@ const SiteConfigAdmin = () => {
                         </div>
                         <div>
                             <label className='text-gray-400 text-sm font-manrope mb-1 block'>Bio Text</label>
-                            <textarea value={config.bioText || ''} onChange={(e) => updateField('bioText', e.target.value)} rows={6} className={`${inputClass} resize-none`} />
+                            <textarea value={config.bioText || ''} onChange={(e) => updateField('bioText', e.target.value)} rows={16} className={`${inputClass} resize-y`} />
                         </div>
                     </div>
                 </div>

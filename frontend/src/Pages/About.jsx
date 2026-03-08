@@ -1,8 +1,26 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { getSiteConfig } from '../api/admin'
 import aboutImage from '../assets/ChatGPT Image Mar 2, 2026, 09_55_22 PM.png'
 
 const About = () => {
+  const [config, setConfig] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchConfig = async () => {
+      try {
+        const { data } = await getSiteConfig()
+        setConfig(data.data)
+      } catch (err) {
+        console.error('Failed to load site config in About', err)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchConfig()
+  }, [])
+
   return (
     <section className='min-h-screen text-white flex items-center justify-center py-24'>
       <div className='max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-x-12 xl:gap-x-24 gap-y-10 lg:gap-y-16 px-6 md:px-12 items-center'>
@@ -16,8 +34,8 @@ const About = () => {
             ABOUT
           </h1>
 
-          <p className='font-manrope font-extralight text-lg md:text-xl text-gray-300 leading-relaxed max-w-xl '>
-            Gyanaranjan Das, a full-stack developer based in India, crafts immersive digital experiences that blend clean architecture with striking design. His work transforms complex problems into seamless, high-performance web applications that connect users with technology.
+          <p className={`font-manrope font-extralight text-lg md:text-xl text-gray-300 leading-relaxed max-w-xl transition-opacity duration-300 ${loading ? 'opacity-50' : 'opacity-100'}`}>
+            {loading ? "Loading..." : (config?.aboutText || "Gyanaranjan Das, a full-stack developer based in India, crafts immersive digital experiences that blend clean architecture with striking design. His work transforms complex problems into seamless, high-performance web applications that connect users with technology.")}
           </p>
 
           <div className='pt-6'>

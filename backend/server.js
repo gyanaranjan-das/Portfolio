@@ -13,7 +13,6 @@ const authRoutes = require('./routes/authRoutes');
 const projectRoutes = require('./routes/projectRoutes');
 const blogRoutes = require('./routes/blogRoutes');
 const contactRoutes = require('./routes/contactRoutes');
-const subscriberRoutes = require('./routes/subscriberRoutes');
 const configRoutes = require('./routes/configRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 
@@ -46,7 +45,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/blog', blogRoutes);
 app.use('/api/contact', contactRoutes);
-app.use('/api/subscribe', subscriberRoutes);
 app.use('/api/config', configRoutes);
 app.use('/api/upload', uploadRoutes);
 
