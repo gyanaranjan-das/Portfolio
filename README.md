@@ -65,9 +65,9 @@ npm run dev
 
 Got a project in mind? I'm open to freelance opportunities, collaborations, and interesting engineering challenges.
 
-- 🌐 **Portfolio**: [gyanaranjan.dev](https://gyanaranjan.dev)
+- 🌐 **Portfolio**: [gyanaranjan.me](https://gyanaranjan.me)
 - 📧 **Email**: [Reach out via the contact form on my site]
-- 💻 **GitHub**: [@gyanaranjan-das](https://github.com/gyanaranjan-das)
+- 💻 **GitHub**: [@gyanaranjan-das](https://github.com/gyanlabsio)
 
 ---
 
