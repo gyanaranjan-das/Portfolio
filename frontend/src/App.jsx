@@ -11,6 +11,7 @@ const Projects = lazy(() => import('./Pages/Projects'))
 const Blog = lazy(() => import('./Pages/Blog'))
 const BlogPost = lazy(() => import('./Pages/BlogPost'))
 const Contact = lazy(() => import('./Pages/Contact'))
+const NotFound = lazy(() => import('./Pages/NotFound'))
 
 // Admin pages
 const Login = lazy(() => import('./Pages/admin/Login'))
@@ -62,6 +63,9 @@ const App = () => {
             <Route path='contacts' element={<ContactsAdmin />} />
             <Route path='config' element={<SiteConfigAdmin />} />
           </Route>
+
+          {/* 404 Catch-all */}
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </Suspense>
 
