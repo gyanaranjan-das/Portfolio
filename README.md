@@ -1,54 +1,74 @@
-# Gyanaranjan's Developer Portfolio 🚀
+# Hey, I'm Gyanaranjan Das 👋
 
-Welcome to the source code for my personal portfolio! This is a modern, responsive web application designed to showcase my journey as a developer, the projects I've built, and the thoughts I share on my blog. 
+**Full-Stack Developer & Software Engineer — Available for Freelance**
 
-The site features a stunning dark and glassmorphic aesthetic built around a sleek neon-red branding (`#ff3300`) with intricate micro-animations throughout.
-
-## Features ✨
-
-*   **Dynamic UI & Animations**: Silky smooth GSAP-powered entry and hover animations for an incredibly premium feel.
-*   **Fully Responsive**: Built with a mobile-first approach, guaranteeing the site looks pixel-perfect across all screen sizes.
-*   **Dark Mode Global Grid**: Features an elegant, seamless global checkered line-grid that persists throughout all views.
-*   **Integrated Sections**:
-    *   **Home/Hero**: Engaging landing section with responsive imagery and quick actions.
-    *   **Bio**: A custom layout detailing my developer timeline and personal branding. 
-    *   **Latest Updates**: Highlighted reel of recent achievements and announcements.
-    *   **Projects (Coming Soon)**: A designated hub for showcasing case studies and code integrations.
-    *   **Blog (Coming Soon)**: A space to share my thoughts on web architecture, engineering, and design.
-    *   **Contact**: Simple integration for inquiries and messaging.
-
-## Tech Stack 🛠️
-
-*   **Frontend Framework**: React.js / Vite
-*   **Styling**: Tailwind CSS v4 (with custom typography settings configured via CSS variables)
-*   **Animations**: GSAP (GreenSock Animation Platform) + `@gsap/react`
-*   **Icons**: Lucide React
-*   **Routing**: React Router DOM
-*   **Typography**: *Nevera* (Custom), *Manrope*, *Wix Madefor Text*, and *Reross Quadratic*.
-
-## Getting Started 🏁
-
-### Prerequisites
-*   Node.js (v16.0 or higher recommended)
-*   npm or yarn
-
-### Installation
-1. Clone the repository to your local machine.
-2. Navigate into the frontend/backend directory and install dependencies:
-
-```bash
-cd frontend
-npm install
-```
-
-### Running Locally
-To launch the development server, run:
-
-```bash
-npm run dev
-```
-Open [http://localhost:5173](http://localhost:5173) in your browser to view the application.
+I design and build high-performance web applications, from pixel-perfect frontends to scalable backend architectures. I turn ideas into production-ready digital products that look stunning and work flawlessly.
 
 ---
 
-> Designed & Engineered by **Gyanaranjan (@GyanLabs.io)**. 
+## What I Do 🔥
+
+- **Full-Stack Web Development** — End-to-end applications using React, Node.js, Express, and modern databases.
+- **Frontend Engineering** — Responsive, animated, pixel-perfect interfaces with React, Tailwind CSS, and GSAP.
+- **Backend & API Development** — RESTful APIs, authentication systems, database design, and server architecture.
+- **UI/UX Implementation** — Translating designs into clean, interactive, and accessible code.
+- **Performance Optimization** — Making websites fast, lightweight, and SEO-friendly.
+
+## Services I Offer 💼
+
+| Service | Description |
+|---|---|
+| **Custom Web Apps** | Full-stack applications tailored to your business needs |
+| **Landing Pages** | High-converting, animated landing pages that make an impression |
+| **Portfolio & Personal Sites** | Stunning personal brands for creators, developers, and professionals |
+| **API Development** | Secure, scalable REST APIs with proper authentication and documentation |
+| **Website Redesign** | Modernize outdated websites with fresh design and better performance |
+| **Bug Fixing & Maintenance** | Quick turnaround fixes and ongoing support for existing projects |
+
+## Tech Stack 🛠️
+
+**Frontend**
+`React.js` · `Vite` · `Tailwind CSS` · `GSAP` · `Framer Motion` · `HTML5` · `CSS3` · `JavaScript (ES6+)`
+
+**Backend**
+`Node.js` · `Express.js` · `MongoDB` · `Mongoose` · `REST APIs` · `JWT Auth`
+
+**Tools & Platforms**
+`Git` · `GitHub` · `VS Code` · `Vercel` · `Render` · `Cloudinary` · `Postman`
+
+## This Portfolio ✨
+
+This repo is the source code for my personal portfolio — a fully responsive, dark-themed web app with:
+
+- 🎨 **Glassmorphic UI** with neon-red (`#ff3300`) branding
+- 🎬 **GSAP-powered animations** for a premium, cinematic feel
+- 📱 **Mobile-first responsive** design across all screen sizes
+- 🔐 **Admin dashboard** with CMS for managing content, blogs, and projects
+- ☁️ **Cloudinary integration** for image uploads and optimization
+- 🧩 **Modular architecture** — clean separation of frontend and backend
+
+### Running Locally
+
+```bash
+# Frontend
+cd frontend
+npm install
+npm run dev
+
+# Backend
+cd backend
+npm install
+npm run dev
+```
+
+## Let's Work Together 🤝
+
+Got a project in mind? I'm open to freelance opportunities, collaborations, and interesting engineering challenges.
+
+- 🌐 **Portfolio**: [gyanaranjan.dev](https://gyanaranjan.dev)
+- 📧 **Email**: [Reach out via the contact form on my site]
+- 💻 **GitHub**: [@gyanaranjan-das](https://github.com/gyanaranjan-das)
+
+---
+
+> Designed & Engineered by **Gyanaranjan Das (@GyanLabs.io)**
