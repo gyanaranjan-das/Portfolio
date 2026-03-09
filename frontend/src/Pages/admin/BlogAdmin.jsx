@@ -78,7 +78,7 @@ const BlogAdmin = () => {
             <div className='flex items-center justify-between mb-8'>
                 <h1 className='text-3xl font-bold font-nevera text-white tracking-wide'>Blog Posts</h1>
                 <button onClick={() => { resetForm(); setShowForm(true) }}
-                    className='bg-[#ff3300] hover:bg-[#e62e00] px-4 py-2 rounded-full text-white text-sm font-manrope flex items-center gap-2 transition-colors'>
+                    className='bg-[#FF0000] hover:bg-[#B30000] px-4 py-2 rounded-full text-white text-sm font-manrope flex items-center gap-2 transition-colors'>
                     <Plus className='w-4 h-4' /> New Post
                 </button>
             </div>
@@ -93,24 +93,24 @@ const BlogAdmin = () => {
                         </div>
                         <form onSubmit={handleSubmit} className='space-y-4'>
                             <input type='text' placeholder='Post Title' value={form.title} onChange={(e) => setForm(p => ({ ...p, title: e.target.value }))} required
-                                className='w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#ff3300]/60 focus:outline-none font-manrope placeholder:text-gray-500 text-lg' />
+                                className='w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#FF0000]/60 focus:outline-none font-manrope placeholder:text-gray-500 text-lg' />
                             <input type='text' placeholder='Excerpt (short summary)' value={form.excerpt} onChange={(e) => setForm(p => ({ ...p, excerpt: e.target.value }))}
-                                className='w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#ff3300]/60 focus:outline-none font-manrope placeholder:text-gray-500' />
+                                className='w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#FF0000]/60 focus:outline-none font-manrope placeholder:text-gray-500' />
                             <div>
                                 <label className='block text-gray-400 text-sm font-manrope mb-2'>Content (HTML supported)</label>
                                 <textarea placeholder='Write your post content here... HTML tags like <h2>, <p>, <code> are supported.' value={form.content}
                                     onChange={(e) => setForm(p => ({ ...p, content: e.target.value }))} required rows={12}
-                                    className='w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#ff3300]/60 focus:outline-none font-mono text-sm placeholder:text-gray-500 resize-none' />
+                                    className='w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#FF0000]/60 focus:outline-none font-mono text-sm placeholder:text-gray-500 resize-none' />
                             </div>
                             <input type='text' placeholder='Tags (comma-separated)' value={form.tags} onChange={(e) => setForm(p => ({ ...p, tags: e.target.value }))}
-                                className='w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#ff3300]/60 focus:outline-none font-manrope placeholder:text-gray-500' />
+                                className='w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#FF0000]/60 focus:outline-none font-manrope placeholder:text-gray-500' />
                             <input type='url' placeholder='Featured Image URL' value={form.featuredImage} onChange={(e) => setForm(p => ({ ...p, featuredImage: e.target.value }))}
-                                className='w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#ff3300]/60 focus:outline-none font-manrope placeholder:text-gray-500' />
+                                className='w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#FF0000]/60 focus:outline-none font-manrope placeholder:text-gray-500' />
                             <label className='flex items-center gap-3 text-gray-400 font-manrope text-sm cursor-pointer'>
-                                <input type='checkbox' checked={form.published} onChange={(e) => setForm(p => ({ ...p, published: e.target.checked }))} className='w-4 h-4 accent-[#ff3300]' />
+                                <input type='checkbox' checked={form.published} onChange={(e) => setForm(p => ({ ...p, published: e.target.checked }))} className='w-4 h-4 accent-[#FF0000]' />
                                 Publish immediately
                             </label>
-                            <button type='submit' className='w-full bg-[#ff3300] hover:bg-[#e62e00] py-3 rounded-full text-white font-bold font-reross uppercase tracking-wide transition-colors'>
+                            <button type='submit' className='w-full bg-[#FF0000] hover:bg-[#B30000] py-3 rounded-full text-white font-bold font-reross uppercase tracking-wide transition-colors'>
                                 {editingId ? 'Update Post' : 'Create Post'}
                             </button>
                         </form>
@@ -121,7 +121,7 @@ const BlogAdmin = () => {
             {/* Posts List */}
             {loading ? (
                 <div className='flex justify-center py-20'>
-                    <div className='w-8 h-8 border-2 border-[#ff3300] border-t-transparent rounded-full animate-spin'></div>
+                    <div className='w-8 h-8 border-2 border-[#FF0000] border-t-transparent rounded-full animate-spin'></div>
                 </div>
             ) : posts.length === 0 ? (
                 <p className='text-gray-500 font-manrope text-center py-20'>No blog posts yet.</p>

@@ -39,7 +39,7 @@ const ContactsAdmin = () => {
             <div className='flex items-center gap-4 mb-8'>
                 <h1 className='text-3xl font-bold font-nevera text-white tracking-wide'>Messages</h1>
                 {unreadCount > 0 && (
-                    <span className='text-xs bg-[#ff3300]/10 text-[#ff3300] border border-[#ff3300]/20 px-3 py-1 rounded-full font-manrope'>
+                    <span className='text-xs bg-[#FF0000]/10 text-[#FF0000] border border-[#FF0000]/20 px-3 py-1 rounded-full font-manrope'>
                         {unreadCount} unread
                     </span>
                 )}
@@ -50,16 +50,16 @@ const ContactsAdmin = () => {
                 <div className='w-1/2 space-y-2 max-h-[70vh] overflow-y-auto pr-2'>
                     {loading ? (
                         <div className='flex justify-center py-20'>
-                            <div className='w-8 h-8 border-2 border-[#ff3300] border-t-transparent rounded-full animate-spin'></div>
+                            <div className='w-8 h-8 border-2 border-[#FF0000] border-t-transparent rounded-full animate-spin'></div>
                         </div>
                     ) : contacts.length === 0 ? (
                         <p className='text-gray-500 font-manrope text-center py-20'>No messages yet.</p>
                     ) : contacts.map((c) => (
                         <button key={c._id} onClick={() => { setSelected(c); if (!c.read) handleMarkRead(c._id) }}
-                            className={`w-full text-left bg-[#111] rounded-xl border p-4 transition-colors ${selected?._id === c._id ? 'border-[#ff3300]/40' : 'border-white/10 hover:border-white/20'
+                            className={`w-full text-left bg-[#111] rounded-xl border p-4 transition-colors ${selected?._id === c._id ? 'border-[#FF0000]/40' : 'border-white/10 hover:border-white/20'
                                 }`}>
                             <div className='flex items-center gap-2 mb-1'>
-                                {c.read ? <MailOpen className='w-3 h-3 text-gray-500' /> : <Mail className='w-3 h-3 text-[#ff3300]' />}
+                                {c.read ? <MailOpen className='w-3 h-3 text-gray-500' /> : <Mail className='w-3 h-3 text-[#FF0000]' />}
                                 <span className={`text-sm font-manrope font-semibold ${c.read ? 'text-gray-400' : 'text-white'}`}>{c.name}</span>
                                 <span className='text-xs text-gray-500 font-manrope ml-auto'>{new Date(c.createdAt).toLocaleDateString()}</span>
                             </div>
@@ -75,7 +75,7 @@ const ContactsAdmin = () => {
                             <div className='flex items-start justify-between mb-6'>
                                 <div>
                                     <h2 className='text-xl text-white font-manrope font-semibold'>{selected.name}</h2>
-                                    <p className='text-sm text-[#ff3300] font-manrope'>{selected.email}</p>
+                                    <p className='text-sm text-[#FF0000] font-manrope'>{selected.email}</p>
                                     <p className='text-xs text-gray-500 font-manrope mt-1'>
                                         {new Date(selected.createdAt).toLocaleString()}
                                     </p>

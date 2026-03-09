@@ -30,8 +30,8 @@ const Home = () => {
       <section className='relative h-screen flex flex-col justify-center items-center text-white overflow-hidden -mt-22 pt-22'>
         {/* Background Image - using img element for precise positioning */}
         <img
-          src={heroImage}
-          alt=""
+          src={config?.heroImage || heroImage}
+          alt="Hero"
           className='absolute pointer-events-none'
           style={{
             top: '55%',
@@ -47,7 +47,7 @@ const Home = () => {
         />
 
         {/* Red tint overlay matching the reference image using multiply blend mode */}
-        <div className='absolute inset-0 bg-[#b30000] mix-blend-multiply opacity-90 pointer-events-none'></div>
+        <div className='absolute inset-0 bg-[#FF0000] mix-blend-multiply opacity-90 pointer-events-none'></div>
 
         {/* Additional gradient overlay so the white text pops and bottom transitions into the next section */}
         <div className='absolute inset-0 bg-linear-to-t from-black via-black/20 to-black/40 pointer-events-none'></div>

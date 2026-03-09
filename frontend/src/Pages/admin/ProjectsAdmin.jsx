@@ -87,7 +87,7 @@ const ProjectsAdmin = () => {
             <div className='flex items-center justify-between mb-8'>
                 <h1 className='text-3xl font-bold font-nevera text-white tracking-wide'>Projects</h1>
                 <button onClick={() => { resetForm(); setShowForm(true) }}
-                    className='bg-[#ff3300] hover:bg-[#e62e00] px-4 py-2 rounded-full text-white text-sm font-manrope flex items-center gap-2 transition-colors'>
+                    className='bg-[#FF0000] hover:bg-[#B30000] px-4 py-2 rounded-full text-white text-sm font-manrope flex items-center gap-2 transition-colors'>
                     <Plus className='w-4 h-4' /> New Project
                 </button>
             </div>
@@ -102,25 +102,25 @@ const ProjectsAdmin = () => {
                         </div>
                         <form onSubmit={handleSubmit} className='space-y-4'>
                             <input type='text' placeholder='Title' value={form.title} onChange={(e) => setForm(p => ({ ...p, title: e.target.value }))} required
-                                className='w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#ff3300]/60 focus:outline-none font-manrope placeholder:text-gray-500' />
+                                className='w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#FF0000]/60 focus:outline-none font-manrope placeholder:text-gray-500' />
                             <input type='text' placeholder='Short Description' value={form.shortDescription} onChange={(e) => setForm(p => ({ ...p, shortDescription: e.target.value }))}
-                                className='w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#ff3300]/60 focus:outline-none font-manrope placeholder:text-gray-500' />
+                                className='w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#FF0000]/60 focus:outline-none font-manrope placeholder:text-gray-500' />
                             <textarea placeholder='Full Description' value={form.description} onChange={(e) => setForm(p => ({ ...p, description: e.target.value }))} required rows={4}
-                                className='w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#ff3300]/60 focus:outline-none font-manrope placeholder:text-gray-500 resize-none' />
+                                className='w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#FF0000]/60 focus:outline-none font-manrope placeholder:text-gray-500 resize-none' />
                             <input type='text' placeholder='Tech Stack (comma-separated)' value={form.techStack} onChange={(e) => setForm(p => ({ ...p, techStack: e.target.value }))}
-                                className='w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#ff3300]/60 focus:outline-none font-manrope placeholder:text-gray-500' />
+                                className='w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#FF0000]/60 focus:outline-none font-manrope placeholder:text-gray-500' />
                             <div className='grid grid-cols-2 gap-4'>
                                 <input type='url' placeholder='GitHub URL' value={form.githubUrl} onChange={(e) => setForm(p => ({ ...p, githubUrl: e.target.value }))}
-                                    className='bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#ff3300]/60 focus:outline-none font-manrope placeholder:text-gray-500' />
+                                    className='bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#FF0000]/60 focus:outline-none font-manrope placeholder:text-gray-500' />
                                 <input type='url' placeholder='Live URL' value={form.liveUrl} onChange={(e) => setForm(p => ({ ...p, liveUrl: e.target.value }))}
-                                    className='bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#ff3300]/60 focus:outline-none font-manrope placeholder:text-gray-500' />
+                                    className='bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#FF0000]/60 focus:outline-none font-manrope placeholder:text-gray-500' />
                             </div>
                             <div className='grid grid-cols-2 gap-4'>
                                 <input type='number' placeholder='Order' value={form.order} onChange={(e) => setForm(p => ({ ...p, order: parseInt(e.target.value) || 0 }))}
-                                    className='bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#ff3300]/60 focus:outline-none font-manrope placeholder:text-gray-500' />
+                                    className='bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#FF0000]/60 focus:outline-none font-manrope placeholder:text-gray-500' />
                                 <label className='flex items-center gap-3 text-gray-400 font-manrope text-sm cursor-pointer'>
                                     <input type='checkbox' checked={form.featured} onChange={(e) => setForm(p => ({ ...p, featured: e.target.checked }))}
-                                        className='w-4 h-4 accent-[#ff3300]' />
+                                        className='w-4 h-4 accent-[#FF0000]' />
                                     Featured project
                                 </label>
                             </div>
@@ -130,7 +130,7 @@ const ProjectsAdmin = () => {
                                 <input type='file' accept='image/*' onChange={handleImageUpload} className='text-gray-400 text-sm font-manrope' />
                                 {form.featuredImage && <img src={form.featuredImage} alt='preview' className='mt-2 h-32 rounded-xl object-cover border border-white/10' />}
                             </div>
-                            <button type='submit' className='w-full bg-[#ff3300] hover:bg-[#e62e00] py-3 rounded-full text-white font-bold font-reross uppercase tracking-wide transition-colors'>
+                            <button type='submit' className='w-full bg-[#FF0000] hover:bg-[#B30000] py-3 rounded-full text-white font-bold font-reross uppercase tracking-wide transition-colors'>
                                 {editingId ? 'Update Project' : 'Create Project'}
                             </button>
                         </form>
@@ -141,7 +141,7 @@ const ProjectsAdmin = () => {
             {/* Projects Table */}
             {loading ? (
                 <div className='flex justify-center py-20'>
-                    <div className='w-8 h-8 border-2 border-[#ff3300] border-t-transparent rounded-full animate-spin'></div>
+                    <div className='w-8 h-8 border-2 border-[#FF0000] border-t-transparent rounded-full animate-spin'></div>
                 </div>
             ) : projects.length === 0 ? (
                 <p className='text-gray-500 font-manrope text-center py-20'>No projects yet. Create your first one!</p>
@@ -157,7 +157,7 @@ const ProjectsAdmin = () => {
                                 </div>
                             </div>
                             <div className='flex items-center gap-2 shrink-0'>
-                                {p.featured && <span className='text-[#ff3300] text-xs bg-[#ff3300]/10 px-2 py-0.5 rounded-full border border-[#ff3300]/20'>Featured</span>}
+                                {p.featured && <span className='text-[#FF0000] text-xs bg-[#FF0000]/10 px-2 py-0.5 rounded-full border border-[#FF0000]/20'>Featured</span>}
                                 <button onClick={() => handleEdit(p)} className='text-gray-400 hover:text-white p-2 transition-colors'><Edit className='w-4 h-4' /></button>
                                 <button onClick={() => handleDelete(p._id)} className='text-gray-400 hover:text-red-400 p-2 transition-colors'><Trash2 className='w-4 h-4' /></button>
                             </div>

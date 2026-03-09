@@ -25,7 +25,7 @@ const AdminLayout = () => {
             <aside className='w-64 bg-black border-r border-white/10 flex flex-col fixed inset-y-0 left-0 z-40'>
                 {/* Brand */}
                 <div className='p-6 border-b border-white/10'>
-                    <h1 className='font-nevera text-[#ff3300] text-lg tracking-widest'>CMS PANEL</h1>
+                    <h1 className='font-nevera text-[#FF0000] text-lg tracking-widest'>CMS PANEL</h1>
                     <p className='text-gray-500 text-xs font-manrope mt-1'>{admin?.email}</p>
                 </div>
 
@@ -36,7 +36,7 @@ const AdminLayout = () => {
                             key={to}
                             to={to}
                             className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-manrope transition-colors ${isActive(to, exact)
-                                    ? 'bg-[#ff3300]/10 text-[#ff3300] border border-[#ff3300]/20'
+                                    ? 'bg-[#FF0000]/10 text-[#FF0000] border border-[#FF0000]/20'
                                     : 'text-gray-400 hover:text-white hover:bg-white/5'
                                 }`}
                         >

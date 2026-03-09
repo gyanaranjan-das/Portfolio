@@ -27,7 +27,7 @@ const BlogPost = () => {
     if (loading) {
         return (
             <div className='min-h-screen flex items-center justify-center'>
-                <div className='w-8 h-8 border-2 border-[#ff3300] border-t-transparent rounded-full animate-spin'></div>
+                <div className='w-8 h-8 border-2 border-[#FF0000] border-t-transparent rounded-full animate-spin'></div>
             </div>
         )
     }
@@ -36,7 +36,7 @@ const BlogPost = () => {
         return (
             <div className='min-h-screen text-white flex flex-col items-center justify-center gap-4'>
                 <p className='text-gray-400 font-manrope text-lg'>{error || 'Post not found'}</p>
-                <Link to='/blog' className='text-[#ff3300] font-reross uppercase tracking-wide hover:underline'>
+                <Link to='/blog' className='text-[#FF0000] font-reross uppercase tracking-wide hover:underline'>
                     ← Back to Blog
                 </Link>
             </div>
@@ -49,7 +49,7 @@ const BlogPost = () => {
             <div className='max-w-3xl mx-auto'>
 
                 {/* Back Link */}
-                <Link to='/blog' className='inline-flex items-center gap-2 text-[#ff3300] font-reross uppercase text-sm tracking-wide mb-8 hover:gap-3 transition-all'>
+                <Link to='/blog' className='inline-flex items-center gap-2 text-[#FF0000] font-reross uppercase text-sm tracking-wide mb-8 hover:gap-3 transition-all'>
                     <ArrowLeft className='w-4 h-4' /> Back to Blog
                 </Link>
 
@@ -71,7 +71,7 @@ const BlogPost = () => {
                 {post.tags && post.tags.length > 0 && (
                     <div className='flex flex-wrap gap-2 mb-10'>
                         {post.tags.map((tag) => (
-                            <span key={tag} className='text-xs font-manrope text-[#ff3300] bg-[#ff3300]/10 px-3 py-1 rounded-full border border-[#ff3300]/20 flex items-center gap-1'>
+                            <span key={tag} className='text-xs font-manrope text-[#FF0000] bg-[#FF0000]/10 px-3 py-1 rounded-full border border-[#FF0000]/20 flex items-center gap-1'>
                                 <Tag className='w-3 h-3' /> {tag}
                             </span>
                         ))}
@@ -82,7 +82,7 @@ const BlogPost = () => {
                 {post.featuredImage && (
                     <div className='relative rounded-2xl overflow-hidden mb-10 border border-white/10'>
                         <img src={post.featuredImage} alt={post.title} className='w-full h-auto object-cover grayscale brightness-75' />
-                        <div className='absolute inset-0 bg-[#b30000] mix-blend-multiply opacity-60 pointer-events-none'></div>
+                        <div className='absolute inset-0 bg-[#FF0000] mix-blend-multiply opacity-60 pointer-events-none'></div>
                     </div>
                 )}
 
@@ -91,9 +91,9 @@ const BlogPost = () => {
                     className='prose prose-invert prose-lg max-w-none font-manrope
             prose-headings:font-nevera prose-headings:text-white prose-headings:tracking-wide
             prose-p:text-gray-300 prose-p:leading-relaxed
-            prose-a:text-[#ff3300] prose-a:no-underline hover:prose-a:underline
+            prose-a:text-[#FF0000] prose-a:no-underline hover:prose-a:underline
             prose-strong:text-white
-            prose-code:text-[#ff3300] prose-code:bg-[#ff3300]/10 prose-code:px-1 prose-code:rounded
+            prose-code:text-[#FF0000] prose-code:bg-[#FF0000]/10 prose-code:px-1 prose-code:rounded
             prose-pre:bg-[#111] prose-pre:border prose-pre:border-white/10'
                     dangerouslySetInnerHTML={{ __html: post.content }}
                 />

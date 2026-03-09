@@ -30,7 +30,7 @@ const Bio = () => {
           alt=""
           className="absolute inset-0 w-full h-full object-cover object-top opacity-50 pointer-events-none grayscale brightness-90"
         />
-        <div className="absolute inset-0 bg-[#b30000] mix-blend-multiply opacity-70 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[#FF0000] mix-blend-multiply opacity-70 pointer-events-none"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black pointer-events-none"></div>
         <h1 className="relative z-10 font-nevera text-4xl sm:text-5xl md:text-6xl font-bold tracking-widest text-white text-center">BIOGRAPHY</h1>
       </section>
@@ -47,7 +47,7 @@ const Bio = () => {
               alt="Profile"
               className="w-full h-full object-cover grayscale brightness-75 z-10 relative"
             />
-            <div className="absolute inset-0 bg-[#b30000] mix-blend-multiply opacity-90 pointer-events-none z-20"></div>
+            <div className="absolute inset-0 bg-[#FF0000] mix-blend-multiply opacity-90 pointer-events-none z-20"></div>
 
             {/* Full Color Image Reveal - Clipped to bottom right by default, expands to full on hover */}
             <div className='absolute inset-0 z-30 transition-all duration-700 ease-in-out [clip-path:polygon(100%_100%,100%_100%,100%_100%,100%_100%)] group-hover:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)]'>
@@ -64,7 +64,7 @@ const Bio = () => {
         <div className="w-full lg:w-1/2 px-6 sm:px-12 py-10 flex flex-col justify-center order-2 lg:overflow-y-auto lg:max-h-[80vh]">
           {loading ? (
             <div className="flex justify-center items-center w-full">
-              <div className="w-8 h-8 rounded-full border-2 border-[#ff3300]/20 border-t-[#ff3300] animate-spin"></div>
+              <div className="w-8 h-8 rounded-full border-2 border-[#FF0000]/20 border-t-[#FF0000] animate-spin"></div>
             </div>
           ) : (
             <div className="text-white text-base md:text-lg leading-relaxed space-y-6">

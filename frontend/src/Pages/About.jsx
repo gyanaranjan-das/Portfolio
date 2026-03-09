@@ -30,7 +30,7 @@ const About = () => {
 
           {/* Subtle line background effect could go here behind the text if needed later */}
 
-          <h1 className='text-6xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-bold font-nevera regular text-[#ff3300] tracking-tighter leading-none mt-4 -ml-1 md:-ml-2'>
+          <h1 className='text-6xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-bold font-nevera regular text-[#FF0000] tracking-tighter leading-none mt-4 -ml-1 md:-ml-2'>
             ABOUT
           </h1>
 
@@ -40,9 +40,9 @@ const About = () => {
 
           <div className='pt-6'>
             <Link to='/Bio'
-              className='text-[#ff3300] hover:text-white transition-colors duration-500 relative text-xl  tracking-wide group pb-1 font-reross quadratic regular inline-block'>
+              className='text-[#FF0000] hover:text-white transition-colors duration-500 relative text-xl  tracking-wide group pb-1 font-reross quadratic regular inline-block'>
               Find Out More
-              <span className='absolute left-0 bottom-0 w-full h-[2px] bg-[#ff3300] transition-all duration-500 group-hover:w-0'></span>
+              <span className='absolute left-0 bottom-0 w-full h-[2px] bg-[#FF0000] transition-all duration-500 group-hover:w-0'></span>
             </Link>
           </div>
         </div>
@@ -54,16 +54,16 @@ const About = () => {
           </div>
 
           {/* Base Red Image */}
-          <img src={aboutImage}
+          <img src={config?.aboutImage || aboutImage}
             alt="Portrait"
             className='absolute inset-0 w-full h-full object-contain grayscale brightness-75 z-10'
           />
           {/* Red Tint Overlay matching reference */}
-          <div className='absolute inset-0 bg-[#b30000] mix-blend-multiply opacity-95 pointer-events-none z-20'></div>
+          <div className='absolute inset-0 bg-[#FF0000] mix-blend-multiply opacity-95 pointer-events-none z-20'></div>
 
           {/* Full Color Image Reveal - Clipped to bottom right by default, expands to full on hover */}
           <div className='absolute inset-0 z-30 transition-all duration-700 ease-in-out [clip-path:polygon(100%_100%,100%_100%,100%_100%,100%_100%)] group-hover:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)]'>
-            <img src={aboutImage}
+            <img src={config?.aboutImage || aboutImage}
               alt="Portrait original"
               className='absolute inset-0 w-full h-full object-contain'
             />

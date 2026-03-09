@@ -29,7 +29,7 @@ const Login = () => {
     return (
         <div className='min-h-screen bg-black flex items-center justify-center px-6'>
             <div className='w-full max-w-md'>
-                <h1 className='text-4xl font-bold font-nevera text-[#ff3300] tracking-wider mb-2 text-center'>
+                <h1 className='text-4xl font-bold font-nevera text-[#FF0000] tracking-wider mb-2 text-center'>
                     CMS LOGIN
                 </h1>
                 <p className='text-gray-500 font-manrope text-center mb-8'>Portfolio Admin Panel</p>
@@ -46,7 +46,7 @@ const Login = () => {
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder='Email'
                         required
-                        className='w-full bg-[#111] text-white px-6 py-4 rounded-xl border border-white/10 focus:outline-none focus:border-[#ff3300]/60 font-manrope placeholder:text-gray-500'
+                        className='w-full bg-[#111] text-white px-6 py-4 rounded-xl border border-white/10 focus:outline-none focus:border-[#FF0000]/60 font-manrope placeholder:text-gray-500'
                     />
                     <input
                         type='password'
@@ -54,12 +54,12 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder='Password'
                         required
-                        className='w-full bg-[#111] text-white px-6 py-4 rounded-xl border border-white/10 focus:outline-none focus:border-[#ff3300]/60 font-manrope placeholder:text-gray-500'
+                        className='w-full bg-[#111] text-white px-6 py-4 rounded-xl border border-white/10 focus:outline-none focus:border-[#FF0000]/60 font-manrope placeholder:text-gray-500'
                     />
                     <button
                         type='submit'
                         disabled={loading}
-                        className='w-full bg-[#ff3300] hover:bg-[#e62e00] disabled:opacity-50 transition-colors py-4 rounded-full text-white font-bold tracking-wide font-reross uppercase'
+                        className='w-full bg-[#FF0000] hover:bg-[#B30000] disabled:opacity-50 transition-colors py-4 rounded-full text-white font-bold tracking-wide font-reross uppercase'
                     >
                         {loading ? 'Logging in...' : 'Login'}
                     </button>

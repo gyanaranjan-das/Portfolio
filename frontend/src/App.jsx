@@ -24,7 +24,7 @@ const SiteConfigAdmin = lazy(() => import('./Pages/admin/SiteConfigAdmin'))
 // Loading fallback
 const PageLoader = () => (
   <div className='min-h-screen flex items-center justify-center'>
-    <div className='w-8 h-8 border-2 border-[#ff3300] border-t-transparent rounded-full animate-spin'></div>
+    <div className='w-8 h-8 border-2 border-[#FF0000] border-t-transparent rounded-full animate-spin'></div>
   </div>
 )
 

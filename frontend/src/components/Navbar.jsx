@@ -68,7 +68,7 @@ const Navbar = () => {
   return (
     <div ref={container}>
       {/* ===== TOP NAVBAR ===== */}
-      <div className='absolute inset-x-0 top-0 w-full z-50 flex justify-between p-4 md:p-6 items-center text-white border-b border-white/10 md:border-[#ff3300]/20 bg-black'>
+      <div className='absolute inset-x-0 top-0 w-full z-50 flex justify-between p-4 md:p-6 items-center text-white border-b border-white/10 md:border-[#FF0000]/20 bg-black'>
 
         {/* Spacer for mobile to keep brand centered */}
         <div className='flex-1 lg:hidden'></div>
@@ -79,7 +79,7 @@ const Navbar = () => {
             <div key={link.to} className="nav-item">
               <Link
                 to={link.to}
-                className={`hover:text-[#ff3300] transition-colors ${location.pathname === link.to ? 'text-[#880808]' : ''}`}
+                className={`hover:text-[#FF0000] transition-colors ${location.pathname === link.to ? 'text-[#880808]' : ''}`}
               >
                 {link.label}
               </Link>
@@ -100,7 +100,7 @@ const Navbar = () => {
             href="https://github.com/gyanaranjan-das"
             target="_blank"
             rel="noopener noreferrer"
-            className='social-item w-9 h-9 rounded-full border border-[#ff3300]/40 flex items-center justify-center text-[#ff3300] hover:bg-[#ff3300]/10 transition-colors'
+            className='social-item w-9 h-9 rounded-full border border-[#FF0000]/40 flex items-center justify-center text-[#FF0000] hover:bg-[#FF0000]/10 transition-colors'
           >
             <Github className='w-4 h-4' />
           </a>
@@ -108,7 +108,7 @@ const Navbar = () => {
             href="https://www.linkedin.com/in/gyanaranjan-das/"
             target="_blank"
             rel="noopener noreferrer"
-            className='social-item w-9 h-9 rounded-full border border-[#ff3300]/40 flex items-center justify-center text-[#ff3300] hover:bg-[#ff3300]/10 transition-colors'
+            className='social-item w-9 h-9 rounded-full border border-[#FF0000]/40 flex items-center justify-center text-[#FF0000] hover:bg-[#FF0000]/10 transition-colors'
           >
             <Linkedin className='w-4 h-4' />
           </a>
@@ -116,7 +116,7 @@ const Navbar = () => {
             href="mailto:gyanlabs.io@gmail.com"
             target="_blank"
             rel="noopener noreferrer"
-            className='social-item w-9 h-9 rounded-full border border-[#ff3300]/40 flex items-center justify-center text-[#ff3300] hover:bg-[#ff3300]/10 transition-colors'
+            className='social-item w-9 h-9 rounded-full border border-[#FF0000]/40 flex items-center justify-center text-[#FF0000] hover:bg-[#FF0000]/10 transition-colors'
           >
             <Mail className='w-4 h-4' />
           </a>
@@ -124,7 +124,7 @@ const Navbar = () => {
             href="https://www.instagram.com/gyanlabs.io/"
             target="_blank"
             rel="noopener noreferrer"
-            className='social-item w-9 h-9 rounded-full border border-[#ff3300]/40 flex items-center justify-center text-[#ff3300] hover:bg-[#ff3300]/10 transition-colors'
+            className='social-item w-9 h-9 rounded-full border border-[#FF0000]/40 flex items-center justify-center text-[#FF0000] hover:bg-[#FF0000]/10 transition-colors'
           >
             <Instagram className='w-4 h-4' />
           </a>
@@ -133,7 +133,7 @@ const Navbar = () => {
         {/* Mobile Menu Button - Right Side */}
         <div className='flex flex-1 justify-end lg:hidden'>
           <button onClick={toggleMenu} aria-label="Toggle Menu" className='flex items-center gap-2 text-white z-[60] brand-logo'>
-            <span className='w-2.5 h-2.5 rounded-full bg-[#ff3300]'></span>
+            <span className='w-2.5 h-2.5 rounded-full bg-[#FF0000]'></span>
             <span className='font-manrope text-sm tracking-wide'>Menu</span>
           </button>
         </div>
@@ -155,7 +155,7 @@ const Navbar = () => {
           <button
             onClick={toggleMenu}
             aria-label="Close Menu"
-            className='text-white hover:text-[#ff3300] transition-all duration-300 hover:rotate-90'
+            className='text-white hover:text-[#FF0000] transition-all duration-300 hover:rotate-90'
           >
             <X className='w-8 h-8' strokeWidth={2.5} />
           </button>
@@ -168,8 +168,8 @@ const Navbar = () => {
               key={link.to}
               to={link.to}
               onClick={toggleMenu}
-              className={`font-reross uppercase tracking-[0.2em] text-lg sm:text-xl md:text-2xl transition-all duration-300 hover:text-[#ff3300] hover:tracking-[0.3em] ${location.pathname === link.to
-                ? 'text-[#ff3300]'
+              className={`font-reross uppercase tracking-[0.2em] text-lg sm:text-xl md:text-2xl transition-all duration-300 hover:text-[#FF0000] hover:tracking-[0.3em] ${location.pathname === link.to
+                ? 'text-[#FF0000]'
                 : 'text-white/90'
                 }`}
             >
@@ -181,19 +181,19 @@ const Navbar = () => {
         {/* Bottom area — social icons */}
         <div className='flex justify-start gap-4 p-8 sm:pl-12 pb-10'>
           <a href="https://github.com/gyanaranjan-das" target="_blank" rel="noopener noreferrer"
-            className='w-10 h-10 rounded-full border border-[#ff3300]/40 flex items-center justify-center text-[#ff3300] hover:bg-[#ff3300]/10 transition-colors'>
+            className='w-10 h-10 rounded-full border border-[#FF0000]/40 flex items-center justify-center text-[#FF0000] hover:bg-[#FF0000]/10 transition-colors'>
             <Github className='w-5 h-5' />
           </a>
           <a href="https://www.linkedin.com/in/gyanaranjan-das/" target="_blank" rel="noopener noreferrer"
-            className='w-10 h-10 rounded-full border border-[#ff3300]/40 flex items-center justify-center text-[#ff3300] hover:bg-[#ff3300]/10 transition-colors'>
+            className='w-10 h-10 rounded-full border border-[#FF0000]/40 flex items-center justify-center text-[#FF0000] hover:bg-[#FF0000]/10 transition-colors'>
             <Linkedin className='w-5 h-5' />
           </a>
           <a href="mailto:gyanlabs.io@gmail.com" target="_blank" rel="noopener noreferrer"
-            className='w-10 h-10 rounded-full border border-[#ff3300]/40 flex items-center justify-center text-[#ff3300] hover:bg-[#ff3300]/10 transition-colors'>
+            className='w-10 h-10 rounded-full border border-[#FF0000]/40 flex items-center justify-center text-[#FF0000] hover:bg-[#FF0000]/10 transition-colors'>
             <Mail className='w-5 h-5' />
           </a>
           <a href="https://www.instagram.com/gyanlabs.io/" target="_blank" rel="noopener noreferrer"
-            className='w-10 h-10 rounded-full border border-[#ff3300]/40 flex items-center justify-center text-[#ff3300] hover:bg-[#ff3300]/10 transition-colors'>
+            className='w-10 h-10 rounded-full border border-[#FF0000]/40 flex items-center justify-center text-[#FF0000] hover:bg-[#FF0000]/10 transition-colors'>
             <Instagram className='w-5 h-5' />
           </a>
         </div>

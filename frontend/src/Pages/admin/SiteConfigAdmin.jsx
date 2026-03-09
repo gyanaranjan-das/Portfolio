@@ -45,21 +45,21 @@ const SiteConfigAdmin = () => {
     if (loading) {
         return (
             <div className='flex justify-center py-20'>
-                <div className='w-8 h-8 border-2 border-[#ff3300] border-t-transparent rounded-full animate-spin'></div>
+                <div className='w-8 h-8 border-2 border-[#FF0000] border-t-transparent rounded-full animate-spin'></div>
             </div>
         )
     }
 
     if (!config) return <p className='text-gray-500 font-manrope'>Failed to load config.</p>
 
-    const inputClass = 'w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#ff3300]/60 focus:outline-none font-manrope placeholder:text-gray-500'
+    const inputClass = 'w-full bg-black text-white px-4 py-3 rounded-xl border border-white/10 focus:border-[#FF0000]/60 focus:outline-none font-manrope placeholder:text-gray-500'
 
     return (
         <div>
             <div className='flex items-center justify-between mb-8'>
                 <h1 className='text-3xl font-bold font-nevera text-white tracking-wide'>Site Configuration</h1>
                 <button onClick={handleSave} disabled={saving}
-                    className='bg-[#ff3300] hover:bg-[#e62e00] disabled:opacity-50 px-6 py-2 rounded-full text-white text-sm font-manrope flex items-center gap-2 transition-colors'>
+                    className='bg-[#FF0000] hover:bg-[#B30000] disabled:opacity-50 px-6 py-2 rounded-full text-white text-sm font-manrope flex items-center gap-2 transition-colors'>
                     <Save className='w-4 h-4' /> {saving ? 'Saving...' : 'Save Changes'}
                 </button>
             </div>
@@ -115,10 +115,20 @@ const SiteConfigAdmin = () => {
 
                 {/* Other */}
                 <div className='bg-[#111] rounded-2xl border border-white/10 p-6'>
-                    <h2 className='text-lg font-bold font-nevera text-white mb-4'>Other</h2>
-                    <div>
-                        <label className='text-gray-400 text-sm font-manrope mb-1 block'>Resume URL</label>
-                        <input type='url' value={config.resumeUrl || ''} onChange={(e) => updateField('resumeUrl', e.target.value)} className={inputClass} placeholder='https://drive.google.com/...' />
+                    <h2 className='text-lg font-bold font-nevera text-white mb-4'>Other & Media</h2>
+                    <div className='space-y-4'>
+                        <div>
+                            <label className='text-gray-400 text-sm font-manrope mb-1 block'>Resume URL</label>
+                            <input type='url' value={config.resumeUrl || ''} onChange={(e) => updateField('resumeUrl', e.target.value)} className={inputClass} placeholder='https://drive.google.com/...' />
+                        </div>
+                        <div>
+                            <label className='text-gray-400 text-sm font-manrope mb-1 block'>Hero Image URL</label>
+                            <input type='text' value={config.heroImage || ''} onChange={(e) => updateField('heroImage', e.target.value)} className={inputClass} placeholder='/uploads/...' />
+                        </div>
+                        <div>
+                            <label className='text-gray-400 text-sm font-manrope mb-1 block'>About Image URL</label>
+                            <input type='text' value={config.aboutImage || ''} onChange={(e) => updateField('aboutImage', e.target.value)} className={inputClass} placeholder='/uploads/...' />
+                        </div>
                     </div>
                 </div>
             </div>

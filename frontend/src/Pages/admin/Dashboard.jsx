@@ -28,7 +28,7 @@ const Dashboard = () => {
     }, [])
 
     const cards = [
-        { label: 'Projects', value: stats.projects, icon: FolderKanban, color: '#ff3300' },
+        { label: 'Projects', value: stats.projects, icon: FolderKanban, color: '#FF0000' },
         { label: 'Blog Posts', value: stats.posts, icon: FileText, color: '#ff6600' },
         { label: 'Messages', value: stats.contacts, icon: Mail, color: '#ff0066' }
     ]
@@ -54,7 +54,7 @@ const Dashboard = () => {
             <div className='mt-12 bg-[#111] rounded-2xl border border-white/10 p-8'>
                 <h2 className='text-xl font-bold font-nevera text-white tracking-wide mb-4'>Quick Actions</h2>
                 <div className='flex flex-wrap gap-3'>
-                    <a href='/admin/projects' className='bg-[#ff3300]/10 text-[#ff3300] border border-[#ff3300]/20 px-4 py-2 rounded-full text-sm font-manrope hover:bg-[#ff3300]/20 transition-colors'>
+                    <a href='/admin/projects' className='bg-[#FF0000]/10 text-[#FF0000] border border-[#FF0000]/20 px-4 py-2 rounded-full text-sm font-manrope hover:bg-[#FF0000]/20 transition-colors'>
                         + New Project
                     </a>
                     <a href='/admin/blog' className='bg-[#ff6600]/10 text-[#ff6600] border border-[#ff6600]/20 px-4 py-2 rounded-full text-sm font-manrope hover:bg-[#ff6600]/20 transition-colors'>

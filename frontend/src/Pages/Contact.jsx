@@ -31,7 +31,7 @@ const Contact = () => {
       {/* Contact Form Section */}
       <section className="text-white py-20 px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
-          <h2 className='text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold font-nevera text-[#ff3300] tracking-tighter leading-none mb-4'>
+          <h2 className='text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold font-nevera text-[#FF0000] tracking-tighter leading-none mb-4'>
             GET IN TOUCH
           </h2>
           <p className="font-manrope text-gray-400 text-lg mb-10 max-w-2xl">
@@ -46,7 +46,7 @@ const Contact = () => {
               onChange={handleContactChange}
               placeholder="Your Name"
               required
-              className="bg-[#111] text-white px-6 py-4 rounded-xl border border-white/10 focus:outline-none focus:border-[#ff3300]/60 font-manrope placeholder:text-gray-500 transition-colors"
+              className="bg-[#111] text-white px-6 py-4 rounded-xl border border-white/10 focus:outline-none focus:border-[#FF0000]/60 font-manrope placeholder:text-gray-500 transition-colors"
             />
             <input
               type="email"
@@ -55,7 +55,7 @@ const Contact = () => {
               onChange={handleContactChange}
               placeholder="Your Email"
               required
-              className="bg-[#111] text-white px-6 py-4 rounded-xl border border-white/10 focus:outline-none focus:border-[#ff3300]/60 font-manrope placeholder:text-gray-500 transition-colors"
+              className="bg-[#111] text-white px-6 py-4 rounded-xl border border-white/10 focus:outline-none focus:border-[#FF0000]/60 font-manrope placeholder:text-gray-500 transition-colors"
             />
             <input
               type="text"
@@ -63,7 +63,7 @@ const Contact = () => {
               value={contactData.subject}
               onChange={handleContactChange}
               placeholder="Subject"
-              className="bg-[#111] text-white px-6 py-4 rounded-xl border border-white/10 focus:outline-none focus:border-[#ff3300]/60 font-manrope placeholder:text-gray-500 transition-colors md:col-span-2"
+              className="bg-[#111] text-white px-6 py-4 rounded-xl border border-white/10 focus:outline-none focus:border-[#FF0000]/60 font-manrope placeholder:text-gray-500 transition-colors md:col-span-2"
             />
             <textarea
               name="message"
@@ -72,13 +72,13 @@ const Contact = () => {
               placeholder="Your Message"
               required
               rows={5}
-              className="bg-[#111] text-white px-6 py-4 rounded-xl border border-white/10 focus:outline-none focus:border-[#ff3300]/60 font-manrope placeholder:text-gray-500 transition-colors md:col-span-2 resize-none"
+              className="bg-[#111] text-white px-6 py-4 rounded-xl border border-white/10 focus:outline-none focus:border-[#FF0000]/60 font-manrope placeholder:text-gray-500 transition-colors md:col-span-2 resize-none"
             />
             <div className="md:col-span-2 flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <button
                 type="submit"
                 disabled={contactLoading}
-                className="bg-[#ff3300] hover:bg-[#e62e00] disabled:opacity-50 transition-colors px-10 py-4 rounded-full text-white font-bold tracking-wide font-reross uppercase whitespace-nowrap"
+                className="bg-[#FF0000] hover:bg-[#B30000] disabled:opacity-50 transition-colors px-10 py-4 rounded-full text-white font-bold tracking-wide font-reross uppercase whitespace-nowrap"
               >
                 {contactLoading ? 'Sending...' : 'Send Message'}
               </button>

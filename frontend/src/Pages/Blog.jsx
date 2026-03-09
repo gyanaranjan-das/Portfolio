@@ -8,7 +8,7 @@ const Blog = () => {
       <div className='max-w-7xl w-full mx-auto'>
 
         {/* Section Header */}
-        <h1 className='text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold font-nevera text-[#ff3300] tracking-tighter leading-none mb-6 -ml-1'>
+        <h1 className='text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold font-nevera text-[#FF0000] tracking-tighter leading-none mb-6 -ml-1'>
           BLOG
         </h1>
         <p className='font-manrope text-gray-400 text-lg mb-12 max-w-2xl'>
@@ -16,7 +16,7 @@ const Blog = () => {
         </p>
 
         <div className='w-full py-24 flex flex-col items-center justify-center text-center opacity-80'>
-          <Code2 className='w-20 h-20 text-[#ff3300] mb-8 opacity-80' />
+          <Code2 className='w-20 h-20 text-[#FF0000] mb-8 opacity-80' />
           <h3 className='text-4xl md:text-5xl font-nevera font-bold tracking-widest text-white mb-4'>
             COMING SOON
           </h3>
