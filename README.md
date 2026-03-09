@@ -67,7 +67,7 @@ Got a project in mind? I'm open to freelance opportunities, collaborations, and 
 
 - 🌐 **Portfolio**: [gyanaranjandas.me](https://gyanaranjandas.me)
 - 📧 **Email**: [Reach out via the contact form on my site]
-- 💻 **GitHub**: [@gyanaranjan-das](https://github.com/gyanlabsio)
+- 💻 **GitHub**: [@gyanlabsio](https://github.com/gyanlabsio)
 
 ---
 
