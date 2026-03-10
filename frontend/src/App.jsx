@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import SmoothScroll from './components/SmoothScroll'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import ProtectedRoute from './components/ProtectedRoute'
 
@@ -34,48 +35,50 @@ const App = () => {
   const isAdminRoute = location.pathname.startsWith('/admin')
 
   return (
-    <div>
-      {/* Hide public Navbar/Footer on admin pages */}
-      {!isAdminRoute && <Navbar />}
+    <SmoothScroll>
+      <div>
+        {/* Hide public Navbar/Footer on admin pages */}
+        {!isAdminRoute && <Navbar />}
 
-      <Suspense fallback={<PageLoader />}>
-        <Routes>
-          {/* Public routes */}
-          <Route path='/' element={<Home />} />
-          <Route path='/Bio' element={<Bio />} />
-          <Route path='/Projects' element={<Projects />} />
-          <Route path='/Blog' element={<Blog />} />
-          <Route path='/blog/:slug' element={<BlogPost />} />
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            {/* Public routes */}
+            <Route path='/' element={<Home />} />
+            <Route path='/Bio' element={<Bio />} />
+            <Route path='/Projects' element={<Projects />} />
+            <Route path='/Blog' element={<Blog />} />
+            <Route path='/blog/:slug' element={<BlogPost />} />
 
-          {/* Admin routes */}
-          <Route path='/admin/login' element={<Login />} />
-          <Route
-            path='/admin'
-            element={
-              <ProtectedRoute>
-                <AdminLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route index element={<Dashboard />} />
-            <Route path='projects' element={<ProjectsAdmin />} />
-            <Route path='blog' element={<BlogAdmin />} />
-            <Route path='contacts' element={<ContactsAdmin />} />
-            <Route path='config' element={<SiteConfigAdmin />} />
-          </Route>
+            {/* Admin routes */}
+            <Route path='/admin/login' element={<Login />} />
+            <Route
+              path='/admin'
+              element={
+                <ProtectedRoute>
+                  <AdminLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Dashboard />} />
+              <Route path='projects' element={<ProjectsAdmin />} />
+              <Route path='blog' element={<BlogAdmin />} />
+              <Route path='contacts' element={<ContactsAdmin />} />
+              <Route path='config' element={<SiteConfigAdmin />} />
+            </Route>
 
-          {/* 404 Catch-all */}
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-      </Suspense>
+            {/* 404 Catch-all */}
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </Suspense>
 
-      {!isAdminRoute && (
-        <>
-          <Contact />
-          <Footer />
-        </>
-      )}
-    </div>
+        {!isAdminRoute && (
+          <>
+            <Contact key={location.pathname} />
+            <Footer />
+          </>
+        )}
+      </div>
+    </SmoothScroll>
   )
 }
 

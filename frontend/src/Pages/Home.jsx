@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { getSiteConfig } from '../api/admin'
 import LatestUpdates from './LatestUpdates'
 import About from './About'
@@ -21,25 +24,59 @@ const Home = () => {
     fetchConfig()
   }, [])
 
+  // GSAP Animations
+  useGSAP(() => {
+    const tl = gsap.timeline()
+
+    // Entrance animation for hero text
+    tl.from('.hero-char', {
+      y: 100,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.05,
+      ease: 'power4.out',
+      delay: 0.2 // slight delay after navbar
+    })
+      .from('.hero-cta', {
+        y: 20,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.out'
+      }, "-=0.4")
+
+    // Parallax effect for the background image
+    gsap.to('.hero-bg', {
+      y: '30%', // moves down specifically to create a parallax delay
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.hero-section',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    })
+  }, [])
+
   // If the backend has the title as 'GYANARANJAN DAS', but the user wants just 'GYANARANJAN' as requested previously, we might split it or just display what's in the DB.
-  // Actually, we should just display what's in the DB and let the user modify it from Admin.
-  const heroName = config?.heroTitle || "GYANARANJAN"
+
+  // Ensure we only render the first name, stripping off any last names from the DB string
+  const heroName = (config?.heroTitle || "GYANARANJAN").split(" ")[0]
 
   return (
     <div>
-      <section className='relative h-screen flex flex-col justify-center items-center text-white overflow-hidden -mt-22 pt-22'>
+      <section className='relative h-screen flex flex-col justify-center items-center text-white overflow-hidden -mt-22 pt-22 hero-section'>
         {/* Background Image - using img element for precise positioning */}
         <img
           src={config?.heroImage || heroImage}
           alt="Hero"
-          className='absolute pointer-events-none'
+          className='absolute pointer-events-none hero-bg'
           style={{
             top: '55%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
             maxHeight: '85%',
             maxWidth: '100%',
-            objectFit: 'contain',
+            objectFit: 'cover',
             WebkitMaskImage: 'radial-gradient(ellipse at center, black 40%, transparent 80%)',
             maskImage: 'radial-gradient(ellipse at center, black 40%, transparent 80%)',
             zIndex: 0
@@ -54,21 +91,20 @@ const Home = () => {
 
         {/* Text Container - Push down to chest area */}
         <div className='relative z-10 flex flex-col items-center mt-24 sm:mt-32 md:mt-72 px-4'>
-          <h1 className='text-3xl sm:text-5xl md:text-7xl lg:text-8xl text-center font-bold tracking-widest font-nevera leading-tight uppercase cursor-default'>
+          <h1 className='text-3xl sm:text-4xl md:text-6xl lg:text-7xl text-center font-bold tracking-widest font-nevera leading-tight uppercase cursor-default overflow-hidden py-2'>
             {heroName.split("").map((char, index) => (
               <span
                 key={index}
-                className={
-                  char === " "
-                    ? "inline-block w-4 md:w-8"
-                    : "transition-colors duration-300 hover:text-white/30"
-                }
+                className={`inline-block hero-char ${char === " "
+                  ? "w-4 md:w-8"
+                  : "transition-colors duration-300 hover:text-white/30"
+                  }`}
               >
-                {char}
+                {char === " " ? "\u00A0" : char}
               </span>
             ))}
           </h1>
-          <div className='mt-4 sm:mt-6 md:mt-8'>
+          <div className='mt-4 sm:mt-6 md:mt-8 hero-cta'>
             <Link to='/Bio'
               className='text-white relative text-sm sm:text-base md:text-lg tracking-wide group pb-1 font-reross '>Learn More
               <span className='absolute left-0 bottom-0 w-full h-0.5 bg-white transition-all duration-500 group-hover:w-0'></span></Link>

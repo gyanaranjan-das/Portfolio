@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { getSiteConfig } from '../api/admin'
 import bioImage from '../assets/ChatGPT Image Mar 2, 2026, 10_00_15 PM.png'
 import bioProfileImage from '../assets/ChatGPT Image Mar 2, 2026, 09_49_15 PM.png'
@@ -21,24 +24,75 @@ const Bio = () => {
     fetchConfig()
   }, [])
 
+  // GSAP Animations
+  useGSAP(() => {
+    // Animate the initial bio heading
+    gsap.from('.bio-heading', {
+      y: 100,
+      opacity: 0,
+      duration: 1.2,
+      ease: 'power4.out',
+      delay: 0.2
+    })
+
+    // Animate the background image parallax slightly
+    gsap.to('.bio-hero-img', {
+      y: '20%',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.bio-hero-section',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    })
+
+    // Scroll trigger for the bio content split section
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.bio-content-section',
+        start: 'top 75%',
+        toggleActions: 'play none none reverse'
+      }
+    })
+
+    // Image slides in
+    tl.from('.bio-portrait', {
+      x: -50,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out'
+    })
+
+    // Paragraphs stagger in
+    tl.from('.bio-text-content > p', {
+      y: 30,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.15,
+      ease: 'power3.out'
+    }, "-=0.6")
+
+  }, [])
+
   return (
     <div className="w-full">
       {/* First screen: Centered Biography heading with background image */}
-      <section className="relative flex items-center justify-center min-h-screen w-full px-4 overflow-hidden">
+      <section className="relative flex items-center justify-center min-h-screen w-full px-4 overflow-hidden bio-hero-section">
         <img
           src={bioImage}
           alt=""
-          className="absolute inset-0 w-full h-full object-cover object-top opacity-50 pointer-events-none grayscale brightness-90"
+          className="absolute inset-0 w-full h-full object-cover object-top opacity-50 pointer-events-none grayscale brightness-90 bio-hero-img"
         />
         <div className="absolute inset-0 bg-[#FF0000] mix-blend-multiply opacity-70 pointer-events-none"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black pointer-events-none"></div>
-        <h1 className="relative z-10 font-nevera text-4xl sm:text-5xl md:text-6xl font-bold tracking-widest text-white text-center">BIOGRAPHY</h1>
+        <h1 className="relative z-10 font-nevera text-4xl sm:text-5xl md:text-6xl font-bold tracking-widest text-white text-center bio-heading">BIOGRAPHY</h1>
       </section>
 
       {/* Second screen: Bio content with image and scrollable text */}
-      <section className="w-full min-h-screen flex flex-col lg:flex-row max-w-7xl mx-auto py-12 lg:py-24">
+      <section className="w-full min-h-screen flex flex-col lg:flex-row max-w-7xl mx-auto py-12 lg:py-24 bio-content-section overflow-hidden">
         {/* Left: Image Section */}
-        <div className="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12 order-1">
+        <div className="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12 order-1 bio-portrait">
           <div className="relative w-full max-w-md aspect-[3/4] rounded-2xl shadow-2xl border border-white/10 overflow-hidden group">
 
             {/* Base Red Image */}
@@ -67,7 +121,7 @@ const Bio = () => {
               <div className="w-8 h-8 rounded-full border-2 border-[#FF0000]/20 border-t-[#FF0000] animate-spin"></div>
             </div>
           ) : (
-            <div className="text-white text-base md:text-lg leading-relaxed space-y-6">
+            <div className="text-white text-base md:text-lg leading-relaxed space-y-6 bio-text-content">
               {config?.bioText ? (
                 config.bioText.split('\n').filter(p => p.trim() !== '').map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>

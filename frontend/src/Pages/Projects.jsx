@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Code2, Github, ExternalLink } from 'lucide-react'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SEO from '../components/SEO'
 import { getProjects } from '../api/projects'
 
@@ -22,15 +25,89 @@ const Projects = () => {
     fetchProjects()
   }, [])
 
+  // GSAP Animations
+  useGSAP(() => {
+    // Only animate if projects exist and are loaded
+    if (!loading && projects.length > 0) {
+      gsap.from('.project-card', {
+        scrollTrigger: {
+          trigger: '.projects-grid',
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power3.out'
+      })
+    }
+
+    // Animate Coming Soon state if empty
+    if (!loading && projects.length === 0) {
+      gsap.from('.coming-soon-item', {
+        scrollTrigger: {
+          trigger: '.coming-soon-section',
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
+        },
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power3.out'
+      })
+    }
+  }, [loading, projects])
+
+  // Static Elements GSAP Animations
+  useGSAP(() => {
+    // Projects Header Reveal Animation
+    gsap.from('.header-char', {
+      scrollTrigger: {
+        trigger: '.projects-section',
+        start: 'top 85%',
+        toggleActions: 'play none none reverse'
+      },
+      y: 100,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.03,
+      ease: 'power4.out',
+      clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)' // this adds a cool text clip effect
+    })
+
+    // Animate subtitle
+    gsap.from('.projects-subtitle', {
+      scrollTrigger: {
+        trigger: '.projects-section',
+        start: 'top 75%',
+        toggleActions: 'play none none reverse'
+      },
+      y: 20,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power3.out'
+    })
+  }, [])
+
   return (
-    <section className='min-h-screen text-white flex flex-col justify-center py-24 px-6 md:px-12'>
+    <section className='min-h-screen text-white flex flex-col justify-center py-24 px-6 md:px-12 overflow-hidden projects-section'>
       <SEO title="Projects" description="Featured projects built with modern web technologies." />
       <div className='max-w-7xl w-full mx-auto'>
 
-        <h1 className='text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold font-nevera text-[#FF0000] tracking-tighter leading-none mb-4 -ml-1'>
-          PROJECTS
+        <h1 className='text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold font-nevera text-[#FF0000] tracking-tighter leading-none mb-4 -ml-1 overflow-hidden py-2'>
+          {"PROJECTS".split("").map((char, index) => (
+            <span
+              key={index}
+              className="inline-block header-char custom-clip-start"
+              style={{ clipPath: 'polygon(0 100%, 100% 100%, 100% 0, 0 0)' }} // End state for GSAP to animate to 
+            >
+              {char}
+            </span>
+          ))}
         </h1>
-        <p className='font-manrope text-gray-400 text-lg mb-12 max-w-2xl'>
+        <p className='font-manrope text-gray-400 text-lg mb-12 max-w-2xl projects-subtitle'>
           A selection of things I've built, broken, and shipped.
         </p>
 
@@ -41,26 +118,27 @@ const Projects = () => {
           </div>
         )}
 
-        {/* Empty State */}
+        {/* Empty State / Coming Soon */}
         {!loading && projects.length === 0 && (
-          <div className='w-full py-24 flex flex-col items-center justify-center text-center opacity-80'>
-            <Code2 className='w-20 h-20 text-[#FF0000] mb-8 opacity-80' />
-            <h3 className='text-4xl md:text-5xl font-nevera font-bold tracking-widest text-white mb-4'>
+          <div className='w-full py-24 flex flex-col items-center justify-center text-center coming-soon-section'>
+            <Code2 className='w-20 h-20 text-[#FF0000] mb-8 opacity-80 coming-soon-item' />
+            <h3 className='text-4xl md:text-5xl font-nevera font-bold tracking-widest text-[#FF0000] mb-4 coming-soon-item'>
               COMING SOON
             </h3>
-            <p className='font-manrope text-gray-400 max-w-lg mx-auto text-lg'>
-              I am currently curating my best work. Check back soon for exciting new projects and in-depth case studies!
+            <p className='font-manrope text-gray-400 max-w-lg mx-auto text-lg coming-soon-item'>
+              I'm currently brewing up some exciting projects in my local environment.
+              Check back soon to see what's deploying next.
             </p>
           </div>
         )}
 
         {/* Project Grid */}
         {!loading && projects.length > 0 && (
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 projects-grid'>
             {projects.map((project) => (
               <div
                 key={project._id}
-                className='group relative bg-[#0a0a0a] border border-white/10 rounded-2xl overflow-hidden hover:border-[#FF0000]/40 transition-colors duration-500'
+                className='group relative bg-[#0a0a0a] border border-white/10 rounded-2xl overflow-hidden hover:border-[#FF0000]/40 transition-colors duration-500 project-card'
               >
                 {/* Featured Image */}
                 {project.featuredImage && (
