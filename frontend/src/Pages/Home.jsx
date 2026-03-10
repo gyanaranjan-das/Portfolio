@@ -65,23 +65,23 @@ const Home = () => {
   return (
     <div>
       <section className='relative h-screen flex flex-col justify-center items-center text-white overflow-hidden -mt-22 pt-22 hero-section'>
-        {/* Background Image - using img element for precise positioning */}
-        <img
-          src={config?.heroImage || heroImage}
-          alt="Hero"
-          className='absolute pointer-events-none hero-bg'
-          style={{
-            top: '55%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            maxHeight: '85%',
-            maxWidth: '100%',
-            objectFit: 'cover',
-            WebkitMaskImage: 'radial-gradient(ellipse at center, black 40%, transparent 80%)',
-            maskImage: 'radial-gradient(ellipse at center, black 40%, transparent 80%)',
-            zIndex: 0
-          }}
-        />
+        {/* Background Image Wrapper to prevent GSAP transform conflicts */}
+        <div className='absolute inset-0 flex justify-center items-center pointer-events-none' style={{ top: '5%' }}>
+          <img
+            src={config?.heroImage || heroImage}
+            alt="Hero"
+            className='hero-bg'
+            style={{
+              maxHeight: '85%',
+              maxWidth: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center',
+              WebkitMaskImage: 'radial-gradient(ellipse at center, black 40%, transparent 80%)',
+              maskImage: 'radial-gradient(ellipse at center, black 40%, transparent 80%)',
+              zIndex: 0
+            }}
+          />
+        </div>
 
         {/* Red tint overlay matching the reference image using multiply blend mode */}
         <div className='absolute inset-0 bg-[#FF0000] mix-blend-multiply opacity-90 pointer-events-none'></div>
